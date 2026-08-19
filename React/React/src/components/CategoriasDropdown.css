@@ -1,0 +1,158 @@
+.sidebar-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.dropdown-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Botón desplegable principal */
+.btn-categorias-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #2b3548;
+  color: #ffffff;
+  border: 1px solid #3b475d;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-categorias-toggle:hover,
+.btn-categorias-toggle.active {
+  background-color: #4f46e5;
+  border-color: #6366f1;
+}
+
+.arrow-icon {
+  margin-left: auto;
+  font-size: 11px;
+  transition: transform 0.2s ease;
+  color: #94a3b8;
+}
+
+.btn-categorias-toggle:hover .arrow-icon {
+  color: #ffffff;
+}
+
+.arrow-icon.open {
+  transform: rotate(180deg);
+}
+
+/* Cuadro flotante que abre hacia la derecha */
+.categorias-flyout-menu {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 12px);
+  width: 240px;
+  max-height: 400px;
+  background-color: #1b2230;
+  border: 1px solid #334155;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.flyout-header {
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #64748b;
+  border-bottom: 1px solid #273142;
+}
+
+.flyout-list {
+  padding: 8px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.flyout-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.flyout-item:hover {
+  background-color: #273142;
+  color: #ffffff;
+}
+
+.flyout-item.selected {
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Botones adicionales (Ofertas, Cuenta) */
+.menu-secciones-extra {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  border-top: 1px solid #273142;
+  padding-top: 12px;
+}
+
+.nav-extra-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  background-color: transparent;
+  border: none;
+  border-radius: 12px;
+  color: #94a3b8;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.nav-extra-btn:hover {
+  background-color: #273142;
+  color: #ffffff;
+}
