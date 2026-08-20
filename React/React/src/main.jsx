@@ -5,6 +5,7 @@ import './index.css'
 import Catalogo from './pages/Catalogo.jsx'
 import DetalleJuego from './pages/DetalleJuego.jsx'
 
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>

@@ -1,17 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './CategoriasDropdown.css';
+import '../components/TranslatorWidget'
+import TranslatorWidget from '../components/TranslatorWidget';
 
 const categorias = [
   { id: 'Todos', nombre: 'Todos los juegos' },
   { id: 'Acción', nombre: 'Acción' },
   { id: 'Aventura', nombre: 'Aventura' },
-  { id: 'RPG', nombre: 'RPG'},
+  { id: 'RPG', nombre: 'RPG' },
   { id: 'Shooter', nombre: 'Shooter' },
   { id: 'Deportes', nombre: 'Deportes' },
-  { id: 'Multijugador', nombre: 'Multijugador'},
+  { id: 'Multijugador', nombre: 'Multijugador' },
   { id: 'Plataformas', nombre: 'Plataformas' },
   { id: 'Terror', nombre: 'Terror' },
-  { id: 'Estrategia', nombre: 'Estrategia'},
+  { id: 'Estrategia', nombre: 'Estrategia' },
   { id: 'Carreras', nombre: 'Carreras' },
   { id: 'Sandbox', nombre: 'Sandbox' },
 ];
@@ -38,7 +40,7 @@ export const CategoriasMenu = ({ categoriaSeleccionada = 'Todos', onSelectCatego
   return (
     <div className="sidebar-navigation">
       <div className="dropdown-container" ref={dropdownRef}>
-        <button 
+        <button
           type="button"
           className={`btn-categorias-toggle ${isOpen ? 'active' : ''}`}
           onClick={() => setIsOpen(!isOpen)}
@@ -53,7 +55,7 @@ export const CategoriasMenu = ({ categoriaSeleccionada = 'Todos', onSelectCatego
             <div className="flyout-header">Categorías</div>
             <div className="flyout-list">
               {categorias.map((cat) => {
-                const isSelected = 
+                const isSelected =
                   String(categoriaSeleccionada).toLowerCase() === cat.id.toLowerCase();
                 return (
                   <button
@@ -80,7 +82,7 @@ export const CategoriasMenu = ({ categoriaSeleccionada = 'Todos', onSelectCatego
           <span className="btn-icon"></span>
           <span className="btn-text">Ofertas</span>
         </button>
-        
+
         <button type="button" className="nav-extra-btn">
           <span className="btn-icon"></span>
           <span className="btn-text">Cuenta</span>

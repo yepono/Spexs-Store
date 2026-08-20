@@ -2,7 +2,9 @@ import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { JUEGOS, CATEGORIAS } from '../data/juegos'
 import Sidebar from '../components/Sidebar'
-import Hero from '../components/Hero' // Importación del nuevo Hero
+import Hero from '../components/Hero' 
+import TranslatorWidget from '../components/TranslatorWidget'
+
 import './Catalogo.css'
 
 function Catalogo() {
@@ -47,7 +49,7 @@ function Catalogo() {
         onSeleccionar={seleccionarCategoria}
       />
 
-      {/* Renderizado del hero*/}
+
       {categoriaActiva === 'Todos' && <Hero />}
 
       <div className="catalogo-container">
@@ -125,39 +127,7 @@ function Catalogo() {
           {juegosFiltrados.length === 0 && (
             <p className="sin-resultados">No hay juegos en esta categoría todavía.</p>
           )}
-        </div><header className="catalogo-header">
-          <h1>Catálogo de Videojuegos</h1>
-
-          {/* NUEVO CONTENEDOR DEL CARRITO */}
-          <div className={`carrito-contenedor ${carritoCount > 0 ? 'lleno' : 'vacio'}`}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill={carritoCount > 0 ? "currentColor" : "none"}
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="icono-carrito"
-            >
-              <circle cx="9" cy="21" r="1"></circle>
-              <circle cx="20" cy="21" r="1"></circle>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </svg>
-            {carritoCount > 0 && (
-              <span className="cart-badge-number">{carritoCount}</span>
-            )}
-          </div>
-          {/* FIN DEL NUEVO CONTENEDOR */}
-
-          <p>
-            {categoriaActiva === 'Todos'
-              ? 'Explora toda nuestra colección'
-              : `Categoría: ${categoriaActiva}`}
-            {' · '}
-            {juegosFiltrados.length} {juegosFiltrados.length === 1 ? 'juego' : 'juegos'}
-          </p>
-        </header>
+        </div>
       </div>
     </div>
   )
