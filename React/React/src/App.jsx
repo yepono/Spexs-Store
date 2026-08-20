@@ -3,7 +3,7 @@ import Formulario from './pages/Formulario'
 function App() {
   return (
     <main className="app-container">
-      <Formulario />
+      {/*<Formulario />*/}
     </main>
   )
 }

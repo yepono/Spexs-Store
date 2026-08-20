@@ -1,0 +1,124 @@
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Alinea el overlay a la derecha */
+}
+
+/* Gradiente oscuro que empieza transparente a la izquierda y se oscurece a la derecha */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(15,23,42,0) 0%, rgba(15,23,42,0.85) 60%, rgba(15,23,42,1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  text-align: left;
+  color: #f8fafc;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: #22c55e;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-desc {
+  font-size: 16px;
+  color: #cbd5e1;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.hero-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+.hero-precio {
+  font-size: 28px;
+  font-weight: 800;
+  color: #38bdf8;
+}
+
+.hero-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(30, 41, 59, 0.6);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.1);
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 50%;
+  z-index: 10;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-nav:hover {
+  background: #6366f1;
+  border-color: #6366f1;
+}
+
+.hero-nav.prev {
+  left: 24px;
+}
+
+.hero-nav.next {
+  right: 24px;
+}
+
+/* Responsividad, pasa el texto a la parte inferior en lugar de la derecha */
+@media (max-width: 768px) {
+  .hero-container {
+    height: 70vh;
+  }
+  .hero-overlay {
+    background: linear-gradient(0deg, rgba(15,23,42,1) 0%, rgba(15,23,42,0.8) 50%, rgba(15,23,42,0) 100%);
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 40px;
+  }
+  .hero-title {
+    font-size: 32px;
+  }
+  .hero-nav {
+    display: none; /* Oculta botones en móvil para diseño más limpio */
+  }
+}

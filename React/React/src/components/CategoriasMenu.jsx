@@ -77,12 +77,12 @@ export const CategoriasMenu = ({ categoriaSeleccionada = 'Todos', onSelectCatego
 
       <div className="menu-secciones-extra">
         <button type="button" className="nav-extra-btn">
-          <span className="btn-icon">🏷️</span>
+          <span className="btn-icon"></span>
           <span className="btn-text">Ofertas</span>
         </button>
         
         <button type="button" className="nav-extra-btn">
-          <span className="btn-icon">👤</span>
+          <span className="btn-icon"></span>
           <span className="btn-text">Cuenta</span>
         </button>
       </div>
