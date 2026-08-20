@@ -1,5 +1,6 @@
 import './Sidebar.css';
 import CategoriasMenu from '../components/CategoriasMenu';
+import TranslatorWidget from '../components/TranslatorWidget';
 
 function Sidebar({ abierto, onCerrar, categoriaActiva, onSeleccionar }) {
   return (
@@ -18,11 +19,14 @@ function Sidebar({ abierto, onCerrar, categoriaActiva, onSeleccionar }) {
           </button>
         </div>
 
-        {/* REEMPLAZO DE LA LISTA VIEJA POR EL COMPONENTE DESPLEGABLE */}
         <CategoriasMenu 
           categoriaSeleccionada={categoriaActiva} 
           onSelectCategoria={onSeleccionar} 
         />
+
+        <TranslatorWidget/>
+
+        
       </aside>
     </>
   );
