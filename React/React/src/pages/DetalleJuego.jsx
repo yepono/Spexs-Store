@@ -67,7 +67,7 @@ function DetalleJuego() {
 
             <div
               className="detalle-header-visual"
-              style={{ backgroundImage: `url(${juego.imagen_juego})` }}
+              style={{ backgroundImage: `url(${juego.imagenes?.hero || juego.imagen_juego})` }}
             >
               <div className="detalle-header-overlay"/>
 
@@ -160,7 +160,7 @@ function DetalleJuego() {
 
             <div className="detalle-portada-wrapper">
               <img
-                src={juego.imagen_juego}
+                src={juego.imagenes ? juego.imagenes.poster : juego.imagen_juego}
                 alt={juego.nombre}
                 className="detalle-portada-img"
               />
