@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { JUEGOS } from '../data/juegos'
 import './Hero.css'
 
@@ -47,6 +48,13 @@ function Hero() {
           <div className="hero-precio">
             {juegoActual.precio}
           </div>
+          <Link
+            to={`/catalogo/juego/${juegoActual.id}`}
+            className="hero-btn-detalle"
+          >
+            Ver Página Completa
+          </Link>
+
         </div>
       </div>
 

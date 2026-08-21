@@ -9,9 +9,11 @@
   height: 100vh;
   z-index: 1000;
 
+  overflow-y: auto;
+
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 40px 20px;
   box-sizing: border-box;
 
@@ -32,9 +34,11 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   box-sizing: border-box;
 
-  min-height: 650px; /* Fija la altura de la tarjeta para que no brinque */
+  min-height: 650px;
   display: flex;
   flex-direction: column;
+
+  margin: auto;
 }
 
 /* BOTÓN REGRESAR */

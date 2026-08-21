@@ -21,10 +21,10 @@ export const JUEGOS = [
     descripcion_corta: 'Una épica aventura a través de la tierra y los cielos de Hyrule.',
     descripcion_larga: 'En esta secuela del aclamado Breath of the Wild, los jugadores explorarán los vastos cielos y las misteriosas profundidades de Hyrule, utilizando nuevas habilidades para resolver acertijos y derrotar a las fuerzas oscuras.',
     
-    imagen_juego: 'https://switchplayer.net/wp-content/uploads/2023/07/2x1_NSwitch_TloZTearsOfTheKingdom_Gamepage.jpg',
+    imagen_juego: 'https://media.es.wired.com/photos/645d4a69a566376ee967bb98/16:9/w_2560%2Cc_limit/Zelda-Tears-Of-The-Kingdom-Culture-TotK_3rd_54.jpg',
 
     imagenes: {
-      hero: 'https://switchplayer.net/wp-content/uploads/2023/07/2x1_NSwitch_TloZTearsOfTheKingdom_Gamepage.jpg',
+      hero: 'https://media.es.wired.com/photos/645d4a69a566376ee967bb98/16:9/w_2560%2Cc_limit/Zelda-Tears-Of-The-Kingdom-Culture-TotK_3rd_54.jpg',
       poster: 'https://m.media-amazon.com/images/I/61m+z+XRvZL._AC_UF894,1000_QL80_.jpg',
       logo: 'https://i.pinimg.com/736x/d6/a8/23/d6a823380920b4cc838e52682d80ba72.jpg'
     },
@@ -67,11 +67,11 @@ export const JUEGOS = [
     descripcion_corta: 'Peter Parker y Miles Morales unen fuerzas para proteger Nueva York.',
     descripcion_larga: 'Los Spider-Men Peter Parker y Miles Morales se enfrentan a la prueba definitiva de fuerza dentro y fuera de la máscara mientras luchan para salvar la ciudad, a los demás y a sus seres queridos del monstruoso Venom.',
     
-    imagen_juego: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2651280/ss_c6a0adf568d91d49a5c0f7f5e4df7e1cef71ee28.1920x1080.jpg?t=1763569811',
+    imagen_juego: 'https://m.media-amazon.com/images/M/MV5BODgwNDc4NjYtYmI2NS00ZWEwLTgxNzAtYzU1NGU3ZjhiN2NlXkEyXkFqcGdeQXZ3ZXNsZXk@._V1_.jpg',
 
     imagenes: {
       hero: 'https://m.media-amazon.com/images/M/MV5BODgwNDc4NjYtYmI2NS00ZWEwLTgxNzAtYzU1NGU3ZjhiN2NlXkEyXkFqcGdeQXZ3ZXNsZXk@._V1_.jpg',
-      poster: 'https://pbs.twimg.com/media/FyIE3c0WYAIt723.jpg',
+      poster: 'https://cdn.marvel.com/content/2x/marvelsspiderman2_lob_mas_mob_02-1.webp',
       logo: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Marvel%27s_Spider-Man_2_%282025%29_logo_official_%28SGDB_124347%29.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original'
     },
 
@@ -113,10 +113,10 @@ export const JUEGOS = [
     descripcion_corta: 'Lidera una banda de vikingos en busca de gloria en Inglaterra.',
     descripcion_larga: 'Ponte en la piel de Eivor, una leyenda vikinga en busca de gloria. Explora un mundo abierto dinámico y hermoso ambientado en la despiadada Inglaterra de los años oscuros.',
      
-    imagen_juego: 'https://image.api.playstation.com/vulcan/img/rnd/202010/3023/PnqfxnHGmf9E826ECuEM9niQ.jpg',
+    imagen_juego: 'https://www.nme.com/wp-content/uploads/2020/05/assassins-creed-valhalla-credit-ubisoft@2000x1270-3-1.jpg',
 
     imagenes: {
-      hero: 'https://image.api.playstation.com/vulcan/img/rnd/202010/3023/PnqfxnHGmf9E826ECuEM9niQ.jpg',
+      hero: 'https://www.nme.com/wp-content/uploads/2020/05/assassins-creed-valhalla-credit-ubisoft@2000x1270-3-1.jpg',
       poster: 'https://cdn.europosters.eu/image/1300/96340.jpg',
       logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Assassin%27s_Creed_Valhalla_text_logo.svg/960px-Assassin%27s_Creed_Valhalla_text_logo.svg.png?utm_source=es.wikipedia.org&utm_campaign=index&utm_content=thumbnail'
     },
@@ -182,10 +182,10 @@ export const JUEGOS = [
     descripcion_corta: 'Geralt de Rivia busca a Ciri en un mundo abierto lleno de monstruos.',
     descripcion_larga: 'Eres Geralt de Rivia, un cazador de monstruos a sueldo. Ante ti tienes un continente devastado por la guerra y plagado de monstruos que puedes explorar a voluntad.',
     
-    imagen_juego: 'https://image.api.playstation.com/vulcan/ap/rnd/202211/2813/hfxDHG9zRcCC7JcviyqgqGUc.png',
+    imagen_juego: 'https://store-images.s-microsoft.com/image/apps.46303.65858607118306853.39ed2a08-df0d-4ae1-aee0-c66ffb783a34.1fbbd7b6-6399-4b79-99f0-f48c6ada8a2b?h=862&format=jpg',
 
     imagenes: {
-      hero: 'https://image.api.playstation.com/vulcan/ap/rnd/202211/2813/hfxDHG9zRcCC7JcviyqgqGUc.png',
+      hero: 'https://store-images.s-microsoft.com/image/apps.46303.65858607118306853.39ed2a08-df0d-4ae1-aee0-c66ffb783a34.1fbbd7b6-6399-4b79-99f0-f48c6ada8a2b?h=862&format=jpg',
       poster: 'https://m.media-amazon.com/images/M/MV5BNTQ2NjNkMTItNjViYy00MjhlLTgxMTEtOTM1ODJiNmFiMmJhXkEyXkFqcGc@._V1_.jpg',
       logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
     },
@@ -205,10 +205,10 @@ export const JUEGOS = [
     descripcion_corta: 'Reúne un grupo y decide el destino de los Reinos Olvidados.',
     descripcion_larga: 'Forma tu equipo y regresa a los Reinos Olvidados en un relato de compañerismo y traición, sacrificio y supervivencia, además de la atracción de un poder absoluto.',
     
-    imagen_juego: 'https://image.api.playstation.com/vulcan/ap/rnd/202308/1519/95cce955dc59d04e2ea5ab624a823ace14e9c5f7e24dfb8f.png',
+    imagen_juego: 'https://gameinformer.com/sites/default/files/styles/content_header_l/public/2023/08/16/e92f072f/bg3_party.jpg.webp',
 
     imagenes: {
-      hero: 'https://image.api.playstation.com/vulcan/ap/rnd/202308/1519/95cce955dc59d04e2ea5ab624a823ace14e9c5f7e24dfb8f.png',
+      hero: 'https://gameinformer.com/sites/default/files/styles/content_header_l/public/2023/08/16/e92f072f/bg3_party.jpg.webp',
       poster: 'https://m.media-amazon.com/images/M/MV5BN2I0N2Y3MWUtNjJiNy00NjRjLWE4ZTctOTQ2YWVhM2VhMTM4XkEyXkFqcGc@._V1_.jpg',
       logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
     },
@@ -228,10 +228,10 @@ export const JUEGOS = [
     descripcion_corta: 'El Slayer regresa para enfrentar a las fuerzas del infierno.',
     descripcion_larga: 'Los ejércitos del infierno han invadido la Tierra. Ponte en la piel del Slayer en una épica campaña para un jugador y cruza dimensiones para aniquilar demonios.',
     
-    imagen_juego: 'https://image.api.playstation.com/vulcan/ap/rnd/202010/0114/fT6LMdFs6KhD42W5ThxaeyoI.png',
+    imagen_juego: 'https://i.blogs.es/7526d7/doom-eternal/1366_2000.jpeg',
 
     imagenes: {
-      hero: 'https://image.api.playstation.com/vulcan/ap/rnd/202010/0114/fT6LMdFs6KhD42W5ThxaeyoI.png',
+      hero: 'https://i.blogs.es/7526d7/doom-eternal/1366_2000.jpeg',
       poster: 'https://m.media-amazon.com/images/M/MV5BZGY4ODZmZjMtNjY0NS00MWMzLTkzNGUtZTAxZDI0YzU1YWJmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
       logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
     },

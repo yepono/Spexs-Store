@@ -122,3 +122,33 @@
     display: none; /* Oculta botones en móvil para diseño más limpio */
   }
 }
+
+.hero-btn-detalle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  margin-top: 15px;
+
+  background-color: #ffffff;
+  color: #1a1a1a;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.hero-btn-detalle:hover {
+  background-color: #aeaeaf;
+  transform: translateY(-2px);
+}
+
+.hero-btn-detalle:active {
+  transform: translateY(0);
+}
