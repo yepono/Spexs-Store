@@ -11,8 +11,9 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/catalogo" replace />} />
-        <Route path="/catalogo" element={<Catalogo />} />
-        <Route path="/juego/:id" element={<DetalleJuego />} />
+        <Route path="/catalogo" element={<Catalogo />} >
+          <Route path="juego/:id" element={<DetalleJuego />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>,

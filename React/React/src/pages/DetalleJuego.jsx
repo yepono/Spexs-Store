@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { JUEGOS } from '../data/juegos'
 import './DetalleJuego.css'
@@ -21,6 +21,20 @@ function DetalleJuego() {
   // Estado para controlar la visibilidad de los detalles extra
   const [mostrarDetalles, setMostrarDetalles] = useState(false)
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [])
+
+  const handleCerrarModal = (e) => {
+    if (e.target === e.currentTarget) {
+      navigate('/catalogo')
+    }
+  }
+
   const juego = JUEGOS.find((j) => j.id === id)
 
   if (!juego) {
@@ -41,7 +55,7 @@ function DetalleJuego() {
   }
 
   return (
-    <div className="detalle-container">
+    <div className="detalle-container" onClick={handleCerrarModal}>
       <div className="detalle-card">
 
         {/* Botón regresar */}

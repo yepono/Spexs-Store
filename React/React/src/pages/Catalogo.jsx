@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { JUEGOS, CATEGORIAS } from '../data/juegos'
 import Sidebar from '../components/Sidebar'
 import Hero from '../components/Hero' 
@@ -114,7 +114,7 @@ function Catalogo() {
                     <button className="btn-add-cart" onClick={() => agregarAlCarrito(juego.nombre)}>
                       Añadir al Carrito
                     </button>
-                    <Link to={`/juego/${juego.id}`} className="btn-detalle">
+                    <Link to={`/catalogo/juego/${juego.id}`} className="btn-detalle">
                       Ver Página Completa →
                     </Link>
                   </div>
@@ -129,6 +129,7 @@ function Catalogo() {
           )}
         </div>
       </div>
+      <Outlet />
     </div>
   )
 }
