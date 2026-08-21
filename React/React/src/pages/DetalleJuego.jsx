@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { JUEGOS } from '../data/juegos'
 import './DetalleJuego.css'
@@ -5,6 +6,20 @@ import './DetalleJuego.css'
 function DetalleJuego() {
   const { id } = useParams()
   const navigate = useNavigate()
+
+  const calcularPrecioFinal = (precioStr, descuentoStr) => {
+    if (!descuentoStr)
+      return precioStr
+
+    const precioNum = parseFloat(precioStr.replace('$', '').replace(' MXN', '').replace(',', ''));
+    const descuentoNum = parseFloat(descuentoStr.replace('%', ''));
+    const precioFinal = precioNum * (1 - descuentoNum / 100);
+    return `$${precioFinal.toLocaleString('es-MX')} MXN`;
+
+  }
+  
+  // Estado para controlar la visibilidad de los detalles extra
+  const [mostrarDetalles, setMostrarDetalles] = useState(false)
 
   const juego = JUEGOS.find((j) => j.id === id)
 
@@ -45,23 +60,29 @@ function DetalleJuego() {
           </svg>
         </button>
 
-
         <div className="detalle-content">
 
-          {/* =========================
-              INFORMACIÓN DEL JUEGO
-          ========================== */}
+          {/* --- INFORMACIÓN DEL JUEGO --- */}
           <div className="detalle-info">
 
-            <h1>{juego.nombre}</h1>
+            <div
+              className="detalle-header-visual"
+              style={{ backgroundImage: `url(${juego.imagen_juego})` }}
+            >
+              <div className="detalle-header-overlay"/>
 
-            <div className="detalle-subinfo">
-              <span>{juego.categoria}</span>
-              <span>•</span>
-              <span>{juego.compania}</span>
+              <div className="detalle-header-texto">
+
+                <h1>{juego.nombre}</h1>
+                <div className="detalle-subinfo">
+                  <span>{juego.categoria}</span>
+                  <span>•</span>
+                  <span>{juego.compania}</span>
+                </div>
+
+              </div>
+
             </div>
-
-            <div className="detalle-separador" />
 
             <div className="detalle-descripcion">
               <h3>Descripción</h3>
@@ -69,80 +90,72 @@ function DetalleJuego() {
               <p>
                 {juego.descripcion_larga}
               </p>
+              
+              {/* Botón de Ver Más */}
+              <button 
+                className="btn-ver-mas"
+                onClick={() => setMostrarDetalles(!mostrarDetalles)}
+              >
+                {mostrarDetalles ? 'Ocultar detalles' : 'Ver más detalles'}
+              </button>
             </div>
 
-            <div className="detalle-separador" />
+            <div className={`detalles-extra-wrapper ${mostrarDetalles ? 'abierto' : ''}`}>
+              <div className="detalles-extra-inner">
+                
+                <div className="detalle-separador" />
 
-            {/* Datos adicionales */}
-            <div className="detalle-datos">
-
-              <div className="dato-item">
-                <span className="dato-label">
-                  Clasificación
-                </span>
-
-                <span className="dato-valor badge-clasificacion">
-                  {juego.clasificacion_edad}
-                </span>
-              </div>
-
-              <div className="dato-item">
-                <span className="dato-label">
-                  Lanzamiento
-                </span>
-
-                <span className="dato-valor">
-                  {juego.fecha_lanzamiento}
-                </span>
-              </div>
-
-              <div className="dato-item">
-                <span className="dato-label">
-                  Compañía
-                </span>
-
-                <span className="dato-valor">
-                  {juego.compania}
-                </span>
-              </div>
-
-              <div className="dato-item">
-                <span className="dato-label">
-                  Requerimientos
-                </span>
-
-                <span className="dato-valor">
-                  {juego.requerimientos_minimos}
-                </span>
-              </div>
-
-            </div>
-
-            {/* Etiquetas */}
-            {juego.etiquetas && juego.etiquetas.length > 0 && (
-              <div className="detalle-tags">
-                <span className="dato-label">
-                  Etiquetas
-                </span>
-
-                <div className="tags-list">
-                  {juego.etiquetas.map((etiqueta, index) => (
-                    <span
-                      className="tag"
-                      key={index}
-                    >
-                      {etiqueta}
+                {/* Datos adicionales */}
+                <div className="detalle-datos">
+                  <div className="dato-item">
+                    <span className="dato-label">Clasificación</span>
+                    <span className="dato-valor badge-clasificacion">
+                      {juego.clasificacion_edad}
                     </span>
-                  ))}
+                  </div>
+
+                  <div className="dato-item">
+                    <span className="dato-label">Lanzamiento</span>
+                    <span className="dato-valor">
+                      {juego.fecha_lanzamiento}
+                    </span>
+                  </div>
+
+                  <div className="dato-item">
+                    <span className="dato-label">Compañía</span>
+                    <span className="dato-valor">
+                      {juego.compania}
+                    </span>
+                  </div>
+
+                  <div className="dato-item">
+                    <span className="dato-label">Requerimientos</span>
+                    <span className="dato-valor">
+                      {juego.requerimientos_minimos}
+                    </span>
+                  </div>
                 </div>
+
+                {/* Etiquetas */}
+                {juego.etiquetas && juego.etiquetas.length > 0 && (
+                  <div className="detalle-tags">
+                    <span className="dato-label">Etiquetas</span>
+                    <div className="tags-list">
+                      {juego.etiquetas.map((etiqueta, index) => (
+                        <span className="tag" key={index}>
+                          {etiqueta}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
               </div>
-            )}
+            </div>
 
           </div>
 
-          {/* =========================
-              PORTADA Y COMPRA
-          ========================== */}
+          {/* --- PORTADA Y COMPRA --- */}
           <div className="detalle-compra">
 
             <div className="detalle-portada-wrapper">
@@ -155,15 +168,20 @@ function DetalleJuego() {
 
             <div className="precio-box">
 
-              <span className="label-precio">
-                Precio
-              </span>
+              <span className="label-precio">Precio</span>
 
               <div className="precio-contenedor">
 
-                <span className="val-precio">
-                  {juego.precio}
-                </span>
+                <div className="precio-valores">
+                  {juego.descuento && (
+                    <span className="val-precio-original">
+                      {juego.precio}
+                    </span>
+                  )}
+                  <span className="val-precio">
+                    {juego.descuento ? calcularPrecioFinal(juego.precio, juego.descuento) : juego.precio}
+                  </span>
+                </div>
 
                 {juego.descuento && (
                   <span className="badge-descuento">
@@ -172,7 +190,6 @@ function DetalleJuego() {
                 )}
 
               </div>
-
             </div>
 
             <button
