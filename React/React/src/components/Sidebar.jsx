@@ -1,28 +1,30 @@
-import './Sidebar.css';
-import CategoriasMenu from '../components/CategoriasMenu';
+import { Link } from "react-router-dom";
+import "./Sidebar.css";
 
-function Sidebar({ abierto, onCerrar, categoriaActiva, onSeleccionar }) {
+function Sidebar({ abierto, onCerrar }) {
   return (
     <>
-      {/* Fondo oscuro al abrir el menú (clic para cerrar) */}
-      <div 
-        className={`sidebar-overlay ${abierto ? 'visible' : ''}`}
+      {/* Overlay oscuro */}
+      <div
+        className={`sidebar-overlay ${abierto ? "visible" : ""}`}
         onClick={onCerrar}
-      />
+      ></div>
 
-      <aside className={`sidebar ${abierto ? 'abierto' : ''}`}>
+      {/* Sidebar vertical */}
+      <aside className={`sidebar ${abierto ? "abierto" : ""}`}>
         <div className="sidebar-header">
-          <h2> GameStore</h2>
-          <button className="sidebar-close" onClick={onCerrar} aria-label="Cerrar menú">
-            ✕
-          </button>
+          <h2>GameStore</h2>
+          <button className="sidebar-close" onClick={onCerrar}>✖</button>
         </div>
 
-        {/* REEMPLAZO DE LA LISTA VIEJA POR EL COMPONENTE DESPLEGABLE */}
-        <CategoriasMenu 
-          categoriaSeleccionada={categoriaActiva} 
-          onSelectCategoria={onSeleccionar} 
-        />
+        <nav className="sidebar-nav">
+          <button className="sidebar-item">Todos los juegos</button>
+          <button className="sidebar-item">Ofertas</button>
+          <button className="sidebar-item">Cuenta</button>
+          <Link to="/registro" className="sidebar-item registro-link">
+            🧾 Registro
+          </Link>
+        </nav>
       </aside>
     </>
   );

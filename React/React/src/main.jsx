@@ -1,18 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import './index.css'
-import Catalogo from './pages/Catalogo.jsx'
-import DetalleJuego from './pages/DetalleJuego.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.jsx";
+import "./index.css";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/catalogo" replace />} />
-        <Route path="/catalogo" element={<Catalogo />} />
-        <Route path="/juego/:id" element={<DetalleJuego />} />
-      </Routes>
+      <App />
     </BrowserRouter>
-  </StrictMode>,
-)
+  </React.StrictMode>
+);
