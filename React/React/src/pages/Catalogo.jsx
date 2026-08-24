@@ -3,7 +3,6 @@ import { Link, Outlet } from 'react-router-dom'
 import { JUEGOS, CATEGORIAS } from '../data/juegos'
 import Sidebar from '../components/Sidebar'
 import Hero from '../components/Hero' 
-import TranslatorWidget from '../components/TranslatorWidget'
 
 import './Catalogo.css'
 
@@ -12,43 +11,57 @@ function Catalogo() {
   const [sidebarAbierto, setSidebarAbierto] = useState(false)
   const [categoriaActiva, setCategoriaActiva] = useState('Todos')
 
+  const toggleSidebar = () => setSidebarAbierto((prev) => !prev)
+
   const agregarAlCarrito = (nombre) => {
     setCarritoCount((prev) => prev + 1)
-    alert(`¡"${nombre}" fue añadido al carrito! `)
+    alert(`¡"${nombre}" fue añadido al carrito!`)
   }
+
+  const esCategoriaOfertas = categoriaActiva === 'Ofertas' || categoriaActiva === 'Ofertas Especiales'
 
   const juegosFiltrados = useMemo(() => {
     if (categoriaActiva === 'Todos') return JUEGOS
+    
+    if (esCategoriaOfertas) {
+      return JUEGOS.filter((j) => (j.descuento && j.descuento > 0) || j.oferta === true)
+    }
+
     return JUEGOS.filter((j) => j.categoria === categoriaActiva)
-  }, [categoriaActiva])
+  }, [categoriaActiva, esCategoriaOfertas])
 
   const seleccionarCategoria = (cat) => {
     setCategoriaActiva(cat)
     setSidebarAbierto(false)
   }
 
+  // Función helper para calcular el precio final
+  const obtenerPrecioConDescuento = (precioString, porcentajeDescuento) => {
+    // Extrae solo los dígitos del string (ej: "$1,299 MXN" -> 1299)
+    const numeroLimpio = parseFloat(precioString.replace(/[^0-9.-]+/g, ''))
+    if (isNaN(numeroLimpio)) return { precioFinal: precioString, precioOriginal: precioString }
+
+    const precioCalculado = numeroLimpio * (1 - porcentajeDescuento / 100)
+    
+    // Formatea el nuevo precio con comas y decimales
+    const formatoFinal = `$${precioCalculado.toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 2 })} MXN`
+    
+    return {
+      precioFinal: formatoFinal,
+      precioOriginal: precioString
+    }
+  }
+
   return (
     <div className="catalogo-page">
-      {/* Botón hamburguesa */}
-      <button
-        className={`hamburguesa-btn ${sidebarAbierto ? 'abierto' : ''}`}
-        onClick={() => setSidebarAbierto((prev) => !prev)}
-        aria-label="Abrir menú de categorías"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      {/* Menú lateral de categorías */}
       <Sidebar
         abierto={sidebarAbierto}
+        onToggle={toggleSidebar}
         onCerrar={() => setSidebarAbierto(false)}
         categorias={CATEGORIAS}
         categoriaActiva={categoriaActiva}
         onSeleccionar={seleccionarCategoria}
       />
-
 
       {categoriaActiva === 'Todos' && <Hero />}
 
@@ -84,45 +97,68 @@ function Catalogo() {
         </header>
 
         <div className="catalogo-grid">
-          {juegosFiltrados.map((juego) => (
-            <div key={juego.id} className="flip-card">
-              <div className="flip-card-inner">
+          {juegosFiltrados.map((juego) => {
+            const tieneOferta = (juego.descuento && juego.descuento > 0) || juego.oferta === true;
+            const porcentaje = juego.descuento || (juego.oferta ? 20 : 0);
+            
+            const { precioFinal, precioOriginal } = tieneOferta 
+              ? obtenerPrecioConDescuento(juego.precio, porcentaje)
+              : { precioFinal: juego.precio, precioOriginal: juego.precio };
 
-                {/* Cara Frontal de la Carta */}
-                <div className="flip-card-front">
-                  <div className="juego-portada-wrapper">
-                    {/* Consumiendo la nueva propiedad imagen_juego */}
-                    <img src={juego.imagen_juego} alt={juego.nombre} className="juego-portada-img" />
+            return (
+              <div key={juego.id} className="flip-card">
+                <div className="flip-card-inner">
+
+                  {/* Frente de la tarjeta */}
+                  <div className="flip-card-front">
+                    {esCategoriaOfertas && tieneOferta && (
+                      <div className="ribbon-oferta">
+                        <span>-{porcentaje}%</span>
+                      </div>
+                    )}
+
+                    <div className="juego-portada-wrapper">
+                      <img src={juego.imagen_juego} alt={juego.nombre} className="juego-portada-img" />
+                    </div>
+                    <div className="front-title-box">
+                      <span className="juego-id">#{juego.id}</span>
+                      <h3>{juego.nombre}</h3>
+                    </div>
                   </div>
-                  <div className="front-title-box">
-                    <span className="juego-id">#{juego.id}</span>
+
+                  {/* Reverso de la tarjeta */}
+                  <div className="flip-card-back">
+                    <span className="juego-compania">{juego.compania}</span>
                     <h3>{juego.nombre}</h3>
+                    <p className="juego-desc">{juego.descripcion_corta}</p>
+                    <span className="juego-fecha">Lanzamiento: {juego.fecha_lanzamiento}</span>
+
+                    {/* Precios: Muestra el precio tachado y el precio final con descuento */}
+                    <div className="juego-precio-container">
+                      {tieneOferta ? (
+                        <>
+                          <span className="precio-original-tachado">{precioOriginal}</span>
+                          <span className="juego-precio oferta">{precioFinal}</span>
+                        </>
+                      ) : (
+                        <span className="juego-precio">{juego.precio}</span>
+                      )}
+                    </div>
+
+                    <div className="back-actions">
+                      <button className="btn-add-cart" onClick={() => agregarAlCarrito(juego.nombre)}>
+                        Añadir al Carrito
+                      </button>
+                      <Link to={`/catalogo/juego/${juego.id}`} className="btn-detalle">
+                        Ver Página Completa →
+                      </Link>
+                    </div>
                   </div>
+
                 </div>
-
-                {/* Cara Trasera de la Carta */}
-                <div className="flip-card-back">
-                  {/* Nuevas propiedades: compania y descripcion_corta */}
-                  <span className="juego-compania">{juego.compania}</span>
-                  <h3>{juego.nombre}</h3>
-                  <p className="juego-desc">{juego.descripcion_corta}</p>
-                  <span className="juego-fecha">Lanzamiento: {juego.fecha_lanzamiento}</span>
-
-                  <div className="juego-precio">{juego.precio}</div>
-
-                  <div className="back-actions">
-                    <button className="btn-add-cart" onClick={() => agregarAlCarrito(juego.nombre)}>
-                      Añadir al Carrito
-                    </button>
-                    <Link to={`/catalogo/juego/${juego.id}`} className="btn-detalle">
-                      Ver Página Completa →
-                    </Link>
-                  </div>
-                </div>
-
               </div>
-            </div>
-          ))}
+            )
+          })}
 
           {juegosFiltrados.length === 0 && (
             <p className="sin-resultados">No hay juegos en esta categoría todavía.</p>

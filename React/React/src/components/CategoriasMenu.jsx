@@ -1,24 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './CategoriasDropdown.css';
-import '../components/TranslatorWidget'
 import TranslatorWidget from '../components/TranslatorWidget';
 
 const categorias = [
-  { id: 'Todos', nombre: 'Todos los juegos' },
-  { id: 'Acción', nombre: 'Acción' },
-  { id: 'Aventura', nombre: 'Aventura' },
-  { id: 'RPG', nombre: 'RPG' },
-  { id: 'Shooter', nombre: 'Shooter' },
-  { id: 'Deportes', nombre: 'Deportes' },
-  { id: 'Multijugador', nombre: 'Multijugador' },
-  { id: 'Plataformas', nombre: 'Plataformas' },
-  { id: 'Terror', nombre: 'Terror' },
-  { id: 'Estrategia', nombre: 'Estrategia' },
-  { id: 'Carreras', nombre: 'Carreras' },
-  { id: 'Sandbox', nombre: 'Sandbox' },
+  { id: 'Todos', nombre: 'Todos los juegos', icono: '🎮' },
+  { id: 'Acción', nombre: 'Acción', icono: '💥' },
+  { id: 'Aventura', nombre: 'Aventura', icono: '🗺️' },
+  { id: 'RPG', nombre: 'RPG', icono: '⚔️' },
+  { id: 'Shooter', nombre: 'Shooter', icono: '🎯' },
+  { id: 'Deportes', nombre: 'Deportes', icono: '⚽' },
+  { id: 'Multijugador', nombre: 'Multijugador', icono: '👥' },
+  { id: 'Plataformas', nombre: 'Plataformas', icono: '🏃' },
+  { id: 'Terror', nombre: 'Terror', icono: '👻' },
+  { id: 'Estrategia', nombre: 'Estrategia', icono: '🧠' },
+  { id: 'Carreras', nombre: 'Carreras', icono: '🏎️' },
+  { id: 'Sandbox', nombre: 'Sandbox', icono: '🌍' },
 ];
 
-export const CategoriasMenu = ({ categoriaSeleccionada = 'Todos', onSelectCategoria }) => {
+export const CategoriasMenu = ({ 
+  categoriaSeleccionada = 'Todos', 
+  onSelectCategoria,
+  onOpenAuth 
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -35,7 +38,11 @@ export const CategoriasMenu = ({ categoriaSeleccionada = 'Todos', onSelectCatego
   // Comparación tolerante a mayúsculas/minúsculas
   const categoriaActual = categorias.find(
     c => c.id.toLowerCase() === String(categoriaSeleccionada).toLowerCase()
-  ) || categorias[0];
+  ) || {
+    id: categoriaSeleccionada,
+    nombre: categoriaSeleccionada === 'Ofertas' ? 'Ofertas Especiales' : 'Todos los juegos',
+    icono: categoriaSeleccionada === 'Ofertas' ? '🏷️' : '🎮'
+  };
 
   return (
     <div className="sidebar-navigation">
@@ -78,13 +85,25 @@ export const CategoriasMenu = ({ categoriaSeleccionada = 'Todos', onSelectCatego
       </div>
 
       <div className="menu-secciones-extra">
-        <button type="button" className="nav-extra-btn">
-          <span className="btn-icon"></span>
+        <button 
+          type="button" 
+          className={`nav-extra-btn ${categoriaSeleccionada === 'Ofertas' ? 'active' : ''}`}
+          onClick={() => {
+            if (onSelectCategoria) onSelectCategoria('Ofertas');
+          }}
+        >
+          <span className="btn-icon">🏷️</span>
           <span className="btn-text">Ofertas</span>
         </button>
 
-        <button type="button" className="nav-extra-btn">
-          <span className="btn-icon"></span>
+        <button 
+          type="button" 
+          className="nav-extra-btn"
+          onClick={() => {
+            if (onOpenAuth) onOpenAuth();
+          }}
+        >
+          <span className="btn-icon">👤</span>
           <span className="btn-text">Cuenta</span>
         </button>
       </div>

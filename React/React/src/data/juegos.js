@@ -1,17 +1,3 @@
-export const CATEGORIAS = [
-  'Acción',
-  'Aventura',
-  'RPG',
-  'Shooter',
-  'Deportes',
-  'Multijugador',
-  'Plataformas',
-  'Terror',
-  'Estrategia',
-  'Carreras',
-  'Sandbox'
-];
-
 export const JUEGOS = [
   {
     id: '1',
@@ -66,7 +52,7 @@ export const JUEGOS = [
     etiquetas: ['Acción', 'Mitología', 'Un solo jugador'],
     fecha_lanzamiento: '9 de noviembre de 2022',
     compania: 'Santa Monica Studio',
-    descuento: '20%'
+    descuento: 20
   },
   {
     id: '3',
@@ -79,7 +65,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://m.media-amazon.com/images/M/MV5BODgwNDc4NjYtYmI2NS00ZWEwLTgxNzAtYzU1NGU3ZjhiN2NlXkEyXkFqcGdeQXZ3ZXNsZXk@._V1_.jpg',
       poster: 'https://cdn.marvel.com/content/2x/marvelsspiderman2_lob_mas_mob_02-1.webp',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Marvel%27s_Spider-Man_2_%282025%29_logo_official_%28SGDB_124347%29.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Marvel%27s_Spider-Man_2_%282025%29_logo_official_%28SGDB_124347%29.png'
     },
     clasificacion_edad: 'T (Adolescentes)',
     requerimientos_minimos: 'PlayStation 5',
@@ -107,7 +93,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://wallpapercat.com/w/full/b/f/0/119138-3840x2160-desktop-4k-uncharted-wallpaper-image.jpg',
       poster: 'https://m.media-amazon.com/images/M/MV5BNTFmN2M0MGMtMTI5Ny00NzRlLWFlZGYtZDM0N2VmOTUwYTdmXkEyXkFqcGc@._V1_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'T (Adolescentes)',
     requerimientos_minimos: 'CPU: Intel i5-4330 / GPU: GTX 960 / RAM: 8GB',
@@ -121,7 +107,7 @@ export const JUEGOS = [
     etiquetas: ['Aventura', 'Historia', 'Tercera persona'],
     fecha_lanzamiento: '10 de mayo de 2016',
     compania: 'Naughty Dog',
-    descuento: '50%'
+    descuento: 50
   },
   {
     id: '5',
@@ -134,7 +120,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://www.nme.com/wp-content/uploads/2020/05/assassins-creed-valhalla-credit-ubisoft@2000x1270-3-1.jpg',
       poster: 'https://cdn.europosters.eu/image/1300/96340.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Assassin%27s_Creed_Valhalla_text_logo.svg/960px-Assassin%27s_Creed_Valhalla_text_logo.svg.png?utm_source=es.wikipedia.org&utm_campaign=index&utm_content=thumbnail'
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Assassin%27s_Creed_Valhalla_text_logo.svg/960px-Assassin%27s_Creed_Valhalla_text_logo.svg.png'
     },
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Ryzen 3 1200 / GPU: GTX 960 / RAM: 8GB',
@@ -150,7 +136,7 @@ export const JUEGOS = [
     etiquetas: ['Mundo abierto', 'RPG', 'Vikingos'],
     fecha_lanzamiento: '10 de noviembre de 2020',
     compania: 'Ubisoft',
-    descuento: '75%'
+    descuento: 75
   },
   {
     id: '6',
@@ -163,7 +149,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://i.guim.co.uk/img/media/579318570c74cd4dbc08f82db78e8291f3977f9b/0_100_3305_1983/master/3305.jpg?width=1200&quality=85&auto=format&fit=max&s=6d06ad98f7ef3314064d50ca7293a709',
       poster: 'https://steamforged.com/cdn/shop/collections/ER-collection-2000x1125-780428.png?v=1743077065',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Intel i5-8400 / GPU: GTX 1060 / RAM: 12GB',
@@ -179,7 +165,7 @@ export const JUEGOS = [
     etiquetas: ['RPG de acción', 'Mundo abierto', 'Fantasía oscura'],
     fecha_lanzamiento: '25 de febrero de 2022',
     compania: 'FromSoftware',
-    descuento: '30%'
+    descuento: 30
   },
   {
     id: '7',
@@ -192,7 +178,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://espirituracer.com/archivos/2020/12/coches-de-cyberpunk-2077-2.jpg',
       poster: 'https://store-images.s-microsoft.com/image/apps.47379.63407868131364914.bcaa868c-407e-42c2-baeb-48a3c9f29b54.89bb995b-b066-4a53-9fe4-0260ce07e894',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Core i7-6700 / GPU: GTX 1060 / RAM: 12GB',
@@ -207,7 +193,7 @@ export const JUEGOS = [
     etiquetas: ['Cyberpunk', 'Ciencia Ficción', 'Mundo abierto'],
     fecha_lanzamiento: '10 de diciembre de 2020',
     compania: 'CD Projekt Red',
-    descuento: '50%'
+    descuento: 50
   },
   {
     id: '8',
@@ -220,7 +206,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://store-images.s-microsoft.com/image/apps.46303.65858607118306853.39ed2a08-df0d-4ae1-aee0-c66ffb783a34.1fbbd7b6-6399-4b79-99f0-f48c6ada8a2b?h=862&format=jpg',
       poster: 'https://m.media-amazon.com/images/M/MV5BNTQ2NjNkMTItNjViYy00MjhlLTgxMTEtOTM1ODJiNmFiMmJhXkEyXkFqcGc@._V1_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Intel i5-2500K / GPU: GTX 660 / RAM: 6GB',
@@ -235,7 +221,7 @@ export const JUEGOS = [
     etiquetas: ['Fantasía', 'Historia', 'Mundo abierto'],
     fecha_lanzamiento: '18 de mayo de 2015',
     compania: 'CD Projekt Red',
-    descuento: '80%'
+    descuento: 80
   },
   {
     id: '9',
@@ -248,7 +234,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://gameinformer.com/sites/default/files/styles/content_header_l/public/2023/08/16/e92f072f/bg3_party.jpg.webp',
       poster: 'https://m.media-amazon.com/images/M/MV5BN2I0N2Y3MWUtNjJiNy00NjRjLWE4ZTctOTQ2YWVhM2VhMTM4XkEyXkFqcGc@._V1_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Intel i5-4690 / GPU: GTX 970 / RAM: 8GB',
@@ -263,7 +249,7 @@ export const JUEGOS = [
     etiquetas: ['CRPG', 'Elecciones importan', 'Fantasía'],
     fecha_lanzamiento: '3 de agosto de 2023',
     compania: 'Larian Studios',
-    descuento: '10%'
+    descuento: 10
   },
   {
     id: '10',
@@ -276,7 +262,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://i.blogs.es/7526d7/doom-eternal/1366_2000.jpeg',
       poster: 'https://m.media-amazon.com/images/M/MV5BZGY4ODZmZjMtNjY0NS00MWMzLTkzNGUtZTAxZDI0YzU1YWJmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Intel Core i5 @ 3.3 GHz / GPU: GTX 1050 Ti / RAM: 8GB',
@@ -291,7 +277,7 @@ export const JUEGOS = [
     etiquetas: ['Acción frenética', 'Demonios', 'FPS'],
     fecha_lanzamiento: '20 de marzo de 2020',
     compania: 'id Software',
-    descuento: '70%'
+    descuento: 70
   },
   {
     id: '11',
@@ -304,7 +290,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://cdn.akamai.steamstatic.com/apps/csgo/images/csgo_react/cs2/maps/dust2_back_plat_s1.jpg',
       poster: 'https://m.media-amazon.com/images/M/MV5BYjdlZjZlMTQtMTQwNS00MTBjLWE3YjQtM2Y3NjQ5ZWEzMzRmXkEyXkFqcGc@._V1_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Intel Core i5-750 / GPU: 1GB VRAM / RAM: 8GB',
@@ -332,7 +318,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://theaverageviewer.home.blog/wp-content/uploads/2019/02/992033.jpg',
       poster: 'https://m.media-amazon.com/images/M/MV5BM2Q5YmMzM2ItNzY2OS00OWQ3LTkzMzMtYzJiYTE4NDVjODgzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'T (Adolescentes)',
     requerimientos_minimos: 'CPU: Intel Core i3-6300 / GPU: GT 640 / RAM: 6GB',
@@ -360,7 +346,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://img.somosxbox.com/somosxbox/2024/07/23102942/ea-sports-fc-25-logo-filtrado-2-somosxbox.jpeg',
       poster: 'https://m.media-amazon.com/images/M/MV5BMjNiMWJjYzgtZWRjMy00MWZlLWE2ZjEtMTRkYWYxZTdjMDEwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'E (Todos)',
     requerimientos_minimos: 'CPU: Intel Core i5-6600K / GPU: GTX 1050 Ti / RAM: 8GB',
@@ -375,7 +361,7 @@ export const JUEGOS = [
     etiquetas: ['Fútbol', 'Deportes', 'Multijugador'],
     fecha_lanzamiento: '27 de septiembre de 2024',
     compania: 'EA Sports',
-    descuento: '25%'
+    descuento: 25
   },
   {
     id: '14',
@@ -388,7 +374,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://www.nintendo.com/eu/media/images/10_share_images/games_15/nintendo_switch_download_software_1/2x1_NSwitchDS_RocketLeague_S16.jpg',
       poster: 'https://m.media-amazon.com/images/M/MV5BNTkyNjdlM2ItMGEwZS00NzYyLTlmOGYtZThlOTExN2E4NGYyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'E (Todos)',
     requerimientos_minimos: 'CPU: Dual Core 2.5 GHz / GPU: GTX 760 / RAM: 4GB',
@@ -415,7 +401,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://ecranpartage.ca/wp-content/uploads/2022/07/Super-Mario-Odyssey-Featured-Ecran-Partage.jpg',
       poster: 'https://m.media-amazon.com/images/M/MV5BMGUyNGFjZDgtNzYyNi00ZjdjLTlkY2ItOWRiMTM2ZWY1Y2Y2XkEyXkFqcGc@._V1_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'E10+',
     requerimientos_minimos: 'Nintendo Switch',
@@ -442,7 +428,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://images3.alphacoders.com/806/thumb-1920-806257.jpg',
       poster: 'https://m.media-amazon.com/images/M/MV5BMGIyYmJmZDgtOWQ1Ny00NDFiLTk2OTgtM2Q2ZWQ4OWIxZjg3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'E10+',
     requerimientos_minimos: 'CPU: Intel Core 2 Duo E5200 / GPU: 9800GTX+ / RAM: 4GB',
@@ -456,7 +442,7 @@ export const JUEGOS = [
     etiquetas: ['Metroidvania', 'Difícil', '2D'],
     fecha_lanzamiento: '24 de febrero de 2017',
     compania: 'Team Cherry',
-    descuento: '50%'
+    descuento: 50
   },
   {
     id: '17',
@@ -467,9 +453,9 @@ export const JUEGOS = [
     descripcion_larga: 'Sobrevive es solo el principio. Seis años después de la catástrofe biológica en Raccoon City, el agente Leon S. Kennedy ha sido enviado a rescatar a la hija del presidente, secuestrada.',
     imagen_juego: 'https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg',
     imagenes: {
-      hero: 'https://images3.alphacoders.com/806/thumb-1920-806257.jpg',
-      poster: 'https://m.media-amazon.com/images/M/MV5BMGIyYmJmZDgtOWQ1Ny00NDFiLTk2OTgtM2Q2ZWQ4OWIxZjg3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      hero: 'https://cdn.akamai.steamstatic.com/steam/apps/2050650/ss_4938a1f8db1a38cf0db24ecaaefeaed7fb8c9f59.1920x1080.jpg',
+      poster: 'https://m.media-amazon.com/images/M/MV5BN2E2YmNlNDMtNTI0OC00N2EzLWIzNDgtMTVlNWJjODhkNDI3XkEyXkFqcGc@._V1_.jpg',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Resident_Evil_4_remake_logo.svg/1280px-Resident_Evil_4_remake_logo.svg.png'
     },
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Ryzen 3 1200 / GPU: GTX 1050 Ti / RAM: 8GB',
@@ -484,7 +470,7 @@ export const JUEGOS = [
     etiquetas: ['Terror de supervivencia', 'Zombis', 'Acción'],
     fecha_lanzamiento: '24 de marzo de 2023',
     compania: 'Capcom',
-    descuento: '25%'
+    descuento: 25
   },
   {
     id: '18',
@@ -497,7 +483,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://images3.alphacoders.com/806/thumb-1920-806257.jpg',
       poster: 'https://m.media-amazon.com/images/M/MV5BMGIyYmJmZDgtOWQ1Ny00NDFiLTk2OTgtM2Q2ZWQ4OWIxZjg3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'T (Adolescentes)',
     requerimientos_minimos: 'CPU: Intel Core i5-6300U / GPU: Intel HD 520 / RAM: 8GB',
@@ -525,7 +511,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://images3.alphacoders.com/806/thumb-1920-806257.jpg',
       poster: 'https://m.media-amazon.com/images/M/MV5BMGIyYmJmZDgtOWQ1Ny00NDFiLTk2OTgtM2Q2ZWQ4OWIxZjg3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'E (Todos)',
     requerimientos_minimos: 'CPU: Ryzen 3 1200 / GPU: GTX 970 / RAM: 8GB',
@@ -541,7 +527,7 @@ export const JUEGOS = [
     etiquetas: ['Carreras', 'Mundo abierto', 'Multijugador'],
     fecha_lanzamiento: '8 de noviembre de 2021',
     compania: 'Playground Games',
-    descuento: '40%'
+    descuento: 40
   },
   {
     id: '20',
@@ -554,7 +540,7 @@ export const JUEGOS = [
     imagenes: {
       hero: 'https://images3.alphacoders.com/806/thumb-1920-806257.jpg',
       poster: 'https://m.media-amazon.com/images/M/MV5BMGIyYmJmZDgtOWQ1Ny00NDFiLTk2OTgtM2Q2ZWQ4OWIxZjg3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=original'
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
     },
     clasificacion_edad: 'E10+',
     requerimientos_minimos: 'CPU: Intel Core i3-3210 / GPU: Intel HD Graphics 4000 / RAM: 4GB',
@@ -571,4 +557,18 @@ export const JUEGOS = [
     compania: 'Mojang Studios',
     descuento: null
   }
+];
+export const CATEGORIAS = [
+  'Todas',
+  'Aventura',
+  'Acción',
+  'RPG',
+  'Shooter',
+  'Deportes',
+  'Multijugador',
+  'Plataformas',
+  'Terror',
+  'Estrategia',
+  'Carreras',
+  'Sandbox'
 ];
