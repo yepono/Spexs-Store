@@ -10,16 +10,16 @@ export const useNotificacion = () => {
 export const NotificacionProvider = ({ children }) => {
   const [notificacion, setNotificacion] = useState(null);
 
-  const mostrarNotificacion = useCallback((titulo, mensaje) => {
-    setNotificacion({ titulo, mensaje });
+  const mostrarNotificacion = useCallback((titulo, mensaje, logo = null) => {
+    setNotificacion({ titulo, mensaje, logo, saliendo: false });
 
     setTimeout(() => {
       // Primero disparamos la animación de salida
       setNotificacion((prev) => prev ? { ...prev, saliendo: true } : null);
       
       // Luego desmontamos el componente
-      setTimeout(() => setNotificacion(null), 300);
-    }, 3000);
+      setTimeout(() => setNotificacion(null), 400);
+    }, 3500);
   }, []);
 
   return (
@@ -29,16 +29,41 @@ export const NotificacionProvider = ({ children }) => {
       {notificacion && (
         <div className={`toast-notificacion ${notificacion.saliendo ? 'saliendo' : ''}`}>
           
-          <div className="toast-icon-wrapper">
-            <svg className="toast-icon" fill="currentColor" viewBox="0 0 512 512">
-              <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
-            </svg>
+          {/* Logo */}
+          <div className='toast-logo-wrapper'>
+            {notificacion.logo ? (
+              <img
+                src={notificacion.logo}
+                alt={notificacion.titulo}
+                className='toast-logo'
+              />
+            ) : (
+              <div className='toast-logo-placeholder'>
+                <svg
+                  className="toast-icon"
+                  fill="currentColor"
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
+                </svg>
+              </div>
+            )}
           </div>
 
-          <div className="toast-textos">
-            <p className="toast-titulo">{notificacion.titulo}</p>
-            <p className="toast-mensaje">{notificacion.mensaje}</p>
+          {/* Texto */}
+
+          <div className='toast-textos'>
+            <span className='toast-label'>
+              AGREGADO AL CARRITO
+            </span>
+
+            <p className='toast-mensaje'>
+              {notificacion.mensaje}
+            </p>
+
           </div>
+
+          <div className='toast-acento'/>
 
         </div>
       )}

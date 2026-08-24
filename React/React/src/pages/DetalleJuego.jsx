@@ -282,7 +282,8 @@ function DetalleJuego() {
               onClick={() =>
                 mostrarNotificacion(
                   'Carrito actualizado',
-                  `Se añadió ${juego.nombre} - ${versionActual.nombre}`
+                  `Se añadió ${juego.nombre} - ${versionActual.nombre}`,
+                  juego.imagenes.logo
                 )
               }
             >
