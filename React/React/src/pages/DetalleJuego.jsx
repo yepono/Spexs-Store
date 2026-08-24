@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, version } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { JUEGOS } from '../data/juegos'
 import { useNotificacion } from '../context/NotificacionContext.jsx'
@@ -11,18 +11,35 @@ function DetalleJuego() {
   const { mostrarNotificacion } = useNotificacion()
 
   const calcularPrecioFinal = (precioStr, descuentoStr) => {
-    if (!descuentoStr)
+    if (!precioStr || precioStr === 'Gratis') {
       return precioStr
+    }
 
-    const precioNum = parseFloat(precioStr.replace('$', '').replace(' MXN', '').replace(',', ''));
-    const descuentoNum = parseFloat(descuentoStr.replace('%', ''));
-    const precioFinal = precioNum * (1 - descuentoNum / 100);
-    return `$${precioFinal.toLocaleString('es-MX')} MXN`;
+    const precioNum = parseFloat(
+      precioStr
+        .replace('$', '')
+        .replace(' MXN', '')
+        .replace(',', '')
+    )
 
+    const descuentoNum = parseFloat (
+      descuentoStr.replace('%', '')
+    )
+
+    if (isNaN(precioNum) || isNaN(descuentoNum)) {
+      return precioStr
+    }
+
+    const precioFinal = precioNum * (1 - descuentoNum / 100)
+
+    return `$${precioFinal.toLocaleString('es-MX')} MXN` 
   }
   
   // Estado para controlar la visibilidad de los detalles extra
   const [mostrarDetalles, setMostrarDetalles] = useState(false)
+
+  const [versionSeleccionada, setVersionSeleccionada] = useState(0);
+  const [esFavorito, setEsFavorito] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -39,6 +56,16 @@ function DetalleJuego() {
   }
 
   const juego = JUEGOS.find((j) => j.id === id)
+
+  const versiones = juego?.versiones?.length
+    ? juego.versiones
+    : [{
+      nombre: 'Juego Base',
+      precio: juego?.precio,
+      descuento: juego?.descuento
+    }]
+
+  const versionActual = versiones[versionSeleccionada] || versiones[0]
 
   if (!juego) {
     return (
@@ -185,34 +212,78 @@ function DetalleJuego() {
 
             <div className="precio-box">
 
-              <span className="label-precio">Precio</span>
+              <span className="label-precio">Versión</span>
 
-              <div className="precio-contenedor">
+              <div className="version-selector-wrapper">
 
-                <div className="precio-valores">
-                  {juego.descuento && (
-                    <span className="val-precio-original">
-                      {juego.precio}
-                    </span>
-                  )}
-                  <span className="val-precio">
-                    {juego.descuento ? calcularPrecioFinal(juego.precio, juego.descuento) : juego.precio}
-                  </span>
-                </div>
+                <select
+                  className="version-selector"
+                  value={versionSeleccionada}
+                  onChange={(e) => setVersionSeleccionada(Number(e.target.value))}
+                  aria-label="Seleccionar versión"
+                >
+                  {versiones.map((version, index) =>  (
+                    <option key={index} value={index}>
+                      {version.nombre}
+                    </option>
+                  ))}
+                </select>
 
-                {juego.descuento && (
-                  <span className="badge-descuento">
-                    {juego.descuento}
+                <button className={`btn-favorito ${esFavorito ? 'activo' : ''}`}
+                onClick={() => setEsFavorito(!esFavorito)}
+                aria-label={
+                  esFavorito
+                    ? 'Quitar de favoritos'
+                    : 'Agregar a favoritos'
+                }
+                title={
+                  esFavorito
+                    ? 'Quitar de favoritos'
+                    : 'Agregar a favoritos'
+                }
+                >
+                  {esFavorito ? '♥' : '♡' }
+                </button>
+
+              </div>
+
+              <span className='label-precio'>Precio</span>
+
+              <div className='precio-contenedor'>
+
+                {versionActual.descuento && (
+                  <span className='val-precio-original'>
+                    {versionActual.precio}
                   </span>
                 )}
 
+                <span className='val-precio'>
+                  {versionActual.descuento
+                    ? calcularPrecioFinal(
+                      versionActual.precio,
+                      versionActual.descuento
+                    )
+                    : versionActual.precio
+                  }
+                </span>
+
               </div>
+
+              {versionActual.descuento && (
+                <span className='badge-descuento'>
+                  {versionActual.descuento}
+                </span>
+              )}
+
             </div>
 
             <button
               className="btn-comprar"
               onClick={() =>
-                mostrarNotificacion('Carrito actualizado', `Se añadió ${juego.nombre}`)
+                mostrarNotificacion(
+                  'Carrito actualizado',
+                  `Se añadió ${juego.nombre} - ${versionActual.nombre}`
+                )
               }
             >
               Agregar al carrito
