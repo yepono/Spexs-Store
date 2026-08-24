@@ -25,7 +25,7 @@
 }
 
 .detalle-card {
-  background: #1e293b;
+  background: #1a1a1a;
   border: 1px solid rgba(148, 163, 184, 0.12);
   border-radius: 20px;
   padding: 32px;
@@ -67,7 +67,7 @@
 
 .btn-back-link:hover {
   color: #ffffff;
-  border-color: #38bdf8;
+  border-color: #8b5cf6;
   background: rgba(56, 189, 248, 0.1);
   transform: scale(1.05);
 }
@@ -123,9 +123,9 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(15, 23, 42, 0.95) 0%,
-    rgba(15, 23, 42, 0.4) 40%,
-    rgba(15, 23, 42, 0) 100%
+    #1a1a1a 0%,
+    #0f172a66 40%,
+    #0f172a00 100%
   );
 }
 
@@ -169,8 +169,8 @@
 /* DESCRIPCIÓN */
 
 .detalle-descripcion {
-  background: #273449;
-  border: 1px solid #273449;
+  background: #D9D9D906;
+  border: 1px solid #3a3a3a;
   border-radius: 14px;
   padding: 20px;
 }
@@ -222,6 +222,110 @@
   font-size: 14px;
   font-weight: 500;
 }
+
+.version-selector-wrapper {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.version-selector {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 42px 12px 14px;
+
+  color: #fff;
+  background-color: #171717;
+
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  outline: none;
+
+  appearance: none;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, #aaa 50%),
+    linear-gradient(135deg, #aaa 50%, transparent 50%);
+
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 13px) 50%;
+
+  background-size:
+    5px 5px,
+    5px 5px;
+
+  background-repeat: no-repeat;
+
+  transition: border-color 0.2s ease,
+              background-color 0.2s ease;
+}
+
+.version-selector:hover {
+  border-color: #666;
+  background-color: #202020;
+}
+
+.version-selector:focus {
+  border-color: #8b5cf6;
+}
+
+.version-selector option {
+  color: #fff;
+  background-color: #171717;
+}
+
+
+.btn-favorito {
+  flex-shrink: 0;
+
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+
+  background: #171717;
+  color: #aaa;
+
+  font-size: 25px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-favorito:hover {
+  color: #ff4d6d;
+  border-color: #ff4d6d;
+  background-color: rgba(255, 77, 109, 0.08);
+
+  transform: scale(1.04);
+}
+
+.btn-favorito.activo {
+  color: #ff4d6d;
+  border-color: #ff4d6d;
+  background-color: rgba(255, 77, 109, 0.12);
+}
+
 
 
 /* CLASIFICACIÓN */
@@ -450,7 +554,7 @@
 .btn-ver-mas {
   background: transparent;
   border: 1px solid #475569;
-  color: #38bdf8;
+  color: #8b5cf6;
   padding: 8px 16px;
   border-radius: 8px;
   margin-top: 18px;
@@ -464,7 +568,7 @@
 
 .btn-ver-mas:hover {
   background: rgba(56, 189, 248, 0.1);
-  border-color: #38bdf8;
+  border-color: #8b5cf6;
 }
 
 .btn-ver-mas:active {
