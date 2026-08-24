@@ -1,0 +1,80 @@
+.toast-notificacion {
+  /* Posición top-24 y right-8 (aprox) */
+  position: fixed;
+  top: 96px;
+  right: 32px;
+  z-index: 9999;
+  
+  /* Layout y estilo general */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  
+  /* Colores oscuros por defecto (como en tu tema) */
+  background-color: #1a1a1a;
+  border: 1px solid rgba(75, 83, 188, 0.3);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  
+  font-family: system-ui, -apple-system, sans-serif;
+  
+  /* Animación de entrada */
+  animation: slideIn 0.3s ease-out forwards;
+  transition: all 0.3s ease;
+}
+
+.toast-notificacion.saliendo {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+/* El círculo de fondo del icono */
+.toast-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(75, 83, 188, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* El icono SVG */
+.toast-icon {
+  width: 20px;
+  height: 20px;
+  color: #4B53BC;
+}
+
+/* Textos */
+.toast-textos {
+  display: flex;
+  flex-direction: column;
+}
+
+.toast-titulo {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0;
+}
+
+.toast-mensaje {
+  color: #9ca3af; /* text-gray-400 */
+  font-size: 12px;
+  margin: 0;
+}
+
+/* Animación de entrada desde la derecha */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

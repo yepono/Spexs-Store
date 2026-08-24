@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { JUEGOS } from '../data/juegos'
+import { useNotificacion } from '../context/NotificacionContext.jsx'
 import './DetalleJuego.css'
 
 function DetalleJuego() {
   const { id } = useParams()
   const navigate = useNavigate()
+
+  const { mostrarNotificacion } = useNotificacion()
 
   const calcularPrecioFinal = (precioStr, descuentoStr) => {
     if (!descuentoStr)
@@ -209,7 +212,7 @@ function DetalleJuego() {
             <button
               className="btn-comprar"
               onClick={() =>
-                alert(`¡Añadido ${juego.nombre} al carrito!`)
+                mostrarNotificacion('Carrito actualizado', `Se añadió ${juego.nombre}`)
               }
             >
               Agregar al carrito
