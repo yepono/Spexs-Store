@@ -1,12 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';
+import { useAuth } from '../context/AuthContext';
 import './Recibo.css';
 
 export default function Recibo() {
     const location = useLocation();
     const navigate = useNavigate();
     const { vaciarCarrito } = useCarrito();
+    const { agregarCompras } = useAuth();
+    const procesadoRef = useRef(false);
 
     // datos del carrito sidebar
     const datosCompra = location.state;
@@ -14,10 +17,22 @@ export default function Recibo() {
     useEffect(() => {
         if (!datosCompra || !datosCompra.items || datosCompra.items.length === 0) {
             navigate('/catalogo');
-        } else {
+        } else if (!procesadoRef.current) {
+            procesadoRef.current = true;
+
+            // Transfiere los artículos comprados del recibo a la biblioteca
+            const juegosNuevos = datosCompra.items.map((item) => ({
+                id: item.id || item.nombre.toLowerCase().replace(/\s+/g, '-'),
+                titulo: item.nombre || item.titulo,
+                imagen: item.imagen || item.img || item.imagenUrl || '',
+                fechaCompra: new Date().toLocaleDateString('es-MX'),
+                horasJugadas: '0.0 hrs'
+            }));
+
+            agregarCompras(juegosNuevos);
             vaciarCarrito();
         }
-    }, []);
+    }, [datosCompra, navigate, vaciarCarrito, agregarCompras]);
 
     if (!datosCompra) return null;
 

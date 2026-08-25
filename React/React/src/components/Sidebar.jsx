@@ -1,11 +1,17 @@
+import React, { useState } from 'react';
 import './Sidebar.css';
-import CategoriasMenu from '../components/CategoriasMenu';
-import TranslatorWidget from '../components/TranslatorWidget';
+import CategoriasMenu from './CategoriasMenu';
+import TranslatorWidget from './TranslatorWidget';
+import AuthModal from './AuthModal';
+import { useAuth } from '../context/AuthContext';
 
 function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }) {
+  const [modalAuthAbierto, setModalAuthAbierto] = useState(false);
+  const { usuario, cerrarSesion } = useAuth();
+
   return (
     <>
-      {/* Botón Hamburguesa */}
+      {/* Botón Hamburguesa (Izquierda) */}
       <button 
         className={`hamburguesa-btn ${abierto ? 'abierto' : ''}`} 
         onClick={onToggle}
@@ -15,6 +21,23 @@ function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }
         <span></span>
         <span></span>
       </button>
+
+      {/* Botón de Iniciar Sesión / Perfil (Derecha) */}
+      <div className="user-top-right-btn">
+        {usuario ? (
+          <div className="user-logged-menu">
+            <span>👤 {usuario.nombre}</span>
+            <button onClick={cerrarSesion} className="btn-logout-small">Salir</button>
+          </div>
+        ) : (
+          <button 
+            className="btn-auth-top-right" 
+            onClick={() => setModalAuthAbierto(true)}
+          >
+            👤 Iniciar Sesión / Registrarse
+          </button>
+        )}
+      </div>
 
       {/* Overlay translúcido */}
       <div 
@@ -38,6 +61,12 @@ function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }
 
         <TranslatorWidget />
       </aside>
+
+      {/* Modal de Autenticación */}
+      <AuthModal 
+        isOpen={modalAuthAbierto} 
+        onClose={() => setModalAuthAbierto(false)} 
+      />
     </>
   );
 }
