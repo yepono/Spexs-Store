@@ -10,18 +10,22 @@ export default function CarritoSidebar() {
 
     const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
-    // Calcular total de la compra con el descuento
+    // Función auxiliar para precios
+    const procesarPrecio = (item) => {
+        if (!item.precioReal || item.precioReal === 'Gratis') return { precioNum: 0, descNum: 0, precioFinal: 0, esGratis: true };
+        const precioNum = parseFloat(item.precioReal.replace(/[^0-9.-]+/g, '')) || 0;
+        const descNum = item.descuentoReal ? parseFloat(String(item.descuentoReal).replace('%', '')) : 0;
+        const precioFinal = precioNum * (1 - descNum / 100);
+        return { precioNum, descNum, precioFinal, esGratis: false };
+    };
+
     const calcularTotales = () => {
         let original = 0;
         let final = 0;
         carrito.forEach(item => {
-            const precioNum = parseFloat(item.precio.replace(/[^0-9.-]+/g, '')) || 0;
-            const descuentoNum = item.descuento ? parseFloat(String(item.descuento).replace('%', '')) : 0;
-
-            const precioFinalItem = precioNum * (1 - descuentoNum / 100);
-
-            original += precioNum * item.cantidad;
-            final += precioFinalItem * item.cantidad;
+            const val = procesarPrecio(item);
+            original += val.precioNum * item.cantidad;
+            final += val.precioFinal * item.cantidad;
         });
         return { original, final };
     };
@@ -30,8 +34,7 @@ export default function CarritoSidebar() {
 
     const handleComprar = () => {
         setAbierto(false);
-        // pasar los datos del carrito al recibo
-        navigate('/recibo', { state: { items: carrito, total: final } });
+        navigate('/recibo', { state: { items: carrito, total: final, subtotal: original } });
     };
 
     const irADetalle = (id) => {
@@ -61,28 +64,49 @@ export default function CarritoSidebar() {
                     {carrito.length === 0 ? (
                         <p className="carrito-vacio">El carrito está vacío</p>
                     ) : (
-                        carrito.map(item => (
-                            <div key={item.id} className="carrito-item" onClick={() => irADetalle(item.id)}>
-                                <img src={item.imagen_juego} alt={item.nombre} className="carrito-item-img" />
-                                <div className="carrito-item-info">
-                                    <h4>{item.nombre}</h4>
-                                    <span>{item.precio}</span>
+                        carrito.map(item => {
+                            const val = procesarPrecio(item);
+
+                            return (
+                                <div key={`${item.id}-${item.version}`} className="carrito-item" onClick={() => irADetalle(item.id)}>
+                                    <img src={item.imagen_juego} alt={item.nombre} className="carrito-item-img" />
+                                    <div className="carrito-item-info">
+                                        <h4>{item.nombre}</h4>
+                                        <span style={{ display: 'block', fontSize: '11px', color: '#94a3b8', marginBottom: '4px' }}>
+                                            Versión: {item.version}
+                                        </span>
+
+                                        {val.esGratis ? (
+                                            <span style={{ color: '#22c55e', fontWeight: 'bold' }}>Gratis (x{item.cantidad})</span>
+                                        ) : (
+                                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                {val.descNum > 0 && (
+                                                    <span style={{ textDecoration: 'line-through', color: '#64748b', fontSize: '12px' }}>
+                                                        {item.precioReal}
+                                                    </span>
+                                                )}
+                                                <span style={{ color: '#38bdf8', fontWeight: 'bold', fontSize: '14px' }}>
+                                                    ${val.precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN (x{item.cantidad})
+                                                </span>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <button
+                                        className="btn-eliminar"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            eliminarDelCarrito(item.id, item.version);
+                                        }}
+                                        title="Eliminar"
+                                    >
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
                                 </div>
-                                <button
-                                    className="btn-eliminar"
-                                    onClick={(e) => {
-                                        e.stopPropagation(); // evita que se dispare irADetalle
-                                        eliminarDelCarrito(item.id);
-                                    }}
-                                    title="Eliminar"
-                                >
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                    </svg>
-                                </button>
-                            </div>
-                        ))
+                            )
+                        })
                     )}
                 </div>
 

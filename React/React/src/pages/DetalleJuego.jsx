@@ -2,6 +2,7 @@ import { useState, useEffect, version } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { JUEGOS } from '../data/juegos'
 import { useNotificacion } from '../context/NotificacionContext.jsx'
+import { useCarrito } from '../context/CarritoContext.jsx'
 import './DetalleJuego.css'
 
 function DetalleJuego() {
@@ -9,6 +10,7 @@ function DetalleJuego() {
   const navigate = useNavigate()
 
   const { mostrarNotificacion } = useNotificacion()
+  const { agregarAlCarrito } = useCarrito()
 
   const calcularPrecioFinal = (precioStr, descuentoStr) => {
     if (!precioStr || precioStr === 'Gratis') {
@@ -22,8 +24,8 @@ function DetalleJuego() {
         .replace(',', '')
     )
 
-    const descuentoNum = parseFloat (
-      descuentoStr.replace('%', '')
+    const descuentoNum = parseFloat(
+      String(descuentoStr).replace('%', '')
     )
 
     if (isNaN(precioNum) || isNaN(descuentoNum)) {
@@ -32,9 +34,9 @@ function DetalleJuego() {
 
     const precioFinal = precioNum * (1 - descuentoNum / 100)
 
-    return `$${precioFinal.toLocaleString('es-MX')} MXN` 
+    return `$${precioFinal.toLocaleString('es-MX')} MXN`
   }
-  
+
   // Estado para controlar la visibilidad de los detalles extra
   const [mostrarDetalles, setMostrarDetalles] = useState(false)
 
@@ -84,6 +86,24 @@ function DetalleJuego() {
     )
   }
 
+  // funcion para comprar
+  const handleAgregarCarrito = () => {
+    const itemParaCarrito = {
+      ...juego,
+      version: versionActual.nombre,
+      precioReal: versionActual.precio,
+      descuentoReal: versionActual.descuento
+    };
+
+    agregarAlCarrito(itemParaCarrito);
+
+    mostrarNotificacion(
+      'Carrito actualizado',
+      `Se añadió ${juego.nombre} - ${versionActual.nombre}`,
+      juego.imagenes?.logo
+    );
+  };
+
   return (
     <div className="detalle-container" onClick={handleCerrarModal}>
       <div className="detalle-card">
@@ -113,7 +133,7 @@ function DetalleJuego() {
               className="detalle-header-visual"
               style={{ backgroundImage: `url(${juego.imagenes?.hero || juego.imagen_juego})` }}
             >
-              <div className="detalle-header-overlay"/>
+              <div className="detalle-header-overlay" />
 
               <div className="detalle-header-texto">
 
@@ -134,9 +154,9 @@ function DetalleJuego() {
               <p>
                 {juego.descripcion_larga}
               </p>
-              
+
               {/* Botón de Ver Más */}
-              <button 
+              <button
                 className="btn-ver-mas"
                 onClick={() => setMostrarDetalles(!mostrarDetalles)}
               >
@@ -146,7 +166,7 @@ function DetalleJuego() {
 
             <div className={`detalles-extra-wrapper ${mostrarDetalles ? 'abierto' : ''}`}>
               <div className="detalles-extra-inner">
-                
+
                 <div className="detalle-separador" />
 
                 {/* Datos adicionales */}
@@ -222,7 +242,7 @@ function DetalleJuego() {
                   onChange={(e) => setVersionSeleccionada(Number(e.target.value))}
                   aria-label="Seleccionar versión"
                 >
-                  {versiones.map((version, index) =>  (
+                  {versiones.map((version, index) => (
                     <option key={index} value={index}>
                       {version.nombre}
                     </option>
@@ -230,19 +250,19 @@ function DetalleJuego() {
                 </select>
 
                 <button className={`btn-favorito ${esFavorito ? 'activo' : ''}`}
-                onClick={() => setEsFavorito(!esFavorito)}
-                aria-label={
-                  esFavorito
-                    ? 'Quitar de favoritos'
-                    : 'Agregar a favoritos'
-                }
-                title={
-                  esFavorito
-                    ? 'Quitar de favoritos'
-                    : 'Agregar a favoritos'
-                }
+                  onClick={() => setEsFavorito(!esFavorito)}
+                  aria-label={
+                    esFavorito
+                      ? 'Quitar de favoritos'
+                      : 'Agregar a favoritos'
+                  }
+                  title={
+                    esFavorito
+                      ? 'Quitar de favoritos'
+                      : 'Agregar a favoritos'
+                  }
                 >
-                  {esFavorito ? '♥' : '♡' }
+                  {esFavorito ? '♥' : '♡'}
                 </button>
 
               </div>
@@ -279,13 +299,7 @@ function DetalleJuego() {
 
             <button
               className="btn-comprar"
-              onClick={() =>
-                mostrarNotificacion(
-                  'Carrito actualizado',
-                  `Se añadió ${juego.nombre} - ${versionActual.nombre}`,
-                  juego.imagenes.logo
-                )
-              }
+              onClick={handleAgregarCarrito}
             >
               Agregar al carrito
             </button>

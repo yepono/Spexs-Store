@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar'
 import Hero from '../components/Hero'
 import CarritoSidebar from '../components/CarritoSidebar'
 import { useCarrito } from '../context/CarritoContext'
+import { useNotificacion } from '../context/NotificacionContext'
 
 import './Catalogo.css'
 
@@ -13,6 +14,7 @@ function Catalogo() {
   const [categoriaActiva, setCategoriaActiva] = useState('Todos')
 
   const { agregarAlCarrito } = useCarrito();
+  const { mostrarNotificacion } = useNotificacion();
 
   const toggleSidebar = () => setSidebarAbierto((prev) => !prev)
 
@@ -49,6 +51,30 @@ function Catalogo() {
       precioOriginal: precioString
     }
   }
+
+  const handleAgregarAlCarrito = (juego, porcentaje) => {
+    // Se toma por default la primera versión, si existe
+    const versionBase = juego.versiones && juego.versiones.length > 0
+      ? juego.versiones[0]
+      : { nombre: 'Estándar', precio: juego.precio, descuento: juego.descuento };
+
+    // Si estamos en la categoría de ofertas y aplica un descuento forzado, lo tomamos
+    const descuentoFinal = porcentaje > 0 ? `${porcentaje}%` : versionBase.descuento;
+
+    const itemParaCarrito = {
+      ...juego,
+      version: versionBase.nombre,
+      precioReal: versionBase.precio,
+      descuentoReal: descuentoFinal
+    };
+
+    agregarAlCarrito(itemParaCarrito);
+    mostrarNotificacion(
+      'Carrito actualizado',
+      `Se añadió ${juego.nombre} - ${versionBase.nombre}`,
+      juego.imagenes?.logo
+    );
+  };
 
   return (
     <div className="catalogo-page">
@@ -125,7 +151,7 @@ function Catalogo() {
                     </div>
 
                     <div className="back-actions">
-                      <button className="btn-add-cart" onClick={() => agregarAlCarrito(juego)}>
+                      <button className="btn-add-cart" onClick={() => handleAgregarAlCarrito(juego, porcentaje)}>
                         Añadir al Carrito
                       </button>
                       <Link to={`/catalogo/juego/${juego.id}`} className="btn-detalle">
@@ -145,7 +171,7 @@ function Catalogo() {
         </div>
       </div>
 
-      <CarritoSidebar/>
+      <CarritoSidebar />
       <Outlet />
     </div>
   )

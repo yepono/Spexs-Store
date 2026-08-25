@@ -9,18 +9,16 @@ export const CarritoProvider = ({ children }) => {
 
     const agregarAlCarrito = (juego) => {
         setCarrito((prev) => {
-            const existe = prev.find(item => item.id === juego.id);
+            const existe = prev.find(item => item.id === juego.id && item.version === juego.version);
             if (existe) {
-                //Arreglar aumento de cantidad en el carrito 
-                return prev.map(item =>
-                    item.id === juego.id ? { ...item, cantidad: item.cantidad } : item);
+                return prev;
             }
             return [...prev, { ...juego, cantidad: 1 }];
         });
     };
 
-    const eliminarDelCarrito = (id) => {
-        setCarrito(prev => prev.filter(item => item.id !== id));
+    const eliminarDelCarrito = (id, version) => {
+        setCarrito(prev => prev.filter(item => !(item.id === id && item.version === version)));
     };
 
     const vaciarCarrito = () => {
