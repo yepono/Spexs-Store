@@ -2,27 +2,25 @@ import { useState, useMemo } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { JUEGOS, CATEGORIAS } from '../data/juegos'
 import Sidebar from '../components/Sidebar'
-import Hero from '../components/Hero' 
+import Hero from '../components/Hero'
+import CarritoSidebar from '../components/CarritoSidebar'
+import { useCarrito } from '../context/CarritoContext'
 
 import './Catalogo.css'
 
 function Catalogo() {
-  const [carritoCount, setCarritoCount] = useState(0)
   const [sidebarAbierto, setSidebarAbierto] = useState(false)
   const [categoriaActiva, setCategoriaActiva] = useState('Todos')
 
-  const toggleSidebar = () => setSidebarAbierto((prev) => !prev)
+  const { agregarAlCarrito } = useCarrito();
 
-  const agregarAlCarrito = (nombre) => {
-    setCarritoCount((prev) => prev + 1)
-    alert(`¡"${nombre}" fue añadido al carrito!`)
-  }
+  const toggleSidebar = () => setSidebarAbierto((prev) => !prev)
 
   const esCategoriaOfertas = categoriaActiva === 'Ofertas' || categoriaActiva === 'Ofertas Especiales'
 
   const juegosFiltrados = useMemo(() => {
     if (categoriaActiva === 'Todos') return JUEGOS
-    
+
     if (esCategoriaOfertas) {
       return JUEGOS.filter((j) => (j.descuento && j.descuento > 0) || j.oferta === true)
     }
@@ -42,10 +40,10 @@ function Catalogo() {
     if (isNaN(numeroLimpio)) return { precioFinal: precioString, precioOriginal: precioString }
 
     const precioCalculado = numeroLimpio * (1 - porcentajeDescuento / 100)
-    
+
     // Formatea el nuevo precio con comas y decimales
     const formatoFinal = `$${precioCalculado.toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 2 })} MXN`
-    
+
     return {
       precioFinal: formatoFinal,
       precioOriginal: precioString
@@ -68,25 +66,6 @@ function Catalogo() {
       <div className="catalogo-container">
         <header className="catalogo-header">
           <h1>Catálogo de Videojuegos</h1>
-          <div className={`carrito-contenedor ${carritoCount > 0 ? 'lleno' : 'vacio'}`}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill={carritoCount > 0 ? "currentColor" : "none"}
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="icono-carrito"
-            >
-              <circle cx="9" cy="21" r="1"></circle>
-              <circle cx="20" cy="21" r="1"></circle>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </svg>
-            {carritoCount > 0 && (
-              <span className="cart-badge-number">{carritoCount}</span>
-            )}
-          </div>
           <p>
             {categoriaActiva === 'Todos'
               ? 'Explora toda nuestra colección'
@@ -100,8 +79,8 @@ function Catalogo() {
           {juegosFiltrados.map((juego) => {
             const tieneOferta = (juego.descuento && juego.descuento > 0) || juego.oferta === true;
             const porcentaje = juego.descuento || (juego.oferta ? 20 : 0);
-            
-            const { precioFinal, precioOriginal } = tieneOferta 
+
+            const { precioFinal, precioOriginal } = tieneOferta
               ? obtenerPrecioConDescuento(juego.precio, porcentaje)
               : { precioFinal: juego.precio, precioOriginal: juego.precio };
 
@@ -146,7 +125,7 @@ function Catalogo() {
                     </div>
 
                     <div className="back-actions">
-                      <button className="btn-add-cart" onClick={() => agregarAlCarrito(juego.nombre)}>
+                      <button className="btn-add-cart" onClick={() => agregarAlCarrito(juego)}>
                         Añadir al Carrito
                       </button>
                       <Link to={`/catalogo/juego/${juego.id}`} className="btn-detalle">
@@ -165,6 +144,8 @@ function Catalogo() {
           )}
         </div>
       </div>
+
+      <CarritoSidebar/>
       <Outlet />
     </div>
   )
