@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './index.css'
 import Catalogo from './pages/Catalogo.jsx'
 import DetalleJuego from './pages/DetalleJuego.jsx'
+import Recibo from './pages/Recibo.jsx'
 
 import { NotificacionProvider } from './context/NotificacionContext.jsx'
 import { CarritoProvider } from './context/CarritoContext.jsx'
@@ -18,10 +19,11 @@ createRoot(document.getElementById('root')).render(
             <Route path="/catalogo" element={<Catalogo />} >
               <Route path="juego/:id" element={<DetalleJuego />} />
             </Route>
+            {/* NUEVA RUTA */}
+            <Route path="/recibo" element={<Recibo />} />
           </Routes>
         </BrowserRouter>
       </CarritoProvider>
-
     </NotificacionProvider>
   </StrictMode>,
 )
