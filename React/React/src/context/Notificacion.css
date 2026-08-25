@@ -1,80 +1,235 @@
 .toast-notificacion {
-  /* Posición top-24 y right-8 (aprox) */
   position: fixed;
   top: 96px;
   right: 32px;
   z-index: 9999;
-  
-  /* Layout y estilo general */
+
+  width: min(420px, calc(100vw - 40px));
+  min-height: 100px;
+
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px;
-  border-radius: 8px;
-  
-  /* Colores oscuros por defecto (como en tu tema) */
-  background-color: #1a1a1a;
-  border: 1px solid rgba(75, 83, 188, 0.3);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-  
+  gap: 18px;
+
+  padding: 14px 20px 14px 14px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(31, 31, 38, 0.98),
+      rgba(18, 18, 23, 0.98)
+    );
+
+  border: 1px solid rgba(75, 83, 188, 0.45);
+
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.55),
+    0 0 35px rgba(75, 83, 188, 0.15);
+
   font-family: system-ui, -apple-system, sans-serif;
-  
-  /* Animación de entrada */
-  animation: slideIn 0.3s ease-out forwards;
-  transition: all 0.3s ease;
+
+  overflow: hidden;
+
+  animation: slideIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
 
 .toast-notificacion.saliendo {
   opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(120%) scale(0.95);
 }
 
-/* El círculo de fondo del icono */
-.toast-icon-wrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(75, 83, 188, 0.2);
+
+/* =========================
+   LOGO DEL JUEGO
+========================= */
+
+.toast-logo-wrapper {
+  width: 72px;
+  height: 72px;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  background: #292933;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.35),
+    0 0 15px rgba(75, 83, 188, 0.12);
+
+  animation: logoAppear 0.5s ease-out;
+}
+
+.toast-logo {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* Placeholder si no existe logo */
+
+.toast-logo-placeholder {
+  width: 100%;
+  height: 100%;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+
+  background: rgba(75, 83, 188, 0.15);
 }
 
-/* El icono SVG */
 .toast-icon {
-  width: 20px;
-  height: 20px;
-  color: #4B53BC;
+  width: 28px;
+  height: 28px;
+
+  color: #6670e8;
 }
 
-/* Textos */
+
+/* =========================
+   TEXTOS
+========================= */
+
 .toast-textos {
+  min-width: 0;
+
   display: flex;
   flex-direction: column;
+
+  gap: 3px;
+
+  padding-right: 8px;
+}
+
+.toast-label {
+  color: #6872e8;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 1.2px;
 }
 
 .toast-titulo {
   color: #ffffff;
-  font-weight: 500;
-  font-size: 14px;
+
+  font-weight: 700;
+  font-size: 18px;
+
+  line-height: 1.25;
+
   margin: 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .toast-mensaje {
-  color: #9ca3af; /* text-gray-400 */
-  font-size: 12px;
+  color: #a1a1aa;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  line-height: 1.4;
+
   margin: 0;
 }
 
-/* Animación de entrada desde la derecha */
+
+/* =========================
+   ACENTO LATERAL
+========================= */
+
+.toast-acento {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 4px;
+
+  background: linear-gradient(
+    180deg,
+    #6670e8,
+    #4B53BC,
+    #7c3aed
+  );
+
+  box-shadow: 0 0 15px rgba(75, 83, 188, 0.6);
+}
+
+
+/* =========================
+   ANIMACIONES
+========================= */
+
 @keyframes slideIn {
   from {
-    transform: translateX(100%);
+    transform: translateX(120%) scale(0.95);
     opacity: 0;
   }
+
   to {
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes logoAppear {
+  from {
+    transform: scale(0.7) rotate(-5deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+  .toast-notificacion {
+    top: 80px;
+    right: 20px;
+    left: 20px;
+
+    width: auto;
+
+    padding: 12px 16px 12px 12px;
+  }
+
+  .toast-logo-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .toast-titulo {
+    font-size: 16px;
+  }
+
+  .toast-mensaje {
+    font-size: 12px;
   }
 }
