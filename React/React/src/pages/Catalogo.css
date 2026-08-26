@@ -22,6 +22,283 @@
   margin-bottom: 8px;
 }
 
+.catalogo-filtros {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 0;
+
+  background: rgba(15, 15, 20, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.catalogo-header {
+  position: relative;
+}
+
+.catalogo-filtros {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 0;
+
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.filtro-btn {
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: #1e293b;
+  border: 1px solid #475569;
+  color: #cbd5e1;
+
+  padding: 0 14px;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.filtro-btn:hover {
+  background: #263449;
+  border-color: #6366f1;
+  color: #f8fafc;
+}
+
+.filtro-btn:active {
+  transform: scale(0.97);
+}
+
+.filtro-btn.activo {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: #6366f1;
+  color: #a78bfa;
+}
+
+.filtro-chevron {
+  font-size: 9px;
+  color: #64748b;
+  margin-left: 4px;
+}
+
+/* =========================
+   CONTENEDOR DROPDOWN
+========================= */
+
+.filtro-dropdown {
+  position: relative;
+}
+
+/* =========================
+   MENÚ
+========================= */
+
+.filtro-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+
+  min-width: 210px;
+
+  padding: 6px;
+
+  background: #0f172a;
+
+  border: 1px solid #334155;
+  border-radius: 10px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+
+  z-index: 200;
+
+  animation: filtroMenuEntrada 0.15s ease-out;
+}
+
+@keyframes filtroMenuEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   OPCIONES
+========================= */
+
+.filtro-opcion {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: transparent;
+  border: none;
+
+  color: #cbd5e1;
+
+  padding: 10px 12px;
+
+  border-radius: 7px;
+
+  text-align: left;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.filtro-opcion:hover {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+.filtro-opcion.seleccionada {
+  color: #a78bfa;
+}
+
+.filtro-opcion span:first-child {
+  width: 14px;
+  color: #6366f1;
+  font-weight: bold;
+}
+
+/* =========================
+   BUSCADOR
+========================= */
+
+.filtro-busqueda {
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  flex: 1;
+  max-width: 260px;
+
+  background: #1e293b;
+
+  border: 1px solid #475569;
+  border-radius: 8px;
+
+  padding: 0 12px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.filtro-busqueda:focus-within {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.12);
+}
+
+.filtro-icono {
+  color: #64748b;
+  font-size: 20px;
+}
+
+.filtro-busqueda input {
+  width: 100%;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #f8fafc;
+
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.filtro-busqueda input::placeholder {
+  color: #64748b;
+}
+
+/* =========================
+   OFERTAS
+========================= */
+
+.filtro-ofertas {
+  color: #fbbf24;
+}
+
+.filtro-ofertas:hover {
+  color: #fcd34d;
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.08);
+}
+
+/* =========================
+   ORDENAR
+========================= */
+
+.ordenar {
+  margin-left: auto;
+}
+
+.ordenar-btn {
+  color: #94a3b8;
+}
+
+.ordenar-btn strong {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.ordenar .filtro-menu {
+  right: 0;
+  left: auto;
+}
+
+
 .carrito-contenedor {
   position: absolute;
   top: 0;
