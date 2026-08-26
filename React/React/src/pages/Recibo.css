@@ -1,0 +1,120 @@
+.recibo-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: #0f172a;
+}
+
+.recibo-container {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  color: #f8fafc;
+}
+
+.recibo-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px dashed #475569;
+}
+
+.recibo-header h2 {
+  font-size: 28px;
+  color: #38bdf8;
+  margin: 0 0 10px 0;
+}
+
+.recibo-header p {
+  color: #22c55e;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.recibo-detalles-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.info-grupo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.info-grupo span {
+  color: #94a3b8;
+}
+
+.recibo-lista-juegos {
+  margin-bottom: 30px;
+}
+
+.recibo-lista-juegos h3 {
+  font-size: 16px;
+  color: #cbd5e1;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 8px;
+}
+
+.recibo-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+.recibo-item-nombre {
+  color: #f8fafc;
+}
+
+.recibo-item-precio {
+  color: #94a3b8;
+}
+
+.recibo-total-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 2px dashed #475569;
+  margin-bottom: 30px;
+}
+
+.recibo-total-section span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.recibo-total-monto {
+  color: #38bdf8;
+  font-size: 24px !important;
+}
+
+.btn-volver-catalogo {
+  width: 100%;
+  padding: 14px;
+  background-color: transparent;
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-volver-catalogo:hover {
+  background-color: #38bdf8;
+  color: #0f172a;
+}
