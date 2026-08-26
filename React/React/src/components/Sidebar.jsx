@@ -48,7 +48,7 @@ function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }
       {/* Sidebar Drawer */}
       <aside className={`sidebar ${abierto ? 'abierto' : ''}`}>
         <div className="sidebar-header">
-          <h2>GameStore</h2>
+          <h2>SPEXS</h2>
           <button className="sidebar-close" onClick={onCerrar} aria-label="Cerrar menú">
             ✕
           </button>
