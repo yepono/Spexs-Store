@@ -26,7 +26,7 @@ function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }
       <div className="user-top-right-btn">
         {usuario ? (
           <div className="user-logged-menu">
-            <span>👤 {usuario.nombre}</span>
+            <span>{usuario.nombre}</span>
             <button onClick={cerrarSesion} className="btn-logout-small">Salir</button>
           </div>
         ) : (
@@ -34,7 +34,7 @@ function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }
             className="btn-auth-top-right" 
             onClick={() => setModalAuthAbierto(true)}
           >
-            👤 Iniciar Sesión / Registrarse
+            Iniciar Sesión / Registrarse
           </button>
         )}
       </div>
@@ -48,7 +48,7 @@ function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }
       {/* Sidebar Drawer */}
       <aside className={`sidebar ${abierto ? 'abierto' : ''}`}>
         <div className="sidebar-header">
-          <h2>GameStore</h2>
+          <h2>SPEXS</h2>
           <button className="sidebar-close" onClick={onCerrar} aria-label="Cerrar menú">
             ✕
           </button>

@@ -71,7 +71,7 @@ export default function Recibo() {
                     </div>
                     <div className="info-grupo">
                         <span>Envio:</span>
-                        <strong>Envío Digital (Vinculado a tu cuenta)</strong>
+                        <strong>Podras ver tus juegos en la seccion de Biblioteca</strong>
                     </div>
                 </div>
 
