@@ -26,7 +26,7 @@ function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }
       <div className="user-top-right-btn">
         {usuario ? (
           <div className="user-logged-menu">
-            <span>👤 {usuario.nombre}</span>
+            <span>{usuario.nombre}</span>
             <button onClick={cerrarSesion} className="btn-logout-small">Salir</button>
           </div>
         ) : (
