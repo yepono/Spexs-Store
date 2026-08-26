@@ -51,7 +51,7 @@ export const JUEGOS = [
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Intel i5-4670K / GPU: GTX 1060 / RAM: 8GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows',
       minimos: {
         procesador: 'Intel i5-4670K / Ryzen 3 1200',
         graficos: 'NVIDIA GTX 1060 / AMD RX 5500 XT',
@@ -127,7 +127,7 @@ export const JUEGOS = [
     clasificacion_edad: 'T (Adolescentes)',
     requerimientos_minimos: 'CPU: Intel i5-4330 / GPU: GTX 960 / RAM: 8GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows',
       minimos: {
         procesador: 'Intel i5-4330 / AMD Ryzen 3 1200',
         graficos: 'NVIDIA GTX 960 / AMD R9 290X',
@@ -165,7 +165,7 @@ export const JUEGOS = [
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Ryzen 3 1200 / GPU: GTX 960 / RAM: 8GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows',
       minimos: {
         procesador: 'Intel Core i5-4460 / AMD Ryzen 3 1200',
         graficos: 'NVIDIA GTX 960 / AMD R9 380',
@@ -205,7 +205,7 @@ export const JUEGOS = [
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Intel i5-8400 / GPU: GTX 1060 / RAM: 12GB',
     especificaciones: {
-      os: 'Windows 10/11 64-bit',
+      os: 'Windows',
       minimos: {
         procesador: 'Intel Core i5-8400 / AMD Ryzen 3 3300X',
         graficos: 'NVIDIA GTX 1060 (3GB) / AMD RX 580 (4GB)',
@@ -245,7 +245,7 @@ export const JUEGOS = [
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Core i7-6700 / GPU: GTX 1060 / RAM: 12GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows / macOS',
       minimos: {
         procesador: 'Intel Core i7-6700 / AMD Ryzen 5 1600',
         graficos: 'NVIDIA GTX 1060 (6GB) / AMD Radeon RX 580 (8GB)',
@@ -284,7 +284,7 @@ export const JUEGOS = [
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Intel i5-2500K / GPU: GTX 660 / RAM: 6GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows / macOS',
       minimos: {
         procesador: 'Intel Core i5-2500K / AMD Phenom II X4',
         graficos: 'NVIDIA GTX 660 / AMD Radeon HD 7870',
@@ -323,7 +323,7 @@ export const JUEGOS = [
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Intel i5-4690 / GPU: GTX 970 / RAM: 8GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows / macOS',
       minimos: {
         procesador: 'Intel Core i5-4690 / AMD FX 8350',
         graficos: 'NVIDIA GTX 970 / AMD RX 480 (4GB)',
@@ -362,7 +362,7 @@ export const JUEGOS = [
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Intel Core i5 @ 3.3 GHz / GPU: GTX 1050 Ti / RAM: 8GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows',
       minimos: {
         procesador: 'Intel Core i5 @ 3.3 GHz / AMD Ryzen 3 @ 3.1 GHz',
         graficos: 'NVIDIA GTX 1050 Ti (4GB) / AMD R9 280 (3GB)',
@@ -401,7 +401,7 @@ export const JUEGOS = [
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Intel Core i5-750 / GPU: 1GB VRAM / RAM: 8GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows / Linux',
       minimos: {
         procesador: 'Intel Core i5-750 o equivalente',
         graficos: 'GPU compatible con DirectX 11 (1GB VRAM)',
@@ -440,7 +440,7 @@ export const JUEGOS = [
     clasificacion_edad: 'T (Adolescentes)',
     requerimientos_minimos: 'CPU: Intel Core i3-6300 / GPU: GT 640 / RAM: 6GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows',
       minimos: {
         procesador: 'Intel Core i3-6300 / AMD FX-4350',
         graficos: 'NVIDIA GeForce GT 640 / AMD Radeon HD 7730',
@@ -479,7 +479,7 @@ export const JUEGOS = [
     clasificacion_edad: 'E (Todos)',
     requerimientos_minimos: 'CPU: Intel Core i5-6600K / GPU: GTX 1050 Ti / RAM: 8GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows',
       minimos: {
         procesador: 'Intel Core i5-6600K / AMD Ryzen 5 1600',
         graficos: 'NVIDIA GTX 1050 Ti / AMD RX 570',
@@ -518,7 +518,7 @@ export const JUEGOS = [
     clasificacion_edad: 'E (Todos)',
     requerimientos_minimos: 'CPU: Dual Core 2.5 GHz / GPU: GTX 760 / RAM: 4GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows',
       minimos: {
         procesador: 'Procesador Dual Core 2.5 GHz',
         graficos: 'NVIDIA GTX 760 / AMD R7 270X',
@@ -592,7 +592,7 @@ export const JUEGOS = [
     clasificacion_edad: 'E10+',
     requerimientos_minimos: 'CPU: Intel Core 2 Duo E5200 / GPU: 9800GTX+ / RAM: 4GB',
     especificaciones: {
-      os: 'Windows 7/10',
+      os: 'Windows / macOS / Linux',
       minimos: {
         procesador: 'Intel Core 2 Duo E5200',
         graficos: 'NVIDIA GeForce 9800GTX+',
@@ -630,7 +630,7 @@ export const JUEGOS = [
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Ryzen 3 1200 / GPU: GTX 1050 Ti / RAM: 8GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows / macOS',
       minimos: {
         procesador: 'Intel Core i5-7500 / AMD Ryzen 3 1200',
         graficos: 'NVIDIA GTX 1050 Ti / AMD RX 560',
@@ -669,7 +669,7 @@ export const JUEGOS = [
     clasificacion_edad: 'T (Adolescentes)',
     requerimientos_minimos: 'CPU: Intel Core i5-6300U / GPU: Intel HD 520 / RAM: 8GB',
     especificaciones: {
-      os: 'Windows 10/11 64-bit',
+      os: 'Windows',
       minimos: {
         procesador: 'Intel Core i5-6300U / AMD Ryzen 5 2400G',
         graficos: 'Intel HD 520 / AMD Radeon RX Vega 11',
@@ -708,7 +708,7 @@ export const JUEGOS = [
     clasificacion_edad: 'E (Todos)',
     requerimientos_minimos: 'CPU: Ryzen 3 1200 / GPU: GTX 970 / RAM: 8GB',
     especificaciones: {
-      os: 'Windows 10 64-bit',
+      os: 'Windows',
       minimos: {
         procesador: 'Intel i5-4460 / AMD Ryzen 3 1200',
         graficos: 'NVIDIA GTX 970 / AMD RX 470',
@@ -748,7 +748,7 @@ export const JUEGOS = [
     clasificacion_edad: 'E10+',
     requerimientos_minimos: 'CPU: Intel Core i3-3210 / GPU: Intel HD Graphics 4000 / RAM: 4GB',
     especificaciones: {
-      os: 'Windows 10',
+      os: 'Windows / macOS / Linux',
       minimos: {
         procesador: 'Intel Core i3-3210 / AMD A8-7600',
         graficos: 'Intel HD 4000 / AMD Radeon R5',
