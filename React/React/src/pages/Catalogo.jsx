@@ -12,11 +12,16 @@ import './Catalogo.css'
 function Catalogo() {
   const [sidebarAbierto, setSidebarAbierto] = useState(false)
   const [categoriaActiva, setCategoriaActiva] = useState('Todos')
+  const [filtroAbierto, setFiltroAbierto] =useState(null)
 
   const { agregarAlCarrito } = useCarrito();
   const { mostrarNotificacion } = useNotificacion();
 
   const toggleSidebar = () => setSidebarAbierto((prev) => !prev)
+
+  const toggleFiltro = (filtro) => {
+    setFiltroAbierto((actual) => actual === filtro ? null : filtro)
+  }
 
   const esCategoriaOfertas = categoriaActiva === 'Ofertas' || categoriaActiva === 'Ofertas Especiales'
 
@@ -91,14 +96,184 @@ function Catalogo() {
 
       <div className="catalogo-container">
         <header className="catalogo-header">
-          <h1>Catálogo de Videojuegos</h1>
+          
+          <h1>
+            Catálogo de Videojuegos
+          </h1>
+
           <p>
             {categoriaActiva === 'Todos'
               ? 'Explora toda nuestra colección'
               : `Categoría: ${categoriaActiva}`}
             {' · '}
-            {juegosFiltrados.length} {juegosFiltrados.length === 1 ? 'juego' : 'juegos'}
           </p>
+
+          <div className='catalogo-filtros'>
+
+            {/* Buscador */}
+            <div className='filtro-busqueda'>
+              <span className='filtro-icono'>⌕</span>
+              <input
+                type='text'
+                placeholder='Buscar...'
+              />
+            </div>
+
+            {/* Categoria */}
+            <div className='filtro-dropdown'>
+
+              <button
+                className={`filtro-btn ${filtroAbierto === 'categoria' ? 'activo' : ''}`}
+                onClick={() => toggleFiltro('categoria')}
+              >
+                Categoría
+                <span className='filtro-chevron'>
+                  {filtroAbierto === 'categoria' ? '▲' : '▼'}
+                </span>
+              </button>
+
+              {filtroAbierto === 'categoria' && (
+                <div className='filtro-menu'>
+                  <button className='filtro-opcion seleccionada'>
+                    Todos
+                  </button>
+
+                  <button className="filtro-opcion">
+                    <span></span>
+                    Acción
+                  </button>
+
+                  <button className="filtro-opcion">
+                    <span></span>
+                    Aventura
+                  </button>
+
+                  <button className="filtro-opcion">
+                    <span></span>
+                    RPG
+                  </button>
+
+                  <button className="filtro-opcion">
+                    <span></span>
+                    Deportes
+                  </button>
+
+                  <button className="filtro-opcion">
+                    <span></span>
+                    Estrategia
+                  </button>
+                </div>
+              )}
+
+            </div>
+
+            {/* Plataforma */}
+
+            <div className='filtro-dropdown'>
+
+              <button
+                className={`filtro-btn ${filtroAbierto === 'plataforma' ? 'activo' : ''}`}
+                onClick={() => toggleFiltro('plataforma')}
+              >
+                Plataforma
+                <span className='filtro-chevron'>
+                  {filtroAbierto === 'plataforma' ?  '▲' : '▼'}
+                </span>
+              </button>
+
+              {filtroAbierto === 'plataforma' && (
+                <div className='filtro-menu'>
+                  <button className='filtro-opcion seleccionada'>
+                    Todas
+                  </button>
+                  <button className='filtro-opcion'>
+                    <span></span>
+                    PC
+                  </button>
+                  <button className='filtro-opcion'>
+                    <span></span>
+                    PayStation
+                  </button>
+                  <button className='filtro-opcion'>
+                    <span></span>
+                    Xbox
+                  </button>
+                  <button className='filtro-opcion'>
+                    <span></span>
+                    Nintendo Switch
+                  </button>
+                </div>
+              )}
+
+            </div>
+
+            {/* Precio */}
+            <div className='filtro-dropdown'>
+              <button
+                className={`filtro-btn ${filtroAbierto === 'precio' ? 'activo' : ''}`}
+                onClick={() => toggleFiltro('precio')}
+              >
+                <span></span>
+                Precio
+                <span className='filtro-chevron'>
+                  {filtroAbierto === 'precio' ? '▲' : '▼' }
+                </span>
+              </button>
+
+              {filtroAbierto === 'precio' && (
+                <div className='filtro-menu'>
+
+                  <button className='filtro-opcion seleccionada'>
+                    Cualquier precio
+                  </button>
+
+                  <button className='filtro-opcion'>
+                    <span></span>
+                    Menos de $500
+                  </button>
+
+                  <button className='filtro-opcion'>
+                    <span></span>
+                    $500 - $1,000
+                  </button>
+                  <button className='filtro-opcion'>
+                    <span></span>
+                    $1,000 - $1,500
+                  </button>
+                  <button className='filtro-opcion'>
+                    <span></span>
+                    Más de $1,500
+                  </button>
+
+                </div>
+              )}
+            </div>
+
+            {/* Ofertas */}
+            <div className='filtro-dropdown ordenar'>
+
+            </div>
+
+            <button className='filtro-btn'>
+              Plataforma
+              <span>⌄</span>
+            </button>
+
+            <button className='filtro-btn'>
+              Precio
+              <span>⌄</span>
+            </button>
+
+            <button className='filtro-btn filtro-ofertas'>
+              Ofertas
+            </button>
+
+            <button className='ordenar-btn'>
+              Ordernar: <strong>Relevancia</strong>
+              <span>⌄</span>
+            </button>
+          </div>
+
         </header>
 
         <div className="catalogo-grid">
