@@ -104,6 +104,11 @@ function DetalleJuego() {
     );
   };
 
+  // dar formato al nombre de cada requerimiento
+  const formatLabel = (key) => {
+    return key.replace('_', ' ').replace(/\b\w/g, char => char.toUpperCase());
+  };
+
   return (
     <div className="detalle-container" onClick={handleCerrarModal}>
       <div className="detalle-card">
@@ -192,12 +197,7 @@ function DetalleJuego() {
                     </span>
                   </div>
 
-                  <div className="dato-item">
-                    <span className="dato-label">Requerimientos</span>
-                    <span className="dato-valor">
-                      {juego.requerimientos_minimos}
-                    </span>
-                  </div>
+
                 </div>
 
                 {/* Etiquetas */}
@@ -215,6 +215,39 @@ function DetalleJuego() {
                 )}
 
               </div>
+              {juego.especificaciones && (
+                <div className="detalle-specs">
+                  <div className="specs-header">
+                    <h4>Requisitos del Sistema</h4>
+                    {juego.especificaciones.os && (
+                      <span className="specs-os"><strong>SO:</strong> {juego.especificaciones.os}</span>
+                    )}
+                  </div>
+
+                  <div className="specs-grid">
+                    <div className="specs-column minimos">
+                      <h5>Mínimos</h5>
+                      {Object.entries(juego.especificaciones.minimos).map(([key, value]) => (
+                        <div className="spec-row" key={key}>
+                          <span className="spec-label">{formatLabel(key)}</span>
+                          <span className="spec-value">{value}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="specs-column recomendados">
+                      <h5>Recomendados</h5>
+                      {Object.entries(juego.especificaciones.recomendados).map(([key, value]) => (
+                        <div className="spec-row" key={key}>
+                          <span className="spec-label">{formatLabel(key)}</span>
+                          <span className="spec-value">{value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
             </div>
 
           </div>
