@@ -4,6 +4,7 @@ import { JUEGOS, CATEGORIAS } from '../data/juegos'
 import Sidebar from '../components/Sidebar'
 import Hero from '../components/Hero'
 import CarritoSidebar from '../components/CarritoSidebar'
+import Footer from '../components/Footer'
 import { useCarrito } from '../context/CarritoContext'
 import { useNotificacion } from '../context/NotificacionContext'
 
@@ -12,7 +13,7 @@ import './Catalogo.css'
 function Catalogo() {
   const [sidebarAbierto, setSidebarAbierto] = useState(false)
   const [categoriaActiva, setCategoriaActiva] = useState('Todos')
-  const [filtroAbierto, setFiltroAbierto] =useState(null)
+  const [filtroAbierto, setFiltroAbierto] = useState(null)
 
   const { agregarAlCarrito } = useCarrito();
   const { mostrarNotificacion } = useNotificacion();
@@ -42,13 +43,11 @@ function Catalogo() {
 
   // Función helper para calcular el precio final
   const obtenerPrecioConDescuento = (precioString, porcentajeDescuento) => {
-    // Extrae solo los dígitos del string (ej: "$1,299 MXN" -> 1299)
     const numeroLimpio = parseFloat(precioString.replace(/[^0-9.-]+/g, ''))
     if (isNaN(numeroLimpio)) return { precioFinal: precioString, precioOriginal: precioString }
 
     const precioCalculado = numeroLimpio * (1 - porcentajeDescuento / 100)
 
-    // Formatea el nuevo precio con comas y decimales
     const formatoFinal = `$${precioCalculado.toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 2 })} MXN`
 
     return {
@@ -58,12 +57,10 @@ function Catalogo() {
   }
 
   const handleAgregarAlCarrito = (juego, porcentaje) => {
-    // Se toma por default la primera versión, si existe
     const versionBase = juego.versiones && juego.versiones.length > 0
       ? juego.versiones[0]
       : { nombre: 'Estándar', precio: juego.precio, descuento: juego.descuento };
 
-    // Si estamos en la categoría de ofertas y aplica un descuento forzado, lo tomamos
     const descuentoFinal = porcentaje > 0 ? `${porcentaje}%` : versionBase.descuento;
 
     const itemParaCarrito = {
@@ -192,7 +189,7 @@ function Catalogo() {
                   </button>
                   <button className='filtro-opcion'>
                     <span></span>
-                    PayStation
+                    PlayStation
                   </button>
                   <button className='filtro-opcion'>
                     <span></span>
@@ -269,7 +266,7 @@ function Catalogo() {
             </button>
 
             <button className='ordenar-btn'>
-              Ordernar: <strong>Relevancia</strong>
+              Ordenar: <strong>Relevancia</strong>
               <span>⌄</span>
             </button>
           </div>
@@ -313,7 +310,6 @@ function Catalogo() {
                     <p className="juego-desc">{juego.descripcion_corta}</p>
                     <span className="juego-fecha">Lanzamiento: {juego.fecha_lanzamiento}</span>
 
-                    {/* Precios: Muestra el precio tachado y el precio final con descuento */}
                     <div className="juego-precio-container">
                       {tieneOferta ? (
                         <>
@@ -348,6 +344,7 @@ function Catalogo() {
 
       <CarritoSidebar />
       <Outlet />
+      <Footer />
     </div>
   )
 }

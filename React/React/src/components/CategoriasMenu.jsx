@@ -4,18 +4,18 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const categorias = [
-  { id: 'Todos', nombre: 'Todos los juegos', icono: '🎮' },
-  { id: 'Acción', nombre: 'Acción', icono: '💥' },
-  { id: 'Aventura', nombre: 'Aventura', icono: '🗺️' },
-  { id: 'RPG', nombre: 'RPG', icono: '⚔️' },
-  { id: 'Shooter', nombre: 'Shooter', icono: '🎯' },
-  { id: 'Deportes', nombre: 'Deportes', icono: '⚽' },
-  { id: 'Multijugador', nombre: 'Multijugador', icono: '👥' },
-  { id: 'Plataformas', nombre: 'Plataformas', icono: '🏃' },
-  { id: 'Terror', nombre: 'Terror', icono: '👻' },
-  { id: 'Estrategia', nombre: 'Estrategia', icono: '🧠' },
-  { id: 'Carreras', nombre: 'Carreras', icono: '🏎️' },
-  { id: 'Sandbox', nombre: 'Sandbox', icono: '🌍' },
+  { id: 'Todos', nombre: 'Todos los juegos' },
+  { id: 'Acción', nombre: 'Acción' },
+  { id: 'Aventura', nombre: 'Aventura' },
+  { id: 'RPG', nombre: 'RPG' },
+  { id: 'Shooter', nombre: 'Shooter' },
+  { id: 'Deportes', nombre: 'Deportes' },
+  { id: 'Multijugador', nombre: 'Multijugador'},
+  { id: 'Plataformas', nombre: 'Plataformas' },
+  { id: 'Terror', nombre: 'Terror'},
+  { id: 'Estrategia', nombre: 'Estrategia' },
+  { id: 'Carreras', nombre: 'Carreras' },
+  { id: 'Sandbox', nombre: 'Sandbox' },
 ];
 
 export const CategoriasMenu = ({ 
@@ -43,7 +43,7 @@ export const CategoriasMenu = ({
   ) || {
     id: categoriaSeleccionada,
     nombre: categoriaSeleccionada === 'Ofertas' ? 'Ofertas Especiales' : 'Todos los juegos',
-    icono: categoriaSeleccionada === 'Ofertas' ? '🏷️' : '🎮'
+    icono: categoriaSeleccionada === 'Ofertas' ? '' : ''
   };
 
   const handleIrBiblioteca = () => {
@@ -102,7 +102,7 @@ export const CategoriasMenu = ({
             if (onSelectCategoria) onSelectCategoria('Ofertas');
           }}
         >
-          <span className="btn-icon">🏷️</span>
+          <span className="btn-icon"></span>
           <span className="btn-text">Ofertas</span>
         </button>
 
@@ -111,8 +111,8 @@ export const CategoriasMenu = ({
           className="nav-extra-btn"
           onClick={handleIrBiblioteca}
         >
-          <span className="btn-icon">📚</span>
-          <span className="btn-text">Mis Compras / Biblioteca</span>
+          <span className="btn-icon"></span>
+          <span className="btn-text"> Biblioteca</span>
         </button>
       </div>
     </div>
