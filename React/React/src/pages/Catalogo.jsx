@@ -72,7 +72,7 @@ function Catalogo() {
 
     agregarAlCarrito(itemParaCarrito);
     mostrarNotificacion(
-      'Carrito actualizado',
+      'Se agrego al carrito',
       `Se añadió ${juego.nombre} - ${versionBase.nombre}`,
       juego.imagenes?.logo
     );

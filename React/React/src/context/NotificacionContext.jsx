@@ -16,7 +16,7 @@ export const NotificacionProvider = ({ children }) => {
     setTimeout(() => {
       // Primero disparamos la animación de salida
       setNotificacion((prev) => prev ? { ...prev, saliendo: true } : null);
-      
+
       // Luego desmontamos el componente
       setTimeout(() => setNotificacion(null), 400);
     }, 3500);
@@ -25,10 +25,10 @@ export const NotificacionProvider = ({ children }) => {
   return (
     <NotificacionContext.Provider value={{ mostrarNotificacion }}>
       {children}
-      
+
       {notificacion && (
         <div className={`toast-notificacion ${notificacion.saliendo ? 'saliendo' : ''}`}>
-          
+
           {/* Logo */}
           <div className='toast-logo-wrapper'>
             {notificacion.logo ? (
@@ -52,18 +52,18 @@ export const NotificacionProvider = ({ children }) => {
 
           {/* Texto */}
 
+          {/* Texto */}
           <div className='toast-textos'>
             <span className='toast-label'>
-              AGREGADO AL CARRITO
+              {notificacion.titulo.toUpperCase()}
             </span>
 
             <p className='toast-mensaje'>
               {notificacion.mensaje}
             </p>
-
           </div>
 
-          <div className='toast-acento'/>
+          <div className='toast-acento' />
 
         </div>
       )}

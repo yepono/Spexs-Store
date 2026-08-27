@@ -33,7 +33,19 @@ export const JUEGOS = [
     etiquetas: ['Mundo abierto', 'Fantasía', 'Exploración'],
     fecha_lanzamiento: '12 de mayo de 2023',
     compania: 'Nintendo',
-    descuento: null
+    descuento: null,
+    comentarios: [
+      {
+        id: 'c1',
+        usuario: 'Carlos Mendoza',
+        email: 'carlos@ejemplo.com',
+        fecha: '15 de agosto de 2026',
+        version: 'Estándar',
+        texto: 'Un juego increíble, la exploración no tiene límites. Lo recomiendo totalmente.',
+        likes: 14,
+        likedBy: ['usuario1@test.com', 'usuario2@test.com']
+      }
+    ]
   },
   {
     id: '2',
@@ -72,7 +84,19 @@ export const JUEGOS = [
     etiquetas: ['Acción', 'Mitología', 'Un solo jugador'],
     fecha_lanzamiento: '9 de noviembre de 2022',
     compania: 'Santa Monica Studio',
-    descuento: 20
+    descuento: 20,
+    comentarios: [
+      {
+        id: 'c2',
+        usuario: 'Ana Torres',
+        email: 'ana@ejemplo.com',
+        fecha: '10 de julio de 2026',
+        version: 'Digital Deluxe',
+        texto: 'La historia es una obra maestra y el combate se siente brutal. 10/10.',
+        likes: 8,
+        likedBy: []
+      }
+    ]
   },
   {
     id: '3',
@@ -109,7 +133,8 @@ export const JUEGOS = [
     etiquetas: ['Superhéroes', 'Mundo abierto', 'Acción'],
     fecha_lanzamiento: '20 de octubre de 2023',
     compania: 'Insomniac Games',
-    descuento: null
+    descuento: null,
+    comentarios: []
   },
   {
     id: '4',
@@ -147,7 +172,8 @@ export const JUEGOS = [
     etiquetas: ['Aventura', 'Historia', 'Tercera persona'],
     fecha_lanzamiento: '10 de mayo de 2016',
     compania: 'Naughty Dog',
-    descuento: 50
+    descuento: 50,
+    comentarios: []
   },
   {
     id: '5',
@@ -187,7 +213,8 @@ export const JUEGOS = [
     etiquetas: ['Mundo abierto', 'RPG', 'Vikingos'],
     fecha_lanzamiento: '10 de noviembre de 2020',
     compania: 'Ubisoft',
-    descuento: 75
+    descuento: 75,
+    comentarios: []
   },
   {
     id: '6',
@@ -227,7 +254,8 @@ export const JUEGOS = [
     etiquetas: ['RPG de acción', 'Mundo abierto', 'Fantasía oscura'],
     fecha_lanzamiento: '25 de febrero de 2022',
     compania: 'FromSoftware',
-    descuento: 30
+    descuento: 30,
+    comentarios: []
   },
   {
     id: '7',
@@ -266,7 +294,8 @@ export const JUEGOS = [
     etiquetas: ['Cyberpunk', 'Ciencia Ficción', 'Mundo abierto'],
     fecha_lanzamiento: '10 de diciembre de 2020',
     compania: 'CD Projekt Red',
-    descuento: 50
+    descuento: 50,
+    comentarios: []
   },
   {
     id: '8',
@@ -305,7 +334,8 @@ export const JUEGOS = [
     etiquetas: ['Fantasía', 'Historia', 'Mundo abierto'],
     fecha_lanzamiento: '18 de mayo de 2015',
     compania: 'CD Projekt Red',
-    descuento: 80
+    descuento: 80,
+    comentarios: []
   },
   {
     id: '9',
@@ -344,7 +374,8 @@ export const JUEGOS = [
     etiquetas: ['CRPG', 'Elecciones importan', 'Fantasía'],
     fecha_lanzamiento: '3 de agosto de 2023',
     compania: 'Larian Studios',
-    descuento: 10
+    descuento: 10,
+    comentarios: []
   },
   {
     id: '10',
@@ -383,7 +414,8 @@ export const JUEGOS = [
     etiquetas: ['Acción frenética', 'Demonios', 'FPS'],
     fecha_lanzamiento: '20 de marzo de 2020',
     compania: 'id Software',
-    descuento: 70
+    descuento: 70,
+    comentarios: []
   },
   {
     id: '11',
@@ -422,7 +454,8 @@ export const JUEGOS = [
     etiquetas: ['Multijugador', 'Competitivo', 'Shooter táctico'],
     fecha_lanzamiento: '27 de septiembre de 2023',
     compania: 'Valve',
-    descuento: null
+    descuento: null,
+    comentarios: []
   },
   {
     id: '12',
@@ -461,7 +494,8 @@ export const JUEGOS = [
     etiquetas: ['Battle Royale', 'Multijugador', 'Hero Shooter'],
     fecha_lanzamiento: '4 de febrero de 2019',
     compania: 'Respawn Entertainment',
-    descuento: null
+    descuento: null,
+    comentarios: []
   },
   {
     id: '13',
@@ -500,7 +534,8 @@ export const JUEGOS = [
     etiquetas: ['Fútbol', 'Deportes', 'Multijugador'],
     fecha_lanzamiento: '27 de septiembre de 2024',
     compania: 'EA Sports',
-    descuento: 25
+    descuento: 25,
+    comentarios: []
   },
   {
     id: '14',
@@ -538,7 +573,8 @@ export const JUEGOS = [
     etiquetas: ['Deportes', 'Autos', 'Competitivo'],
     fecha_lanzamiento: '7 de julio de 2015',
     compania: 'Psyonix',
-    descuento: null
+    descuento: null,
+    comentarios: []
   },
   {
     id: '15',
@@ -574,7 +610,8 @@ export const JUEGOS = [
     etiquetas: ['Plataformas 3D', 'Exploración', 'Familiar'],
     fecha_lanzamiento: '27 de octubre de 2017',
     compania: 'Nintendo',
-    descuento: null
+    descuento: null,
+    comentarios: []
   },
   {
     id: '16',
@@ -612,7 +649,8 @@ export const JUEGOS = [
     etiquetas: ['Metroidvania', 'Difícil', '2D'],
     fecha_lanzamiento: '24 de febrero de 2017',
     compania: 'Team Cherry',
-    descuento: 50
+    descuento: 50,
+    comentarios: []
   },
   {
     id: '17',
@@ -651,7 +689,8 @@ export const JUEGOS = [
     etiquetas: ['Terror de supervivencia', 'Zombis', 'Acción'],
     fecha_lanzamiento: '24 de marzo de 2023',
     compania: 'Capcom',
-    descuento: 25
+    descuento: 25,
+    comentarios: []
   },
   {
     id: '18',
@@ -690,7 +729,8 @@ export const JUEGOS = [
     etiquetas: ['RTS', 'Historia', 'Multijugador'],
     fecha_lanzamiento: '28 de octubre de 2021',
     compania: 'Relic Entertainment',
-    descuento: null
+    descuento: null,
+    comentarios: []
   },
   {
     id: '19',
@@ -710,7 +750,7 @@ export const JUEGOS = [
     especificaciones: {
       os: 'Windows',
       minimos: {
-        procesador: 'Intel i5-4460 / AMD Ryzen 3 1200',
+        procesador: 'Intel i5-4460 / AMD Ryzehttp://localhost:5174/n 3 1200',
         graficos: 'NVIDIA GTX 970 / AMD RX 470',
         memoria_ram: '8 GB',
         almacenamiento: '110 GB'
@@ -730,7 +770,8 @@ export const JUEGOS = [
     etiquetas: ['Carreras', 'Mundo abierto', 'Multijugador'],
     fecha_lanzamiento: '8 de noviembre de 2021',
     compania: 'Playground Games',
-    descuento: 40
+    descuento: 40,
+    comentarios: []
   },
   {
     id: '20',
@@ -769,7 +810,8 @@ export const JUEGOS = [
     etiquetas: ['Supervivencia', 'Construcción', 'Mundo abierto'],
     fecha_lanzamiento: '18 de noviembre de 2011',
     compania: 'Mojang Studios',
-    descuento: null
+    descuento: null,
+    comentarios: []
   }
 ];
 

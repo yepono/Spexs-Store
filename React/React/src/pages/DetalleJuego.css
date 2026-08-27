@@ -709,3 +709,159 @@
     gap: 10px;
   }
 }
+
+/* --- COMENTARIOS --- */
+.seccion-comentarios {
+  margin-top: 40px;
+}
+
+.seccion-comentarios h3 {
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.comentario-alerta {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid #38bdf8;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.comentario-alerta p {
+  margin: 0;
+  color: #38bdf8;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-comentario {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.form-comentario textarea {
+  width: 100%;
+  min-height: 100px;
+  background: #171717;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  padding: 14px;
+  color: #f8fafc;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-comentario textarea:focus {
+  border-color: #8b5cf6;
+}
+
+.btn-publicar {
+  align-self: flex-end;
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-publicar:hover {
+  background: #7c3aed;
+}
+
+.lista-comentarios {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comentario-item {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.comentario-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #475569;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.comentario-contenido {
+  flex: 1;
+}
+
+.comentario-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.comentario-autor {
+  color: #f8fafc;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.comentario-meta {
+  color: #94a3b8;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.comentario-texto {
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 12px 0;
+}
+
+.btn-reaccion {
+  background: transparent;
+  border: 1px solid #3a3a3a;
+  color: #94a3b8;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.btn-reaccion:hover {
+  background: #202020;
+  border-color: #666;
+}
+
+.btn-reaccion.like-activo {
+  border-color: #ef4444;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.sin-comentarios {
+  color: #94a3b8;
+  font-style: italic;
+  font-size: 14px;
+}

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { JUEGOS } from '../data/juegos'
 import { useNotificacion } from '../context/NotificacionContext.jsx'
 import { useCarrito } from '../context/CarritoContext.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 import './DetalleJuego.css'
 
 function DetalleJuego() {
@@ -11,6 +12,9 @@ function DetalleJuego() {
 
   const { mostrarNotificacion } = useNotificacion()
   const { agregarAlCarrito } = useCarrito()
+  const { usuario } = useAuth()
+
+  const juego = JUEGOS.find((j) => j.id === id)
 
   const calcularPrecioFinal = (precioStr, descuentoStr) => {
     if (!precioStr || precioStr === 'Gratis') {
@@ -39,9 +43,14 @@ function DetalleJuego() {
 
   // Estado para controlar la visibilidad de los detalles extra
   const [mostrarDetalles, setMostrarDetalles] = useState(false)
-
   const [versionSeleccionada, setVersionSeleccionada] = useState(0);
   const [esFavorito, setEsFavorito] = useState(false);
+
+  const [comentariosLocales, setComentariosLocales] = useState(juego?.comentarios || [])
+  const [textoComentario, setTextoComentario] = useState('')
+
+  // validar si el usuario ya compro el juego
+  const haComprado = usuario?.compras?.some(compra => compra)
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -57,7 +66,6 @@ function DetalleJuego() {
     }
   }
 
-  const juego = JUEGOS.find((j) => j.id === id)
 
   const versiones = juego?.versiones?.length
     ? juego.versiones
@@ -98,7 +106,7 @@ function DetalleJuego() {
     agregarAlCarrito(itemParaCarrito);
 
     mostrarNotificacion(
-      'Carrito actualizado',
+      'Se agrego al carrito',
       `Se añadió ${juego.nombre} - ${versionActual.nombre}`,
       juego.imagenes?.logo
     );
@@ -107,6 +115,48 @@ function DetalleJuego() {
   // dar formato al nombre de cada requerimiento
   const formatLabel = (key) => {
     return key.replace('_', ' ').replace(/\b\w/g, char => char.toUpperCase());
+  };
+
+  // Reaccionar a un comentario
+  const handleReaccion = (comentarioId) => {
+    if (!usuario) {
+      mostrarNotificacion('Acceso Denegado', 'Inicia sesión para reaccionar a los comentarios.');
+      return;
+    }
+
+    setComentariosLocales(prev => prev.map(c => {
+      if (c.id === comentarioId) {
+        const yaDioLike = c.likedBy?.includes(usuario.email);
+        const nuevosLikes = yaDioLike ? c.likes - 1 : c.likes + 1;
+        const nuevoLikedBy = yaDioLike
+          ? c.likedBy.filter(e => e !== usuario.email)
+          : [...(c.likedBy || []), usuario.email];
+
+        return { ...c, likes: nuevosLikes, likedBy: nuevoLikedBy };
+      }
+      return c;
+    }));
+  };
+
+  // Publicar un nuevo comentario
+  const handlePublicarComentario = (e) => {
+    e.preventDefault();
+    if (!usuario || !haComprado || !textoComentario.trim()) return;
+
+    const nuevoComentario = {
+      id: Date.now().toString(),
+      usuario: usuario.nombre,
+      email: usuario.email,
+      fecha: new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' }),
+      version: versionActual.nombre,
+      texto: textoComentario,
+      likes: 0,
+      likedBy: []
+    };
+
+    setComentariosLocales([nuevoComentario, ...comentariosLocales]);
+    setTextoComentario('');
+    mostrarNotificacion('¡Gracias!', 'Tu reseña ha sido publicada.');
   };
 
   return (
@@ -250,7 +300,68 @@ function DetalleJuego() {
 
             </div>
 
+            <div className="seccion-comentarios">
+              <div className="detalle-separador" />
+              <h3>Reseñas de Jugadores</h3>
+
+              {usuario ? (
+                haComprado ? (
+                  <form className="form-comentario" onSubmit={handlePublicarComentario}>
+                    <textarea
+                      placeholder={`Escribe tu opinión sobre la versión ${versionActual.nombre}...`}
+                      value={textoComentario}
+                      onChange={(e) => setTextoComentario(e.target.value)}
+                      required
+                    ></textarea>
+                    <button type="submit" className="btn-publicar">Publicar Reseña</button>
+                  </form>
+                ) : (
+                  <div className="comentario-alerta">
+                    <p>Debes comprar este juego para poder escribir una reseña.</p>
+                  </div>
+                )
+              ) : (
+                <div className="comentario-alerta">
+                  <p>Inicia sesión y compra el juego para dejar tu reseña.</p>
+                </div>
+              )}
+
+              <div className="lista-comentarios">
+                {comentariosLocales.length > 0 ? (
+                  comentariosLocales.map((comentario) => {
+                    const dioLike = usuario && comentario.likedBy?.includes(usuario.email);
+                    return (
+                      <div key={comentario.id} className="comentario-item">
+                        <div className="comentario-avatar">
+                          {comentario.usuario.charAt(0).toUpperCase()}
+                        </div>
+                        <div className="comentario-contenido">
+                          <div className="comentario-header">
+                            <span className="comentario-autor">{comentario.usuario}</span>
+                            <span className="comentario-meta">{comentario.fecha} • Versión: {comentario.version}</span>
+                          </div>
+                          <p className="comentario-texto">{comentario.texto}</p>
+                          <button
+                            className={`btn-reaccion ${dioLike ? 'like-activo' : ''}`}
+                            onClick={() => handleReaccion(comentario.id)}
+                          >
+                            {dioLike ? '❤️' : '🤍'} {comentario.likes}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <p className="sin-comentarios">Aún no hay reseñas para este juego. ¡Sé el primero en comentar!</p>
+                )}
+              </div>
+            </div>
+
+
           </div>
+
+
+
 
           {/* --- PORTADA Y COMPRA --- */}
           <div className="detalle-compra">
@@ -341,7 +452,7 @@ function DetalleJuego() {
 
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
