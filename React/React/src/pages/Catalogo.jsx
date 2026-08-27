@@ -8,15 +8,15 @@ import Footer from '../components/Footer'
 import { useCarrito } from '../context/CarritoContext'
 import { useNotificacion } from '../context/NotificacionContext'
 
-
 import './Catalogo.css'
 
 function Catalogo() {
   const [sidebarAbierto, setSidebarAbierto] = useState(false)
+  const [carritoAbierto, setCarritoAbierto] = useState(false)
   const [categoriaActiva, setCategoriaActiva] = useState('Todos')
   const [filtroAbierto, setFiltroAbierto] = useState(null)
 
-  const { agregarAlCarrito } = useCarrito();
+  const { carrito, agregarAlCarrito } = useCarrito();
   const { mostrarNotificacion } = useNotificacion();
 
   const toggleSidebar = () => setSidebarAbierto((prev) => !prev)
@@ -42,7 +42,6 @@ function Catalogo() {
     setSidebarAbierto(false)
   }
 
-  // Función helper para calcular el precio final
   const obtenerPrecioConDescuento = (precioString, porcentajeDescuento) => {
     const numeroLimpio = parseFloat(precioString.replace(/[^0-9.-]+/g, ''))
     if (isNaN(numeroLimpio)) return { precioFinal: precioString, precioOriginal: precioString }
@@ -73,11 +72,13 @@ function Catalogo() {
 
     agregarAlCarrito(itemParaCarrito);
     mostrarNotificacion(
-      'Se agrego al carrito',
+      'Se agregó al carrito',
       `Se añadió ${juego.nombre} - ${versionBase.nombre}`,
       juego.imagenes?.logo
     );
   };
+
+  const totalItemsCarrito = carrito ? carrito.reduce((acc, item) => acc + (item.cantidad || 1), 0) : 0;
 
   return (
     <div className="catalogo-page">
@@ -94,184 +95,106 @@ function Catalogo() {
 
       <div className="catalogo-container">
         <header className="catalogo-header">
-          
-          <h1>
-            Catálogo de Videojuegos
-          </h1>
+          <h1>Catálogo de Videojuegos</h1>
 
           <p>
             {categoriaActiva === 'Todos'
               ? 'Explora toda nuestra colección'
               : `Categoría: ${categoriaActiva}`}
-            {' · '}
           </p>
 
-          <div className='catalogo-filtros'>
-
+          <div className="catalogo-filtros">
             {/* Buscador */}
-            <div className='filtro-busqueda'>
-              <span className='filtro-icono'>⌕</span>
-              <input
-                type='text'
-                placeholder='Buscar...'
-              />
+            <div className="filtro-busqueda">
+              <span className="filtro-icono">⌕</span>
+              <input type="text" placeholder="Buscar..." />
             </div>
 
             {/* Categoria */}
-            <div className='filtro-dropdown'>
-
+            <div className="filtro-dropdown">
               <button
                 className={`filtro-btn ${filtroAbierto === 'categoria' ? 'activo' : ''}`}
                 onClick={() => toggleFiltro('categoria')}
               >
                 Categoría
-                <span className='filtro-chevron'>
+                <span className="filtro-chevron">
                   {filtroAbierto === 'categoria' ? '▲' : '▼'}
                 </span>
               </button>
 
               {filtroAbierto === 'categoria' && (
-                <div className='filtro-menu'>
-                  <button className='filtro-opcion seleccionada'>
-                    Todos
-                  </button>
-
-                  <button className="filtro-opcion">
-                    <span></span>
-                    Acción
-                  </button>
-
-                  <button className="filtro-opcion">
-                    <span></span>
-                    Aventura
-                  </button>
-
-                  <button className="filtro-opcion">
-                    <span></span>
-                    RPG
-                  </button>
-
-                  <button className="filtro-opcion">
-                    <span></span>
-                    Deportes
-                  </button>
-
-                  <button className="filtro-opcion">
-                    <span></span>
-                    Estrategia
-                  </button>
+                <div className="filtro-menu">
+                  <button className="filtro-opcion seleccionada">Todos</button>
+                  <button className="filtro-opcion"><span></span>Acción</button>
+                  <button className="filtro-opcion"><span></span>Aventura</button>
+                  <button className="filtro-opcion"><span></span>RPG</button>
+                  <button className="filtro-opcion"><span></span>Deportes</button>
+                  <button className="filtro-opcion"><span></span>Estrategia</button>
                 </div>
               )}
-
             </div>
 
             {/* Plataforma */}
-
-            <div className='filtro-dropdown'>
-
+            <div className="filtro-dropdown">
               <button
                 className={`filtro-btn ${filtroAbierto === 'plataforma' ? 'activo' : ''}`}
                 onClick={() => toggleFiltro('plataforma')}
               >
                 Plataforma
-                <span className='filtro-chevron'>
-                  {filtroAbierto === 'plataforma' ?  '▲' : '▼'}
+                <span className="filtro-chevron">
+                  {filtroAbierto === 'plataforma' ? '▲' : '▼'}
                 </span>
               </button>
 
               {filtroAbierto === 'plataforma' && (
-                <div className='filtro-menu'>
-                  <button className='filtro-opcion seleccionada'>
-                    Todas
-                  </button>
-                  <button className='filtro-opcion'>
-                    <span></span>
-                    PC
-                  </button>
-                  <button className='filtro-opcion'>
-                    <span></span>
-                    PlayStation
-                  </button>
-                  <button className='filtro-opcion'>
-                    <span></span>
-                    Xbox
-                  </button>
-                  <button className='filtro-opcion'>
-                    <span></span>
-                    Nintendo Switch
-                  </button>
+                <div className="filtro-menu">
+                  <button className="filtro-opcion seleccionada">Todas</button>
+                  <button className="filtro-opcion"><span></span>PC</button>
+                  <button className="filtro-opcion"><span></span>PlayStation</button>
+                  <button className="filtro-opcion"><span></span>Xbox</button>
+                  <button className="filtro-opcion"><span></span>Nintendo Switch</button>
                 </div>
               )}
-
             </div>
 
             {/* Precio */}
-            <div className='filtro-dropdown'>
+            <div className="filtro-dropdown">
               <button
                 className={`filtro-btn ${filtroAbierto === 'precio' ? 'activo' : ''}`}
                 onClick={() => toggleFiltro('precio')}
               >
-                <span></span>
                 Precio
-                <span className='filtro-chevron'>
-                  {filtroAbierto === 'precio' ? '▲' : '▼' }
+                <span className="filtro-chevron">
+                  {filtroAbierto === 'precio' ? '▲' : '▼'}
                 </span>
               </button>
 
               {filtroAbierto === 'precio' && (
-                <div className='filtro-menu'>
-
-                  <button className='filtro-opcion seleccionada'>
-                    Cualquier precio
-                  </button>
-
-                  <button className='filtro-opcion'>
-                    <span></span>
-                    Menos de $500
-                  </button>
-
-                  <button className='filtro-opcion'>
-                    <span></span>
-                    $500 - $1,000
-                  </button>
-                  <button className='filtro-opcion'>
-                    <span></span>
-                    $1,000 - $1,500
-                  </button>
-                  <button className='filtro-opcion'>
-                    <span></span>
-                    Más de $1,500
-                  </button>
-
+                <div className="filtro-menu">
+                  <button className="filtro-opcion seleccionada">Cualquier precio</button>
+                  <button className="filtro-opcion"><span></span>Menos de $500</button>
+                  <button className="filtro-opcion"><span></span>$500 - $1,000</button>
+                  <button className="filtro-opcion"><span></span>$1,000 - $1,500</button>
+                  <button className="filtro-opcion"><span></span>Más de $1,500</button>
                 </div>
               )}
             </div>
 
-            {/* Ofertas */}
-            <div className='filtro-dropdown ordenar'>
-
-            </div>
-
-            <button className='filtro-btn'>
-              Plataforma
-              <span>⌄</span>
-            </button>
-
-            <button className='filtro-btn'>
-              Precio
-              <span>⌄</span>
-            </button>
-
-            <button className='filtro-btn filtro-ofertas'>
+            <button className="filtro-btn filtro-ofertas">
               Ofertas
             </button>
 
-            <button className='ordenar-btn'>
-              Ordenar: <strong>Relevancia</strong>
-              <span>⌄</span>
+            {/* BOTÓN DISPARADOR DEL CARRITO */}
+            <button 
+              className="filtro-btn btn-cart-trigger" 
+              onClick={() => setCarritoAbierto(true)}
+            >
+              🛒 Carrito
+              {totalItemsCarrito > 0 && (
+                <span className="cart-badge-number">{totalItemsCarrito}</span>
+              )}
             </button>
           </div>
-
         </header>
 
         <div className="catalogo-grid">
@@ -286,8 +209,7 @@ function Catalogo() {
             return (
               <div key={juego.id} className="flip-card">
                 <div className="flip-card-inner">
-
-                  {/* Frente de la tarjeta */}
+                  {/* Frente */}
                   <div className="flip-card-front">
                     {esCategoriaOfertas && tieneOferta && (
                       <div className="ribbon-oferta">
@@ -304,7 +226,7 @@ function Catalogo() {
                     </div>
                   </div>
 
-                  {/* Reverso de la tarjeta */}
+                  {/* Reverso */}
                   <div className="flip-card-back">
                     <span className="juego-compania">{juego.compania}</span>
                     <h3>{juego.nombre}</h3>
@@ -331,7 +253,6 @@ function Catalogo() {
                       </Link>
                     </div>
                   </div>
-
                 </div>
               </div>
             )
@@ -343,7 +264,10 @@ function Catalogo() {
         </div>
       </div>
 
-      <CarritoSidebar />
+      <CarritoSidebar 
+        isOpen={carritoAbierto} 
+        onClose={() => setCarritoAbierto(false)} 
+      />
       <Outlet />
       <Footer />
     </div>

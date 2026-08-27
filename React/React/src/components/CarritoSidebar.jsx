@@ -1,16 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCarrito } from '../context/CarritoContext';
 import './CarritoSidebar.css';
 
 export default function CarritoSidebar() {
     const [abierto, setAbierto] = useState(false);
+
+    // Persistencia en localStorage
+    const [tarjetas, setTarjetas] = useState(() => {
+        const guardadas = localStorage.getItem("mis_tarjetas_guardadas");
+        return guardadas ? JSON.parse(guardadas) : [];
+    });
+    
+    const [tarjetaSeleccionada, setTarjetaSeleccionada] = useState(null);
+    const [cambiandoTarjeta, setCambiandoTarjeta] = useState(false);
+    const [mostrandoFormulario, setMostrandoFormulario] = useState(false);
+
+    // Formulario de nueva tarjeta
+    const [numTarjeta, setNumTarjeta] = useState('');
+    const [vencimiento, setVencimiento] = useState('');
+    const [cvv, setCvv] = useState('');
+
     const { carrito, eliminarDelCarrito } = useCarrito();
     const navigate = useNavigate();
 
+    // Guardar en localStorage y actualizar la tarjeta seleccionada por defecto
+    useEffect(() => {
+        localStorage.setItem("mis_tarjetas_guardadas", JSON.stringify(tarjetas));
+        if (tarjetas.length > 0 && !tarjetaSeleccionada) {
+            setTarjetaSeleccionada(tarjetas[0].id);
+        }
+    }, [tarjetas]);
+
     const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
-    // Función auxiliar para precios
     const procesarPrecio = (item) => {
         if (!item.precioReal || item.precioReal === 'Gratis') return { precioNum: 0, descNum: 0, precioFinal: 0, esGratis: true };
         const precioNum = parseFloat(item.precioReal.replace(/[^0-9.-]+/g, '')) || 0;
@@ -32,15 +55,55 @@ export default function CarritoSidebar() {
 
     const { original, final } = calcularTotales();
 
+    const handleAgregarTarjeta = (e) => {
+        e.preventDefault();
+        if (!numTarjeta || !vencimiento || !cvv) return;
+
+        const ultimos4 = numTarjeta.slice(-4) || "0000";
+        const nuevaTarjeta = {
+            id: Date.now(),
+            label: `Tarjeta terminada en ${ultimos4}`,
+            num: `**** ${ultimos4}`,
+            vencimiento
+        };
+
+        const nuevasTarjetas = [...tarjetas, nuevaTarjeta];
+        setTarjetas(nuevasTarjetas);
+        setTarjetaSeleccionada(nuevaTarjeta.id);
+        
+        // Limpiar formulario y cerrar modos de edición
+        setNumTarjeta('');
+        setVencimiento('');
+        setCvv('');
+        setMostrandoFormulario(false);
+        setCambiandoTarjeta(false);
+    };
+
     const handleComprar = () => {
+        const tarjetaUsada = tarjetas.find(t => t.id === tarjetaSeleccionada);
+        if (!tarjetaUsada) {
+            alert("Por favor registra o selecciona un método de pago.");
+            setCambiandoTarjeta(true);
+            return;
+        }
+
         setAbierto(false);
-        navigate('/recibo', { state: { items: carrito, total: final, subtotal: original } });
+        navigate('/recibo', { 
+            state: { 
+                items: carrito, 
+                total: final, 
+                subtotal: original,
+                metodoPago: tarjetaUsada 
+            } 
+        });
     };
 
     const irADetalle = (id) => {
         setAbierto(false);
         navigate(`/catalogo/juego/${id}`);
     };
+
+    const tarjetaActual = tarjetas.find(t => t.id === tarjetaSeleccionada);
 
     return (
         <>
@@ -112,6 +175,76 @@ export default function CarritoSidebar() {
 
                 {carrito.length > 0 && (
                     <div className="carrito-footer">
+                        <div className="seccion-metodo-pago">
+                            <span className="pago-titulo">Método de pago:</span>
+
+                            {mostrandoFormulario ? (
+                                <form className="form-agregar-tarjeta" onSubmit={handleAgregarTarjeta}>
+                                    <input 
+                                        type="text" 
+                                        placeholder="Número de tarjeta" 
+                                        maxLength="16"
+                                        value={numTarjeta}
+                                        onChange={(e) => setNumTarjeta(e.target.value)}
+                                        required
+                                    />
+                                    <div className="form-row">
+                                        <input 
+                                            type="text" 
+                                            placeholder="MM/AA" 
+                                            maxLength="5"
+                                            value={vencimiento}
+                                            onChange={(e) => setVencimiento(e.target.value)}
+                                            required
+                                        />
+                                        <input 
+                                            type="password" 
+                                            placeholder="CVV" 
+                                            maxLength="4"
+                                            value={cvv}
+                                            onChange={(e) => setCvv(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-acciones">
+                                        <button type="submit" className="btn-guardar-tarjeta">Guardar</button>
+                                        <button type="button" className="btn-cancelar-tarjeta" onClick={() => setMostrandoFormulario(false)}>Cancelar</button>
+                                    </div>
+                                </form>
+                            ) : !cambiandoTarjeta && tarjetaActual ? (
+                                <div className="tarjeta-activa-box">
+                                    <div className="tarjeta-info">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                                        </svg>
+                                        <span>{tarjetaActual.num}</span>
+                                    </div>
+                                    <button className="btn-cambiar-tarjeta" onClick={() => setCambiandoTarjeta(true)}>
+                                        Cambiar
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="tarjetas-lista">
+                                    {tarjetas.map(t => (
+                                        <button 
+                                            key={t.id} 
+                                            className={`tarjeta-opcion ${t.id === tarjetaSeleccionada ? 'seleccionada' : ''}`}
+                                            onClick={() => {
+                                                setTarjetaSeleccionada(t.id);
+                                                setCambiandoTarjeta(false);
+                                            }}
+                                        >
+                                            💳 {t.label}
+                                        </button>
+                                    ))}
+                                    <button className="btn-nueva-tarjeta" onClick={() => setMostrandoFormulario(true)}>
+                                        + Agregar nueva tarjeta
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+
                         <div className="carrito-totales">
                             {original > final && (
                                 <span className="total-original">${original.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN</span>
