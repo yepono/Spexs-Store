@@ -1,6 +1,8 @@
 .catalogo-page {
   min-height: 100vh;
   position: relative;
+  background-color: #1a1a1a;
+  color: #e5e5e5;
 }
 
 .catalogo-container {
@@ -23,44 +25,30 @@
 }
 
 .catalogo-filtros {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 14px 0;
-
-  background: rgba(15, 15, 20, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.catalogo-header {
   position: relative;
-}
-
-.catalogo-filtros {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 32px;
+  box-sizing: border-box;
 
-  padding: 14px 0;
+  background: rgba(44, 44, 44, 0.75); 
+  backdrop-filter: blur(16px);
+  border: 1px solid #475569;
+  -webkit-backdrop-filter: blur(16px);
+  border: none; 
+  border-radius: 12px;
 
-  background: rgba(15, 23, 42, 0.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  z-index: 100;
 }
+
+.filtros-spacer {
+  flex-grow: 1;
+}
+
 
 /* =========================
    BOTONES
@@ -68,35 +56,28 @@
 
 .filtro-btn {
   height: 40px;
-
   display: flex;
   align-items: center;
   gap: 8px;
 
-  background: #1e293b;
-  border: 1px solid #475569;
-  color: #cbd5e1;
+  background: #181818;
+  border:none;
+  color: #a3a3a3;
 
   padding: 0 14px;
   border-radius: 8px;
-
   cursor: pointer;
-
   font-size: 13px;
   font-weight: 600;
   font-family: inherit;
 
   transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.15s ease;
+    all 0.2s ease;
 }
 
 .filtro-btn:hover {
-  background: #263449;
-  border-color: #6366f1;
-  color: #f8fafc;
+  background: #3f3f3f;
+  color: #ffffff;
 }
 
 .filtro-btn:active {
@@ -104,15 +85,55 @@
 }
 
 .filtro-btn.activo {
-  background: rgba(99, 102, 241, 0.15);
-  border-color: #6366f1;
-  color: #a78bfa;
+  background: rgba(168, 85, 247, 0.15);
+  color: #d8b4fe; 
 }
+
+
+.filtro-btn span {
+  color: #737373;
+  font-weight: normal;
+  margin-left: 4px;
+}
+
 
 .filtro-chevron {
   font-size: 9px;
   color: #64748b;
   margin-left: 4px;
+}
+
+
+/* =========================
+   PANEL DE EXPANSIÓN 
+========================= */
+.panel-filtros-expandido {
+  width: 100%;
+
+  background: rgba(20, 20, 20, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: none;
+  
+  border-radius: 0 0 12px 12px;
+  padding: 24px;
+  margin-top: -8px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  
+  animation: deslizarAbajo 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: top;
+}
+
+@keyframes deslizarAbajo {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scaleY(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
 }
 
 /* =========================
@@ -166,6 +187,42 @@
    OPCIONES
 ========================= */
 
+.opciones-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.opcion-card {
+  background: #2a2a2a;
+  border: none;
+  color: #a3a3a3;
+
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1 1 auto;
+  text-align: center;
+  min-width: 120px;
+}
+
+.opcion-card:hover {
+  background: #3f3f3f;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.opcion-card.activa {
+  /* ¡El gradiente morado que pediste! */
+  background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+  color: #ffffff;
+  /* Glow sutil del mismo color para que resalte */
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3); 
+}
+
 .filtro-opcion {
   width: 100%;
 
@@ -215,17 +272,15 @@
 
 .filtro-busqueda {
   height: 40px;
-
   display: flex;
   align-items: center;
   gap: 8px;
-
   flex: 1;
-  max-width: 260px;
+  min-width: 200px;
+  max-width: 300px;
 
-  background: #1e293b;
-
-  border: 1px solid #475569;
+  background: #1d1d1d;
+  border: none;
   border-radius: 8px;
 
   padding: 0 12px;
@@ -236,12 +291,12 @@
 }
 
 .filtro-busqueda:focus-within {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.12);
+  background: #333333;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.5);
 }
 
 .filtro-icono {
-  color: #64748b;
+  color: #737373;
   font-size: 20px;
 }
 
@@ -252,14 +307,14 @@
   border: none;
   outline: none;
 
-  color: #f8fafc;
+  color: #fff;
 
   font-family: inherit;
   font-size: 13px;
 }
 
 .filtro-busqueda input::placeholder {
-  color: #64748b;
+  color: #737373;
 }
 
 /* =========================
@@ -268,13 +323,15 @@
 
 .filtro-ofertas {
   color: #fbbf24;
+  border-color: #78350f;
 }
 
-.filtro-ofertas:hover {
-  color: #fcd34d;
+.filtro-btn.activo-oferta {
+  background: rgba(245, 158, 11, 0.15);
   border-color: #f59e0b;
-  background: rgba(245, 158, 11, 0.08);
+  color: #fbbf24;
 }
+
 
 /* =========================
    ORDENAR
@@ -383,6 +440,13 @@
   width: 100%;
   height: 280px;
   overflow: hidden;
+}
+
+.filtros-sticky-wrapper {
+  position: sticky;
+  top: 15px;
+  z-index: 100; /* Asegura que pase por encima de las portadas de los juegos */
+  margin-bottom: 25px;
 }
 
 .juego-portada-img {
