@@ -152,9 +152,9 @@
 }
 
 .btn-auth-top-right {
-  background: #1e293b;
-  color: #ffffff;
-  border: 1px solid #334155;
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #4d5d74;
   padding: 10px 18px;
   border-radius: 12px;
   font-weight: 600;
@@ -165,8 +165,8 @@
 }
 
 .btn-auth-top-right:hover {
-  background: #4f46e5;
-  border-color: #6366f1;
+  background: #adacb3;
+  border-color: #adacb3;
 }
 
 .user-logged-menu {

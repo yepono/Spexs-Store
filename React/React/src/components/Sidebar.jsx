@@ -34,7 +34,7 @@ function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }
             className="btn-auth-top-right" 
             onClick={() => setModalAuthAbierto(true)}
           >
-            Iniciar Sesión / Registrarse
+            Iniciar Sesión
           </button>
         )}
       </div>
