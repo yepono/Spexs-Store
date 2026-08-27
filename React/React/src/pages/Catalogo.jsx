@@ -8,6 +8,7 @@ import Footer from '../components/Footer'
 import { useCarrito } from '../context/CarritoContext'
 import { useNotificacion } from '../context/NotificacionContext'
 
+
 import './Catalogo.css'
 
 function Catalogo() {
