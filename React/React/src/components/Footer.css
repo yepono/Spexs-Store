@@ -1,0 +1,136 @@
+.footer-container {
+  width: 100%;
+  background-color: #0f172a;
+  color: #94a3b8;
+  font-family: system-ui, -apple-system, sans-serif;
+  margin-top: 60px;
+}
+
+/* Botón Inicio de página */
+.footer-back-to-top {
+  width: 100%;
+  background-color: #1e293b;
+  color: #cbd5e1;
+  border: none;
+  padding: 14px 0;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.footer-back-to-top:hover {
+  background-color: #334155;
+  color: #ffffff;
+}
+
+/* Grilla de enlaces */
+.footer-links-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+}
+
+.footer-col h4 {
+  color: #f8fafc;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 14px 0;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col li {
+  margin-bottom: 8px;
+}
+
+.footer-col a,
+.footer-col span {
+  color: #94a3b8;
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-col a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #1e293b;
+}
+
+/* Sección Central (Logo / Selector) */
+.footer-brand-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 0;
+}
+
+.footer-logo {
+  font-size: 18px;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: -0.5px;
+}
+
+.footer-country-badge {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+/* Barra Legal / Derechos */
+.footer-legal-bar {
+  background-color: #0b1120;
+  padding: 24px;
+  text-align: center;
+}
+
+.footer-legal-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.footer-legal-links a {
+  color: #cbd5e1;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.footer-legal-links a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  font-size: 11px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .footer-links-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
