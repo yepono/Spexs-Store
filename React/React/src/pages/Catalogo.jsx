@@ -52,8 +52,8 @@ function Catalogo() {
 
     // 3. Filtro por Plataforma (Asume que tus datos tienen 'plataforma' o 'plataformas')
     if (plataformaActiva !== 'Todas') {
-      filtrados = filtrados.filter((j) => 
-        j.plataforma === plataformaActiva || 
+      filtrados = filtrados.filter((j) =>
+        j.plataforma === plataformaActiva ||
         (j.plataformas && j.plataformas.includes(plataformaActiva))
       )
     }
@@ -150,28 +150,28 @@ function Catalogo() {
               <input type='text' placeholder='Buscar juego...' />
             </div>
 
-            <button 
+            <button
               className={`filtro-btn ${filtroAbierto === 'categoria' ? 'activo' : ''}`}
               onClick={() => toggleFiltro('categoria')}
             >
               Categoría: <span>{categoriaActiva}</span>
             </button>
 
-            <button 
+            <button
               className={`filtro-btn ${filtroAbierto === 'plataforma' ? 'activo' : ''}`}
               onClick={() => toggleFiltro('plataforma')}
             >
               Plataforma: <span>{plataformaActiva}</span>
             </button>
 
-            <button 
+            <button
               className={`filtro-btn ${filtroAbierto === 'precio' ? 'activo' : ''}`}
               onClick={() => toggleFiltro('precio')}
             >
               Precio: <span>{precioActivo}</span>
             </button>
 
-            <button 
+            <button
               className={`filtro-btn filtro-ofertas ${soloOfertas ? 'activo-oferta' : ''}`}
               onClick={() => setSoloOfertas(!soloOfertas)}
             >
@@ -181,7 +181,7 @@ function Catalogo() {
             {/* Espaciador para empujar el botón de ordenar a la derecha */}
             <div className="filtros-spacer"></div>
 
-            <button 
+            <button
               className={`filtro-btn ordenar-btn ${filtroAbierto === 'ordenar' ? 'activo' : ''}`}
               onClick={() => toggleFiltro('ordenar')}
             >
@@ -192,12 +192,12 @@ function Catalogo() {
           {/* PANEL DE EXPANSIÓN DE FILTROS */}
           {filtroAbierto && (
             <div className="panel-filtros-expandido">
-              
+
               {filtroAbierto === 'categoria' && (
                 <div className="opciones-grid">
                   {['Todos', 'Acción', 'Aventura', 'RPG', 'Deportes', 'Estrategia'].map(cat => (
-                    <button 
-                      key={cat} 
+                    <button
+                      key={cat}
                       className={`opcion-card ${categoriaActiva === cat ? 'activa' : ''}`}
                       onClick={() => { seleccionarCategoria(cat); setFiltroAbierto(null); }}
                     >
@@ -210,8 +210,8 @@ function Catalogo() {
               {filtroAbierto === 'plataforma' && (
                 <div className="opciones-grid">
                   {['Todas', 'PC', 'PlayStation', 'Xbox', 'Nintendo Switch'].map(plat => (
-                    <button 
-                      key={plat} 
+                    <button
+                      key={plat}
                       className={`opcion-card ${plataformaActiva === plat ? 'activa' : ''}`}
                       onClick={() => { setPlataformaActiva(plat); setFiltroAbierto(null); }}
                     >
@@ -224,8 +224,8 @@ function Catalogo() {
               {filtroAbierto === 'precio' && (
                 <div className="opciones-grid">
                   {['Cualquier precio', 'Menos de $500', '$500 - $1,000', '$1,000 - $1,500', 'Más de $1,500'].map(prec => (
-                    <button 
-                      key={prec} 
+                    <button
+                      key={prec}
                       className={`opcion-card ${precioActivo === prec ? 'activa' : ''}`}
                       onClick={() => { setPrecioActivo(prec); setFiltroAbierto(null); }}
                     >
@@ -238,8 +238,8 @@ function Catalogo() {
               {filtroAbierto === 'ordenar' && (
                 <div className="opciones-grid">
                   {['Relevancia', 'Menor precio', 'Mayor precio', 'Alfabético (A-Z)'].map(ord => (
-                    <button 
-                      key={ord} 
+                    <button
+                      key={ord}
                       className={`opcion-card ${ordenActivo === ord ? 'activa' : ''}`}
                       onClick={() => { setOrdenActivo(ord); setFiltroAbierto(null); }}
                     >
@@ -251,7 +251,7 @@ function Catalogo() {
 
             </div>
           )}
-        
+
         </div>
 
         <div className="catalogo-grid">
@@ -272,7 +272,7 @@ function Catalogo() {
                       </div>
                     )}
                     <div className="juego-portada-wrapper">
-                      <img src={juego.imagen_juego} alt={juego.nombre} className="juego-portada-img" />
+                      <img src={juego.imagenes?.poster || juego.imagen_juego} alt={juego.nombre} className="juego-portada-img" />
                     </div>
                     <div className="front-title-box">
                       <span className="juego-id">#{juego.id}</span>
@@ -318,7 +318,7 @@ function Catalogo() {
                 setPlataformaActiva('Todas');
                 setPrecioActivo('Cualquier precio');
                 setSoloOfertas(false);
-              }} style={{marginTop: '15px', width: 'auto', padding: '10px 20px'}}>
+              }} style={{ marginTop: '15px', width: 'auto', padding: '10px 20px' }}>
                 Limpiar filtros
               </button>
             </div>
