@@ -661,9 +661,9 @@ export const JUEGOS = [
     descripcion_larga: 'Sobrevive es solo el principio. Seis años después de la catástrofe biológica en Raccoon City, el agente Leon S. Kennedy ha sido enviado a rescatar a la hija del presidente, secuestrada.',
     imagen_juego: 'https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg',
     imagenes: {
-      hero: 'https://cdn.akamai.steamstatic.com/steam/apps/2050650/ss_4938a1f8db1a38cf0db24ecaaefeaed7fb8c9f59.1920x1080.jpg',
-      poster: 'https://m.media-amazon.com/images/M/MV5BN2E2YmNlNDMtNTI0OC00N2EzLWIzNDgtMTVlNWJjODhkNDI3XkEyXkFqcGc@._V1_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Resident_Evil_4_remake_logo.svg/1280px-Resident_Evil_4_remake_logo.svg.png'
+      hero: 'https://i.blogs.es/cc9bc0/-resident-evil-4-remake-analisis-y-resena/1366_2000.jpeg',
+      poster: 'https://m.media-amazon.com/images/I/61nNH31Cy5L._AC_UF894,1000_QL80_.jpg',
+      logo: 'https://cdn2.steamgriddb.com/icon_thumb/3d888043a179cc3414d569db712d8846.png'
     },
     clasificacion_edad: 'M (Maduro +17)',
     requerimientos_minimos: 'CPU: Ryzen 3 1200 / GPU: GTX 1050 Ti / RAM: 8GB',
@@ -741,9 +741,9 @@ export const JUEGOS = [
     descripcion_larga: '¡La aventura Horizon definitiva te espera! Explora los vibrantes paisajes del mundo abierto de México con acción de conducción ilimitada y divertida en cientos de los mejores autos del mundo.',
     imagen_juego: 'https://cdn.akamai.steamstatic.com/steam/apps/1551360/header.jpg',
     imagenes: {
-      hero: 'https://images3.alphacoders.com/806/thumb-1920-806257.jpg',
-      poster: 'https://m.media-amazon.com/images/M/MV5BMGIyYmJmZDgtOWQ1Ny00NDFiLTk2OTgtM2Q2ZWQ4OWIxZjg3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
+      hero: 'https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/image_1290x726/dam/ES-PLA-local/2023/Deporte-y-Estilo-de-Vida/Todos-los-Porsche-que-recorren-Mexico-en-Forza-Horizon-5/PLA22_1800_fine.jpg/jcr:content/PLA22_1800_fine.jpg',
+      poster: 'https://i.pinimg.com/736x/61/bf/73/61bf735782a9298796178aa7d3e8249b.jpg',
+      logo: 'https://images.seeklogo.com/logo-png/40/1/forza-horizon-5-logo-png_seeklogo-406612.png'
     },
     clasificacion_edad: 'E (Todos)',
     requerimientos_minimos: 'CPU: Ryzen 3 1200 / GPU: GTX 970 / RAM: 8GB',
@@ -780,11 +780,11 @@ export const JUEGOS = [
     categoria: 'Sandbox',
     descripcion_corta: 'Construye, explora y sobrevive en mundos infinitos.',
     descripcion_larga: 'Explora mundos generados procedimentalmente y construye desde la más simple de las casas hasta el más grandioso de los castillos. Juega en modo creativo o extrae en las profundidades en el modo supervivencia.',
-    imagen_juego: 'https://th.bing.com/th?id=OIF.1E9cwUjOhkmNT4P%2fGdI2BQ&w=334&h=182&c=7&r=0&o=7&pid=1.7&rm=3',
+    imagen_juego: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhg8w8sFekk1xk1P1IJxR3a4tWIAOcBU4jt05epSjdto4Pe9LbOJRUVxY&s=10',
     imagenes: {
-      hero: 'https://images3.alphacoders.com/806/thumb-1920-806257.jpg',
-      poster: 'https://m.media-amazon.com/images/M/MV5BMGIyYmJmZDgtOWQ1Ny00NDFiLTk2OTgtM2Q2ZWQ4OWIxZjg3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-      logo: 'https://upload.wikimedia.org/wikipedia/fr/7/72/Uncharted_4_A_Thief%27s_End_Logo.png'
+      hero: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhg8w8sFekk1xk1P1IJxR3a4tWIAOcBU4jt05epSjdto4Pe9LbOJRUVxY&s=10',
+      poster: 'https://store-images.s-microsoft.com/image/apps.17382.13510798885735219.9735d495-578c-4a4c-b892-3eb3a780b3a0.d3792486-cf98-40c0-a2c1-d6443f0e2b70',
+      logo: 'https://thumbs.dreamstime.com/b/minecraft-logo-online-game-dirt-block-illustrations-concept-design-isolated-186775550.jpg'
     },
     clasificacion_edad: 'E10+',
     requerimientos_minimos: 'CPU: Intel Core i3-3210 / GPU: Intel HD Graphics 4000 / RAM: 4GB',
