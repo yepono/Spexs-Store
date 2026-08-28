@@ -36,13 +36,13 @@
 
   background: rgba(44, 44, 44, 0.75);
   backdrop-filter: blur(16px);
-  border: 1px solid #475569;
   -webkit-backdrop-filter: blur(16px);
   border: none;
   border-radius: 12px;
 
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  z-index: 100;
+  /* z-index menor al sidebar (300) y su overlay (290) */
+  z-index: 50;
 }
 
 .filtros-spacer {
@@ -457,8 +457,7 @@
 .filtros-sticky-wrapper {
   position: sticky;
   top: 15px;
-  z-index: 100;
-  /* Asegura que pase por encima de las portadas de los juegos */
+  z-index: 50; /* siempre por debajo del sidebar (300) */
   margin-bottom: 25px;
 }
 
@@ -649,3 +648,121 @@
   color: #94a3b8;
   padding: 40px 0;
 }
+
+
+/* ==========================================================
+   RESPONSIVIDAD MÓVIL — BARRA DE FILTROS
+========================================================== */
+
+@media (max-width: 768px) {
+
+  /* Contenedor general con espacio para hamburguesa */
+  .catalogo-container {
+    padding: 16px;
+    padding-top: 88px; /* espacio para el botón hamburguesa fijo */
+  }
+
+  .catalogo-header h1 {
+    font-size: 1.4rem;
+  }
+
+  /* En móvil quitamos sticky para evitar el conflicto CSS:
+     position:sticky + overflow-x:scroll en el mismo ancestro
+     impide el scroll táctil horizontal */
+  .filtros-sticky-wrapper {
+    position: relative;
+    top: unset;
+    margin-bottom: 16px;
+  }
+
+  /* Scroll horizontal táctil en el wrapper, no en el filtro */
+  .filtros-sticky-wrapper {
+    overflow-x: scroll;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+  }
+
+  .filtros-sticky-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Barra de filtros: sin wrap, el scroll lo hace el wrapper */
+  .catalogo-filtros {
+    flex-wrap: nowrap;
+    padding: 10px 14px;
+    gap: 8px;
+    border-radius: 10px;
+    width: max-content; /* se expande al ancho real de su contenido */
+    min-width: 100%;
+  }
+
+  /* Búsqueda: ancho mínimo fijo para que quepa bien */
+  .filtro-busqueda {
+    flex: 0 0 160px;
+    min-width: 160px;
+    max-width: 160px;
+  }
+
+  /* Botones de filtro más compactos */
+  .filtro-btn {
+    flex-shrink: 0;
+    font-size: 12px;
+    padding: 0 10px;
+    height: 36px;
+    white-space: nowrap;
+  }
+
+  /* El botón ordenar no se empuja al final en móvil */
+  .filtros-spacer {
+    display: none;
+  }
+
+  /* Panel expandido sin borde-radius superior */
+  .panel-filtros-expandido {
+    padding: 16px;
+    margin-top: -4px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .opciones-grid {
+    gap: 8px;
+  }
+
+  .opcion-card {
+    padding: 10px 14px;
+    font-size: 13px;
+    min-width: 90px;
+  }
+
+  /* Grid de tarjetas: menos columnas en móvil */
+  .catalogo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .catalogo-filtros {
+    padding: 8px 10px;
+  }
+
+  .filtro-busqueda {
+    flex: 0 0 130px;
+    min-width: 130px;
+    max-width: 130px;
+  }
+
+  .filtro-btn {
+    font-size: 11px;
+    padding: 0 8px;
+    height: 34px;
+  }
+
+  .catalogo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+  }
+}
