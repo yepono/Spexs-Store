@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { JUEGOS } from '../data/juegos'
 import { useCarrito } from '../context/CarritoContext'
 import { useNotificacion } from '../context/NotificacionContext'
 import './Hero.css'
 
-function Hero() {
-  const juegosEnOferta = JUEGOS.filter((juego) => juego.descuento)
+function Hero({ juegos = [] }) {
+  const juegosEnOferta = juegos.filter((juego) => juego.descuento)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [animating, setAnimating] = useState(false)
 
@@ -75,14 +74,10 @@ function Hero() {
       className={`hero-container ${animating ? 'hero-fade-out' : 'hero-fade-in'}`}
       style={{ backgroundImage: `url(${juegoActual.imagenes?.hero || juegoActual.imagen_juego})` }}
     >
-      {/* Gradientes de overlay */}
       <div className="hero-overlay-bottom" />
       <div className="hero-overlay-left" />
 
-      {/* Cuerpo del contenido */}
       <div className="hero-body">
-
-        {/* Columna izquierda — info del juego */}
         <div className="hero-info">
           <span className="hero-badge">
             -{typeof juegoActual.descuento === 'number' ? `${juegoActual.descuento}%` : juegoActual.descuento} · Oferta Especial
@@ -96,7 +91,6 @@ function Hero() {
           </div>
         </div>
 
-        {/* Columna derecha — precio + botones */}
         <div className="hero-actions">
           <div className="hero-precio-container">
             {datosPrecio.tieneDescuento ? (
@@ -115,10 +109,8 @@ function Hero() {
             Añadir al Carrito
           </button>
         </div>
-
       </div>
 
-      {/* Miniaturas de navegación */}
       <div className="hero-thumbs">
         {juegosEnOferta.map((juego, index) => (
           <button
@@ -138,7 +130,6 @@ function Hero() {
         ))}
       </div>
 
-      {/* Flechas de navegación */}
       <button className="hero-nav prev" onClick={() => cambiarSlide(currentIndex === 0 ? juegosEnOferta.length - 1 : currentIndex - 1)}>❮</button>
       <button className="hero-nav next" onClick={() => cambiarSlide((currentIndex + 1) % juegosEnOferta.length)}>❯</button>
     </div>

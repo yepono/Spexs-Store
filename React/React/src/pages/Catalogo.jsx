@@ -1,13 +1,13 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { JUEGOS, CATEGORIAS } from '../data/juegos'
+import { CATEGORIAS } from '../data/juegos'
+import { supabase } from '../supabaseClient'
 import Sidebar from '../components/Sidebar'
 import Hero from '../components/Hero'
 import CarritoSidebar from '../components/CarritoSidebar'
 import Footer from '../components/Footer'
 import { useCarrito } from '../context/CarritoContext'
 import { useNotificacion } from '../context/NotificacionContext'
-
 import './Catalogo.css'
 
 function Catalogo() {
@@ -20,8 +20,20 @@ function Catalogo() {
   const [soloOfertas, setSoloOfertas] = useState(false)
   const [filtroAbierto, setFiltroAbierto] = useState(null)
 
+  const [juegosBD, setJuegosBD] = useState([])
+  const [cargando, setCargando] = useState(true)
+
   const { carrito, agregarAlCarrito } = useCarrito();
   const { mostrarNotificacion } = useNotificacion();
+
+  useEffect(() => {
+    const cargarJuegos = async () => {
+      const { data, error } = await supabase.from('juegos').select('*').order('id', { ascending: true });
+      if (!error && data) setJuegosBD(data);
+      setCargando(false);
+    };
+    cargarJuegos();
+  }, []);
 
   const toggleSidebar = () => setSidebarAbierto((prev) => !prev)
 
@@ -31,35 +43,31 @@ function Catalogo() {
 
   const esCategoriaOfertas = categoriaActiva === 'Ofertas' || categoriaActiva === 'Ofertas Especiales' || soloOfertas
 
-  // Helper para convertir el precio en string a número para poder filtrarlo y ordenarlo
   const extraerPrecio = (precioString) => {
-    const numero = parseFloat(precioString.replace(/[^0-9.-]+/g, ''))
+    if (!precioString) return 0;
+    const numero = parseFloat(String(precioString).replace(/[^0-9.-]+/g, ''))
     return isNaN(numero) ? 0 : numero
   }
 
-  // LÓGICA DE FILTRADO
   const juegosFiltrados = useMemo(() => {
-    let filtrados = [...JUEGOS]
+    let filtrados = [...juegosBD]
 
-    // 1. Filtro por Categoría
     if (categoriaActiva !== 'Todos' && !esCategoriaOfertas) {
       filtrados = filtrados.filter((j) => j.categoria === categoriaActiva)
     }
 
-    // 2. Filtro de Ofertas
     if (esCategoriaOfertas) {
       filtrados = filtrados.filter((j) => (j.descuento && j.descuento > 0) || j.oferta === true)
     }
 
-    // 3. Filtro por Plataforma (Asume que tus datos tienen 'plataforma' o 'plataformas')
     if (plataformaActiva !== 'Todas') {
       filtrados = filtrados.filter((j) =>
         j.plataforma === plataformaActiva ||
-        (j.plataformas && j.plataformas.includes(plataformaActiva))
+        (j.plataformas && j.plataformas.includes(plataformaActiva)) ||
+        (j.especificaciones?.os && j.especificaciones.os.includes(plataformaActiva))
       )
     }
 
-    // 4. Filtro por Precio
     if (precioActivo !== 'Cualquier precio') {
       filtrados = filtrados.filter((j) => {
         const precio = extraerPrecio(j.precio)
@@ -71,7 +79,6 @@ function Catalogo() {
       })
     }
 
-    // 5. Ordenamiento
     if (ordenActivo === 'Menor precio') {
       filtrados.sort((a, b) => extraerPrecio(a.precio) - extraerPrecio(b.precio))
     } else if (ordenActivo === 'Mayor precio') {
@@ -81,7 +88,7 @@ function Catalogo() {
     }
 
     return filtrados
-  }, [categoriaActiva, esCategoriaOfertas, plataformaActiva, precioActivo, ordenActivo])
+  }, [juegosBD, categoriaActiva, esCategoriaOfertas, plataformaActiva, precioActivo, ordenActivo])
 
   const seleccionarCategoria = (cat) => {
     setCategoriaActiva(cat)
@@ -118,7 +125,9 @@ function Catalogo() {
     );
   };
 
-  const totalItemsCarrito = carrito ? carrito.reduce((acc, item) => acc + (item.cantidad || 1), 0) : 0;
+  if (cargando) {
+    return <div className="catalogo-page"><h2 style={{ color: '#94a3b8', textAlign: 'center', paddingTop: '150px' }}>Cargando catálogo...</h2></div>
+  }
 
   return (
     <div className="catalogo-page">
@@ -131,7 +140,7 @@ function Catalogo() {
         onSeleccionar={seleccionarCategoria}
       />
 
-      {categoriaActiva === 'Todos' && !soloOfertas && <Hero />}
+      {categoriaActiva === 'Todos' && !soloOfertas && <Hero juegos={juegosBD} />}
 
       <div className="catalogo-container">
         <header className="catalogo-header">
@@ -145,8 +154,6 @@ function Catalogo() {
         </header>
 
         <div className='filtros-sticky-wrapper'>
-
-          {/* BARRA DE FILTROS PRINCIPAL */}
           <div className='catalogo-filtros'>
             <div className='filtro-busqueda'>
               <span className='filtro-icono'>⌕</span>
@@ -181,7 +188,6 @@ function Catalogo() {
               Ofertas
             </button>
 
-            {/* Espaciador para empujar el botón de ordenar a la derecha */}
             <div className="filtros-spacer"></div>
 
             <button
@@ -192,10 +198,8 @@ function Catalogo() {
             </button>
           </div>
 
-          {/* PANEL DE EXPANSIÓN DE FILTROS */}
           {filtroAbierto && (
             <div className="panel-filtros-expandido">
-
               {filtroAbierto === 'categoria' && (
                 <div className="opciones-grid">
                   {['Todos', 'Acción', 'Aventura', 'RPG', 'Deportes', 'Estrategia'].map(cat => (
@@ -251,10 +255,8 @@ function Catalogo() {
                   ))}
                 </div>
               )}
-
             </div>
           )}
-
         </div>
 
         <div className="catalogo-grid">
@@ -329,9 +331,9 @@ function Catalogo() {
         </div>
       </div>
 
-      <CarritoSidebar 
-        isOpen={carritoAbierto} 
-        onClose={() => setCarritoAbierto(false)} 
+      <CarritoSidebar
+        isOpen={carritoAbierto}
+        onClose={() => setCarritoAbierto(false)}
       />
       <Outlet />
       <Footer />

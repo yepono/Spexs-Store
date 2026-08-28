@@ -4,7 +4,7 @@ import { JUEGOS } from '../data/juegos'
 import { useNotificacion } from '../context/NotificacionContext.jsx'
 import { useCarrito } from '../context/CarritoContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
-import { supabase } from '../supabaseClient' 
+import { supabase } from '../supabaseClient.js' 
 import './DetalleJuego.css'
 
 function DetalleJuego() {
