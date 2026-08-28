@@ -5,14 +5,14 @@ import './AuthModal.css'
 export default function AuthModal({ isOpen, onClose }) {
   const [esRegistro, setEsRegistro] = useState(false)
   const [paso, setPaso] = useState(1)
+  const [error, setError] = useState(null) // Estado para manejar errores en la UI
 
   const [nombre, setNombre] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  // guardar (File object)
   const [archivoFoto, setArchivoFoto] = useState(null)
-  const [previewFoto, setPreviewFoto] = useState(null) // Solo para mostrar visualmente
+  const [previewFoto, setPreviewFoto] = useState(null)
 
   const [tarjetaNumero, setTarjetaNumero] = useState('')
   const [tarjetaNombre, setTarjetaNombre] = useState('')
@@ -31,6 +31,7 @@ export default function AuthModal({ isOpen, onClose }) {
   const resetFormulario = () => {
     setPaso(1)
     setEsRegistro(false)
+    setError(null)
     setNombre('')
     setEmail('')
     setPassword('')
@@ -53,25 +54,25 @@ export default function AuthModal({ isOpen, onClose }) {
 
   const handleSiguiente = (e) => {
     e.preventDefault()
+    setError(null)
     setPaso((prev) => prev + 1)
   }
 
   const handleAnterior = () => {
+    setError(null)
     setPaso((prev) => prev - 1)
   }
 
-  // Manejar la selección de archivo local
   const handleCambioFoto = (e) => {
     const file = e.target.files[0];
     if (file) {
       setArchivoFoto(file);
-      // Crear una URL temporal para mostrar la vista previa en el navegador
       setPreviewFoto(URL.createObjectURL(file));
     }
   }
 
-  // Función asíncrona para enviar datos a Supabase
   const finalizarRegistro = async (incluyePago = true) => {
+    setError(null);
     try {
       const metodoPago = (incluyePago && tarjetaNumero) ? [{
         id: Date.now().toString(),
@@ -92,8 +93,8 @@ export default function AuthModal({ isOpen, onClose }) {
       });
 
       handleClose();
-    } catch (error) {
-      alert("Error al registrar: " + error.message);
+    } catch (err) {
+      setError(err.message || "Ocurrió un error durante el registro.");
     }
   }
 
@@ -106,14 +107,14 @@ export default function AuthModal({ isOpen, onClose }) {
     finalizarRegistro(false)
   }
 
-  // Login normal
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
     try {
       await iniciarSesion(email, password);
       handleClose();
-    } catch (error) {
-      alert("Error al iniciar sesión: " + error.message);
+    } catch (err) {
+      setError(err.message || "Error al iniciar sesión. Verifica tus credenciales.");
     }
   }
 
@@ -123,6 +124,9 @@ export default function AuthModal({ isOpen, onClose }) {
         <button className="auth-close" onClick={handleClose}>✕</button>
 
         <h2>{esRegistro ? `Registro - Paso ${paso} de 3` : 'Iniciar Sesión'}</h2>
+
+        {/* Muestra el mensaje de error inline */}
+        {error && <div className="auth-error-banner">{error}</div>}
 
         {esRegistro && (
           <div className="auth-steps-bar">
@@ -172,7 +176,6 @@ export default function AuthModal({ isOpen, onClose }) {
               <form onSubmit={handleSiguiente} className="auth-form">
                 <div className="auth-group">
                   <label>Sube tu Foto de Perfil (Opcional)</label>
-                  {/* CAMBIO: input tipo 'file' */}
                   <input
                     type="file"
                     accept="image/*"
@@ -251,7 +254,7 @@ export default function AuthModal({ isOpen, onClose }) {
 
         <p className="auth-toggle">
           {esRegistro ? '¿Ya tienes cuenta?' : '¿No tienes cuenta?'}
-          <button onClick={() => { setEsRegistro(!esRegistro); setPaso(1); }}>
+          <button onClick={() => { setEsRegistro(!esRegistro); setPaso(1); setError(null); }}>
             {esRegistro ? 'Inicia Sesión' : 'Regístrate aquí'}
           </button>
         </p>
