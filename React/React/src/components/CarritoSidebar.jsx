@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useCarrito } from '../context/CarritoContext';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../supabaseClient';
+import { useNotificacion } from '../context/NotificacionContext';
 import './CarritoSidebar.css';
 
 export default function CarritoSidebar() {
     const [abierto, setAbierto] = useState(false);
+
+    const { mostrarNotificacion } = useNotificacion();
 
     // Persistencia en localStorage
     const [tarjetas, setTarjetas] = useState(() => {
@@ -85,13 +88,13 @@ export default function CarritoSidebar() {
 
     const handleComprar = async () => {
         if (!usuario) {
-            alert("Debes iniciar sesión para realizar una compra.");
+            mostrarNotificacion("Inicia Sesión", "Debes iniciar sesión para realizar una compra.");
             return;
         }
 
         const tarjetaUsada = tarjetas.find(t => t.id === tarjetaSeleccionada);
         if (!tarjetaUsada) {
-            alert("Por favor registra o selecciona un método de pago.");
+            mostrarNotificacion("Método de pago", "Por favor registra o selecciona un método de pago.");
             setCambiandoTarjeta(true);
             return;
         }
@@ -113,6 +116,8 @@ export default function CarritoSidebar() {
             setAbierto(false);
             vaciarCarrito();
 
+            mostrarNotificacion("¡Compra Exitosa!", "Tus juegos han sido añadidos a tu biblioteca.");
+
             navigate('/recibo', {
                 state: {
                     items: carrito,
@@ -128,7 +133,7 @@ export default function CarritoSidebar() {
 
         } catch (error) {
             console.error("Error en la transacción:", error);
-            alert("Ocurrió un error al procesar tu compra. Inténtalo de nuevo.");
+            mostrarNotificacion("Error", "Ocurrió un error al procesar tu compra. Inténtalo de nuevo.");
         }
     };
 
@@ -182,7 +187,7 @@ export default function CarritoSidebar() {
                                                         {item.precioReal}
                                                     </span>
                                                 )}
-                                                <span style={{ color: '#38bdf8', fontWeight: 'bold', fontSize: '14px' }}>
+                                                <span style={{ color: '#c4b5fd', fontWeight: 'bold', fontSize: '14px' }}>
                                                     ${val.precioFinal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN (x{item.cantidad})
                                                 </span>
                                             </div>
