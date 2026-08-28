@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCarrito } from '../context/CarritoContext';
+import { useAuth } from '../context/AuthContext';
+import { supabase } from '../supabaseClient';
 import './CarritoSidebar.css';
 
 export default function CarritoSidebar() {
@@ -11,7 +13,10 @@ export default function CarritoSidebar() {
         const guardadas = localStorage.getItem("mis_tarjetas_guardadas");
         return guardadas ? JSON.parse(guardadas) : [];
     });
-    
+
+    const { usuario } = useAuth();
+    const { carrito, eliminarDelCarrito, vaciarCarrito } = useCarrito();
+
     const [tarjetaSeleccionada, setTarjetaSeleccionada] = useState(null);
     const [cambiandoTarjeta, setCambiandoTarjeta] = useState(false);
     const [mostrandoFormulario, setMostrandoFormulario] = useState(false);
@@ -21,7 +26,6 @@ export default function CarritoSidebar() {
     const [vencimiento, setVencimiento] = useState('');
     const [cvv, setCvv] = useState('');
 
-    const { carrito, eliminarDelCarrito } = useCarrito();
     const navigate = useNavigate();
 
     // Guardar en localStorage y actualizar la tarjeta seleccionada por defecto
@@ -70,7 +74,7 @@ export default function CarritoSidebar() {
         const nuevasTarjetas = [...tarjetas, nuevaTarjeta];
         setTarjetas(nuevasTarjetas);
         setTarjetaSeleccionada(nuevaTarjeta.id);
-        
+
         // Limpiar formulario y cerrar modos de edición
         setNumTarjeta('');
         setVencimiento('');
@@ -79,7 +83,12 @@ export default function CarritoSidebar() {
         setCambiandoTarjeta(false);
     };
 
-    const handleComprar = () => {
+    const handleComprar = async () => {
+        if (!usuario) {
+            alert("Debes iniciar sesión para realizar una compra.");
+            return;
+        }
+
         const tarjetaUsada = tarjetas.find(t => t.id === tarjetaSeleccionada);
         if (!tarjetaUsada) {
             alert("Por favor registra o selecciona un método de pago.");
@@ -87,15 +96,40 @@ export default function CarritoSidebar() {
             return;
         }
 
-        setAbierto(false);
-        navigate('/recibo', { 
-            state: { 
-                items: carrito, 
-                total: final, 
-                subtotal: original,
-                metodoPago: tarjetaUsada 
-            } 
-        });
+        try {
+            // 1. Preparar los datos para Supabase
+            const registrosCompra = carrito.map(item => ({
+                usuario_id: usuario.id,
+                juego_id: item.id,
+                version_comprada: item.version
+            }));
+
+            // 2. Insertar en la base de datos
+            const { error } = await supabase.from('compras').insert(registrosCompra);
+
+            if (error) throw error;
+
+            // 3. Si fue exitoso: cerrar carrito, vaciarlo y navegar al recibo
+            setAbierto(false);
+            vaciarCarrito();
+
+            navigate('/recibo', {
+                state: {
+                    items: carrito,
+                    total: final,
+                    subtotal: original,
+                    metodoPago: tarjetaUsada
+                }
+            });
+
+            // Opcional: Recargar la página o forzar la actualización del AuthContext 
+            // para que los juegos aparezcan inmediatamente en DetalleJuego como "comprados"
+            window.location.reload();
+
+        } catch (error) {
+            console.error("Error en la transacción:", error);
+            alert("Ocurrió un error al procesar tu compra. Inténtalo de nuevo.");
+        }
     };
 
     const irADetalle = (id) => {
@@ -180,26 +214,26 @@ export default function CarritoSidebar() {
 
                             {mostrandoFormulario ? (
                                 <form className="form-agregar-tarjeta" onSubmit={handleAgregarTarjeta}>
-                                    <input 
-                                        type="text" 
-                                        placeholder="Número de tarjeta" 
+                                    <input
+                                        type="text"
+                                        placeholder="Número de tarjeta"
                                         maxLength="16"
                                         value={numTarjeta}
                                         onChange={(e) => setNumTarjeta(e.target.value)}
                                         required
                                     />
                                     <div className="form-row">
-                                        <input 
-                                            type="text" 
-                                            placeholder="MM/AA" 
+                                        <input
+                                            type="text"
+                                            placeholder="MM/AA"
                                             maxLength="5"
                                             value={vencimiento}
                                             onChange={(e) => setVencimiento(e.target.value)}
                                             required
                                         />
-                                        <input 
-                                            type="password" 
-                                            placeholder="CVV" 
+                                        <input
+                                            type="password"
+                                            placeholder="CVV"
                                             maxLength="4"
                                             value={cvv}
                                             onChange={(e) => setCvv(e.target.value)}
@@ -227,8 +261,8 @@ export default function CarritoSidebar() {
                             ) : (
                                 <div className="tarjetas-lista">
                                     {tarjetas.map(t => (
-                                        <button 
-                                            key={t.id} 
+                                        <button
+                                            key={t.id}
                                             className={`tarjeta-opcion ${t.id === tarjetaSeleccionada ? 'seleccionada' : ''}`}
                                             onClick={() => {
                                                 setTarjetaSeleccionada(t.id);

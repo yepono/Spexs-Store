@@ -222,3 +222,26 @@
 .auth-toggle button:hover {
   text-decoration: underline;
 }
+
+/* --- PREVISUALIZACIÓN DEL AVATAR --- */
+.avatar-preview-container {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #6366f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0f172a;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.avatar-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Esto hace la magia del recorte perfecto */
+  display: block;
+}

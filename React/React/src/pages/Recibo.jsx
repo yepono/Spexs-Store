@@ -17,22 +17,8 @@ export default function Recibo() {
     useEffect(() => {
         if (!datosCompra || !datosCompra.items || datosCompra.items.length === 0) {
             navigate('/catalogo');
-        } else if (!procesadoRef.current) {
-            procesadoRef.current = true;
-
-            // Transfiere los artículos comprados del recibo a la biblioteca
-            const juegosNuevos = datosCompra.items.map((item) => ({
-                id: item.id || item.nombre.toLowerCase().replace(/\s+/g, '-'),
-                titulo: item.nombre || item.titulo,
-                imagen: item.imagen || item.img || item.imagenUrl || '',
-                fechaCompra: new Date().toLocaleDateString('es-MX'),
-                horasJugadas: '0.0 hrs'
-            }));
-
-            agregarCompras(juegosNuevos);
-            vaciarCarrito();
         }
-    }, [datosCompra, navigate, vaciarCarrito, agregarCompras]);
+    }, [datosCompra, navigate]);
 
     if (!datosCompra) return null;
 

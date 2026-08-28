@@ -12,8 +12,8 @@ function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }
   return (
     <>
       {/* Botón Hamburguesa (Izquierda) */}
-      <button 
-        className={`hamburguesa-btn ${abierto ? 'abierto' : ''}`} 
+      <button
+        className={`hamburguesa-btn ${abierto ? 'abierto' : ''}`}
         onClick={onToggle}
         aria-label="Toggle menú"
       >
@@ -22,25 +22,29 @@ function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }
         <span></span>
       </button>
 
-      {/* Botón de Iniciar Sesión / Perfil (Derecha) */}
+      {/* Botón de Iniciar Sesión / Perfil Expandible (Derecha) */}
       <div className="user-top-right-btn">
         {usuario ? (
-          <div className="user-logged-menu">
-            <span>{usuario.nombre}</span>
-            <button onClick={cerrarSesion} className="btn-logout-small">Salir</button>
+          <div className="perfil-hover-container" onClick={cerrarSesion}>
+            <img
+              src={usuario.avatar_url || 'https://via.placeholder.com/150'}
+              alt={usuario.nombre}
+              className="perfil-avatar-spin"
+            />
+            <span className="btn-logout-expand">Salir</span>
           </div>
         ) : (
-          <button 
-            className="btn-auth-top-right" 
+          <button
+            className="btn-auth-top-right"
             onClick={() => setModalAuthAbierto(true)}
           >
-            Iniciar Sesión
+            Iniciar Sesión / Registrarse
           </button>
         )}
       </div>
 
       {/* Overlay translúcido */}
-      <div 
+      <div
         className={`sidebar-overlay ${abierto ? 'visible' : ''}`}
         onClick={onCerrar}
       />
@@ -54,18 +58,18 @@ function Sidebar({ abierto, onToggle, onCerrar, categoriaActiva, onSeleccionar }
           </button>
         </div>
 
-        <CategoriasMenu 
-          categoriaSeleccionada={categoriaActiva} 
-          onSelectCategoria={onSeleccionar} 
+        <CategoriasMenu
+          categoriaSeleccionada={categoriaActiva}
+          onSelectCategoria={onSeleccionar}
         />
 
         <TranslatorWidget />
       </aside>
 
       {/* Modal de Autenticación */}
-      <AuthModal 
-        isOpen={modalAuthAbierto} 
-        onClose={() => setModalAuthAbierto(false)} 
+      <AuthModal
+        isOpen={modalAuthAbierto}
+        onClose={() => setModalAuthAbierto(false)}
       />
     </>
   );
