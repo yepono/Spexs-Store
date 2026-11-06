@@ -1,133 +1,358 @@
 .catalogo-page {
-  width: 100%;
   min-height: 100vh;
   position: relative;
+  background-color: #1a1a1a;
+  color: #e5e5e5;
 }
 
 .catalogo-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 60px 20px 40px;
-  /* Reducido el padding-top para conectar mejor con el Hero */
-  font-family: system-ui, -apple-system, sans-serif;
+  padding: 20px;
 }
 
 .catalogo-header {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-bottom: 36px;
-  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  position: relative;
 }
 
 .catalogo-header h1 {
-  font-size: 32px;
-  margin: 0;
-  color: #f8fafc;
-  font-weight: 800;
+  font-size: 2rem;
+  margin-bottom: 8px;
 }
 
-/* Carrito */
-.carrito-contenedor {
+.catalogo-filtros {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  padding: 12px;
-  border-radius: 50%;
-  background: #1e293b;
-  border: 1px solid #334155;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  margin: 10px 0;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 32px;
+  box-sizing: border-box;
+
+  background: rgba(44, 44, 44, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: none;
+  border-radius: 12px;
+
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  /* z-index menor al sidebar (300) y su overlay (290) */
+  z-index: 50;
 }
 
-/* ! juego agregado */
-.carrito-contenedor.lleno {
-  border-color: #38bdf8;
-  color: #38bdf8;
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
-  transform: scale(1.05);
+.filtros-spacer {
+  flex-grow: 1;
 }
 
-/* Estado inicial (0 juegos) */
-.carrito-contenedor.vacio {
-  color: #94a3b8;
-}
 
-.icono-carrito {
-  width: 26px;
-  height: 26px;
-  transition: fill 0.3s ease, color 0.3s ease;
-}
+/* =========================
+   BOTONES DE FILTRO Y CARRITO
+========================= */
 
-/*  */
-.cart-badge-number {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  background: #ef4444;
-  color: white;
-  font-size: 11px;
-  font-weight: 800;
-  width: 22px;
-  height: 22px;
+.filtro-btn {
+  height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 2px solid #0f172a;
-  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  gap: 8px;
+
+  background: #181818;
+  border: none;
+  color: #a3a3a3;
+
+  padding: 0 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+
+  transition:
+    all 0.2s ease;
 }
 
-@keyframes popIn {
-  0% {
-    transform: scale(0);
+.filtro-btn:hover {
+  background: #3f3f3f;
+  color: #ffffff;
+}
+
+.filtro-btn:active {
+  transform: scale(0.97);
+}
+
+.filtro-btn.activo {
+  background: rgba(168, 85, 247, 0.15);
+  color: #d8b4fe;
+}
+
+
+.filtro-btn span {
+  color: #737373;
+  font-weight: normal;
+  margin-left: 4px;
+}
+
+
+.filtro-chevron {
+  font-size: 9px;
+  color: #64748b;
+  margin-left: 4px;
+}
+
+
+/* =========================
+   PANEL DE EXPANSIÓN 
+========================= */
+.panel-filtros-expandido {
+  width: 100%;
+
+  background: rgba(20, 20, 20, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: none;
+
+  border-radius: 0 0 12px 12px;
+  padding: 24px;
+  margin-top: -8px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+  animation: deslizarAbajo 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: top;
+}
+
+@keyframes deslizarAbajo {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scaleY(0.95);
   }
 
-  100% {
-    transform: scale(1);
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
   }
 }
 
-.catalogo-header p {
-  color: #94a3b8;
-  font-size: 15px;
-  margin: 0;
+/* =========================
+   DROPDOWNS Y MENÚS
+========================= */
+
+.filtro-dropdown {
+  position: relative;
 }
+
+.filtro-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+
+  min-width: 210px;
+  padding: 6px;
+
+  background: #0f172a;
+
+  border: 1px solid #334155;
+  border-radius: 10px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+
+  z-index: 200;
+
+  animation: filtroMenuEntrada 0.15s ease-out;
+}
+
+@keyframes filtroMenuEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   OPCIONES
+========================= */
+
+.opciones-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.opcion-card {
+  background: #2a2a2a;
+  border: none;
+  color: #a3a3a3;
+
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1 1 auto;
+  text-align: center;
+  min-width: 120px;
+}
+
+.opcion-card:hover {
+  background: #3f3f3f;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.opcion-card.activa {
+  /* ¡El gradiente morado que pediste! */
+  background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+  color: #ffffff;
+  /* Glow sutil del mismo color para que resalte */
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
+}
+
+.filtro-opcion {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: transparent;
+  border: none;
+
+  color: #cbd5e1;
+
+  padding: 10px 12px;
+  border-radius: 7px;
+
+  text-align: left;
+  font-family: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.filtro-opcion:hover {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+.filtro-opcion.seleccionada {
+  color: #a78bfa;
+}
+
+.filtro-opcion span:first-child {
+  width: 14px;
+  color: #6366f1;
+  font-weight: bold;
+}
+
+/* =========================
+   BUSCADOR
+========================= */
+
+.filtro-busqueda {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+
+  background: #1d1d1d;
+  border: none;
+  border-radius: 8px;
+
+  padding: 0 12px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.filtro-busqueda:focus-within {
+  background: #333333;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.5);
+}
+
+.filtro-icono {
+  color: #737373;
+  font-size: 20px;
+}
+
+.filtro-busqueda input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.filtro-busqueda input::placeholder {
+  color: #737373;
+}
+
+/* =========================
+   OFERTAS
+========================= */
+
+.filtro-ofertas {
+  color: #fbbf24;
+  border-color: #78350f;
+}
+
+.filtro-btn.activo-oferta {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: #f59e0b;
+  color: #fbbf24;
+}
+
+
+/* =========================
+   ORDENAR
+========================= */
 
 .catalogo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 28px;
-  align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
 }
 
-.sin-resultados {
-  grid-column: 1 / -1;
-  text-align: center;
-  color: #94a3b8;
-  font-size: 15px;
-  padding: 60px 0;
-}
-
+/* Tarjeta Flip 3D — Proporción Poster 2:3 */
 .flip-card {
   background-color: transparent;
   width: 100%;
-  height: 420px;
-  perspective: 1000px;
+  aspect-ratio: 2 / 3;
+  perspective: 1200px;
+  cursor: pointer;
 }
 
 .flip-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  text-align: center;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  transition: transform 0.65s cubic-bezier(0.23, 1, 0.32, 1);
   transform-style: preserve-3d;
-  border-radius: 16px;
+  border-radius: 14px;
 }
 
 .flip-card:hover .flip-card-inner {
@@ -141,165 +366,348 @@
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 14px;
+  background-color: #13112a;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  overflow: hidden;
+  box-sizing: border-box;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 16px;
-  border: 1px solid #334155;
-  box-sizing: border-box;
-  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease;
 }
 
+.flip-card:hover .flip-card-front,
+.flip-card:hover .flip-card-back {
+  box-shadow: 0 16px 48px rgba(139, 92, 246, 0.3);
+}
+
+/* Cara Frontal */
 .flip-card-front {
-  background: #1e293b;
   display: flex;
   flex-direction: column;
-  padding: 14px;
-  transition: border-color 0.3s;
-}
-
-.flip-card:hover .flip-card-front {
-  border-color: #6366f1;
+  z-index: 2;
+  transform: rotateY(0deg);
+  position: relative;
 }
 
 .juego-portada-wrapper {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 280px;
-  background-color: #0f172a;
-  border-radius: 12px;
+  height: 100%;
   overflow: hidden;
-  margin-bottom: 8px;
-  flex-shrink: 0;
+}
+
+.filtros-sticky-wrapper {
+  position: sticky;
+  top: 15px;
+  z-index: 50; /* siempre por debajo del sidebar (300) */
+  margin-bottom: 25px;
 }
 
 .juego-portada-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  display: block;
+  object-position: center top;
+  transition: transform 0.4s ease;
 }
 
+.flip-card:hover .juego-portada-img {
+  transform: scale(1.04);
+}
+
+/* Título superpuesto al poster con gradiente */
 .front-title-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 14px 16px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 90px;
-  overflow: hidden;
+  background: linear-gradient(to top,
+      rgba(13, 10, 30, 0.95) 0%,
+      rgba(13, 10, 30, 0.75) 50%,
+      transparent 100%);
+  z-index: 5;
 }
 
 .juego-id {
   font-size: 11px;
-  color: #818cf8;
+  color: #a78bfa;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .front-title-box h3 {
-  font-size: 15px;
-  margin: 4px 0 0;
-  color: #ffffff;
-  width: 100%;
-  text-align: center;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #f1f0ff;
+  white-space: nowrap;
   overflow: hidden;
-  line-height: 1.2;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
+/* Cara Trasera */
 .flip-card-back {
-  background: #0f172a;
-  color: white;
   transform: rotateY(180deg);
+  padding: 18px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
-  border-color: #6366f1;
-  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+  background: linear-gradient(160deg,
+      #1a1535 0%,
+      #13112a 60%,
+      #0f0d22 100%);
 }
 
 .juego-compania {
-  font-size: 11px;
-  color: #818cf8;
-  font-weight: 700;
+  font-size: 10px;
+  color: #a78bfa;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
 }
 
 .flip-card-back h3 {
-  font-size: 17px;
-  margin: 4px 0;
-  color: #ffffff;
-  line-height: 1.2;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  margin: 5px 0 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #f1f0ff;
+  line-height: 1.3;
 }
 
 .juego-desc {
-  font-size: 13px;
-  color: #cbd5e1;
-  line-height: 1.4;
-  margin: 4px 0;
+  font-size: 12px;
+  color: #b0a8d9;
+  line-height: 1.45;
+  margin: 8px 0 6px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  flex-grow: 1;
 }
 
 .juego-fecha {
   font-size: 11px;
-  color: #94a3b8;
-  font-style: italic;
-  margin: 4px 0;
+  color: #6b5fa0;
+  margin-bottom: 4px;
+}
+
+/* Precios */
+.juego-precio-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 8px 0;
+}
+
+.precio-original-tachado {
+  font-size: 12px;
+  color: #6b5fa0;
+  text-decoration: line-through;
+  margin-bottom: -2px;
 }
 
 .juego-precio {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
-  color: #38bdf8;
-  margin: 6px 0;
+  color: #c4b5fd;
+}
+
+.juego-precio.oferta {
+  color: #a3e635;
 }
 
 .back-actions {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 100%;
 }
 
 .btn-add-cart {
-  width: 100%;
-  padding: 10px;
-  background: #22c55e;
+  background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+  color: white;
   border: none;
-  border-radius: 10px;
-  color: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
-  transition: transform 0.1s, background 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
 }
 
 .btn-add-cart:hover {
-  background: #16a34a;
+  background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
   transform: translateY(-1px);
 }
 
 .btn-detalle {
-  color: #94a3b8;
-  text-decoration: none;
+  text-align: center;
+  color: #7c6db0;
   font-size: 12px;
-  font-weight: 600;
+  text-decoration: none;
+  padding: 4px;
   transition: color 0.2s;
-  display: inline-block;
-  padding: 2px;
 }
 
 .btn-detalle:hover {
-  color: #38bdf8;
+  color: #c4b5fd;
+}
+
+/* Listón de Oferta — Morado */
+.ribbon-oferta {
+  position: absolute;
+  top: 16px;
+  right: -30px;
+  width: 120px;
+  background: linear-gradient(135deg, #a855f7, #7e22ce);
+  color: #ffffff;
+  text-align: center;
+  line-height: 24px;
+  transform: rotate(45deg);
+  box-shadow: 0 3px 10px rgba(168, 85, 247, 0.5);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.ribbon-oferta span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: block;
+}
+
+.sin-resultados {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #94a3b8;
+  padding: 40px 0;
+}
+
+
+/* ==========================================================
+   RESPONSIVIDAD MÓVIL — BARRA DE FILTROS
+========================================================== */
+
+@media (max-width: 768px) {
+
+  /* Contenedor general con espacio para hamburguesa */
+  .catalogo-container {
+    padding: 16px;
+    padding-top: 88px; /* espacio para el botón hamburguesa fijo */
+  }
+
+  .catalogo-header h1 {
+    font-size: 1.4rem;
+  }
+
+  /* En móvil quitamos sticky para evitar el conflicto CSS:
+     position:sticky + overflow-x:scroll en el mismo ancestro
+     impide el scroll táctil horizontal */
+  .filtros-sticky-wrapper {
+    position: relative;
+    top: unset;
+    margin-bottom: 16px;
+  }
+
+  /* Scroll horizontal táctil en el wrapper, no en el filtro */
+  .filtros-sticky-wrapper {
+    overflow-x: scroll;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+  }
+
+  .filtros-sticky-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Barra de filtros: sin wrap, el scroll lo hace el wrapper */
+  .catalogo-filtros {
+    flex-wrap: nowrap;
+    padding: 10px 14px;
+    gap: 8px;
+    border-radius: 10px;
+    width: max-content; /* se expande al ancho real de su contenido */
+    min-width: 100%;
+  }
+
+  /* Búsqueda: ancho mínimo fijo para que quepa bien */
+  .filtro-busqueda {
+    flex: 0 0 160px;
+    min-width: 160px;
+    max-width: 160px;
+  }
+
+  /* Botones de filtro más compactos */
+  .filtro-btn {
+    flex-shrink: 0;
+    font-size: 12px;
+    padding: 0 10px;
+    height: 36px;
+    white-space: nowrap;
+  }
+
+  /* El botón ordenar no se empuja al final en móvil */
+  .filtros-spacer {
+    display: none;
+  }
+
+  /* Panel expandido sin borde-radius superior */
+  .panel-filtros-expandido {
+    padding: 16px;
+    margin-top: -4px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .opciones-grid {
+    gap: 8px;
+  }
+
+  .opcion-card {
+    padding: 10px 14px;
+    font-size: 13px;
+    min-width: 90px;
+  }
+
+  /* Grid de tarjetas: menos columnas en móvil */
+  .catalogo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .catalogo-filtros {
+    padding: 8px 10px;
+  }
+
+  .filtro-busqueda {
+    flex: 0 0 130px;
+    min-width: 130px;
+    max-width: 130px;
+  }
+
+  .filtro-btn {
+    font-size: 11px;
+    padding: 0 8px;
+    height: 34px;
+  }
+
+  .catalogo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+  }
 }
